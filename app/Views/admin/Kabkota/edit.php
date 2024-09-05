@@ -3,7 +3,7 @@
 
 <div class="app-content pt-3 p-md-3 p-lg-4">
     <div class="container-xl">
-        <h1 class="app-page-title">Edit Member Kabupaten / Kota</h1>
+        <h1 class="app-page-title">Edit Nama Kabupaten / Kota</h1>
         <hr class="mb-4">
         <div class="row g-4 settings-section">
             <div class="col-12 col-md-8">
@@ -14,7 +14,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <label class="form-label" for="id_provinsi">Member Provinsi</label>
+                                        <label class="form-label" for="id_provinsi">Nama Provinsi</label>
                                         <select class="form-control" id="id_provinsi" name="id_provinsi">
                                             <?php foreach ($all_data_Provinsi as $provinsi) : ?>
                                                 <option value="<?= $provinsi->id_provinsi; ?>" <?php echo ($provinsi->id_provinsi == $kabkotaData->id_provinsi) ? 'selected' : ''; ?>>
@@ -22,14 +22,14 @@
                                                 </option>
                                             <?php endforeach; ?>
                                         </select>
-                                        <small>*Member Provinsi</small>
+                                        <small>*Nama Provinsi</small>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Nama Member Kabupaten / Kota</label>
+                                        <label class="form-label">Nama Kabupaten / Kota</label>
                                         <input type="text" class="form-control" id="nama_kabkota" name="nama_kabkota" value="<?= $kabkotaData->nama_kabkota; ?>">
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Wilayah Nama Member Kabupaten / Kota</label>
+                                        <label class="form-label">Wilayah Kerja Kabupaten / Kota</label>
                                         <input type="text" class="form-control" id="wilayah_kerja_kabkota" name="wilayah_kerja_kabkota" value="<?= $kabkotaData->wilayah_kerja_kabkota; ?>">
                                     </div>
                                 </div>

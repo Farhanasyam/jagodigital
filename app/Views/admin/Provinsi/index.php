@@ -5,10 +5,10 @@
     <div class="container-xl">
         <div class="row g-3 mb-4 align-items-center justify-content-between">
             <div class="col-auto">
-                <h1 class="app-page-title mb-0">Daftar Member Provinsi</h1>
+                <h1 class="app-page-title mb-0">Daftar Wilayah Provinsi</h1>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="<?= base_url('admin/provinsi/tambah') ?>" class="btn btn-primary me-md-2"> + Tambah Member</a>
+                <a href="<?= base_url('admin/provinsi/tambah') ?>" class="btn btn-primary me-md-2"> + Tambah Wilayah</a>
             </div>
         </div>
         <div class="tab-content" id="orders-table-tab-content">
@@ -20,7 +20,7 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center" valign="middle">No</th>
-                                        <th class="text-center" valign="middle">Member Provinsi</th>
+                                        <th class="text-center" valign="middle">Nama Provinsi</th>
                                         <th class="text-center" valign="middle">Aksi</th>
                                     </tr>
                                 </thead>
