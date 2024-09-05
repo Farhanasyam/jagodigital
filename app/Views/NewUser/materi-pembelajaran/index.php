@@ -37,7 +37,7 @@ $loggedIn = $session->get('logged_in');
                             <div class="col-lg-12">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h5 class="text-uppercase font-weight-bold mb-0" style="margin-bottom: 5px;"><?= $category->nama_kategori_video ?></h5>
-                                    <a href="<?= base_url('/video/category/' . $category->id_katvideo) ?>" class="btn btn-primary">Selengkapnya</a>
+                                    <a href="<?= base_url('/video/kategori/' . $category->id_katvideo) ?>" class="btn btn-primary">Selengkapnya</a>
                                 </div>
                                 <hr style="border-top: 2px solid #000; margin-top: 15px;">
                                 <div class="scrolling-wrapper row flex-row flex-nowrap mt-4 pb-4 pt-2">
@@ -48,7 +48,7 @@ $loggedIn = $session->get('logged_in');
                                             $hasVideos = true; // Set flag to true if a video is found
                                     ?>
                                             <div class="col-4" style="max-width: 250px;">
-                                                <a href="<?= base_url('/video/' . $video->id_video) ?>" style="text-decoration: none; color: inherit;">
+                                                <a href="<?= base_url('/video/detail/' . $video->id_video) ?>" style="text-decoration: none; color: inherit;">
                                                     <div class="card" style="width: 100%; height: 380px; display: flex; flex-direction: column; cursor: pointer; border-radius: 8px; transition: box-shadow 0.3s, transform 0.3s;">
                                                         <img src="uploads/thumbnails/<?= $video->thumbnail ?>" class="card-img-top" alt="<?= $video->judul_video ?>" style="height: 200px; object-fit: cover; border-top-left-radius: 8px; border-top-right-radius: 8px;">
                                                         <div class="card-body d-flex flex-column" style="flex-grow: 1;">

@@ -13,6 +13,8 @@ class VideoController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->kategoriVideoModels = new KategoriVideoModels();
         $this->videoPembelajaranModels = new VideoPembelajaranModels();
     }

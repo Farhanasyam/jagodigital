@@ -10,8 +10,18 @@ class Login extends BaseController
     {
         // Pengecekan jika pengguna sudah login
         if (session()->get('logged_in')) {
-            // Jika pengguna sudah login, arahkan ke halaman dashboard
-            return redirect()->to(base_url('admin/dashboard'));
+            // Mendapatkan role pengguna
+            $role = session()->get('role');
+
+            // Mengarahkan berdasarkan role pengguna
+            if ($role === 'admin') {
+                return redirect()->to(base_url('admin/dashboard'));
+            } elseif ($role === 'user') {
+                return redirect()->to(base_url('/pengumuman')); // Atur URL untuk halaman user
+            } else {
+                // Jika role tidak dikenali, arahkan ke halaman login atau error
+                return redirect()->to(base_url('/login'));
+            }
         }
 
         // Tampilkan halaman login jika pengguna belum login
@@ -40,7 +50,7 @@ class Login extends BaseController
                 if ($dataUser->role == 'admin') {
                     return redirect()->to(base_url('admin'));
                 } elseif ($dataUser->role == 'user') {
-                    return redirect()->to(base_url('/')); // Sesuaikan dengan URL halaman user
+                    return redirect()->to(base_url('/pengumuman')); // Sesuaikan dengan URL halaman user
                 }
             } else {
                 session()->setFlashdata('error', 'Username & Password Salah');
@@ -55,8 +65,8 @@ class Login extends BaseController
 
     public function logout()
     {
-    // Hapus semua data sesi dan arahkan ke halaman login
-    session()->destroy();
-    return redirect()->to('http://localhost:8080/login');
+        // Hapus semua data sesi dan arahkan ke halaman login
+        session()->destroy();
+        return redirect()->to('/login');
     }
 }
