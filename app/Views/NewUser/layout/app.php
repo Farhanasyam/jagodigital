@@ -4,6 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Meta Tags -->
+  <meta name="title" content="<?= $metaTitle ?? 'Jago Digital Marketing' ?>">
+  <meta name="description" content="<?= $metaDesc ?? 'Default description for Jago Digital Marketing' ?>">
+
+  <!-- Canonical Tag -->
+  <link rel="canonical" href="<?= $canonicalUrl ?? base_url() ?>">
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 
@@ -14,6 +22,7 @@
 
 </head>
 
+
 <body>
 
 
@@ -23,14 +32,12 @@
 
 
 
-
-
   <!-- Remove the container if you want to extend the Footer to full width. -->
   <div class="container-fluid mt-5">
     <!-- Footer -->
     <footer
       class="text-center text-lg-start text-white"
-      style="background-color: #ac2bac">
+      style="background-color: #87D5C8">
       <!-- Grid container -->
       <div class="container p-4 footer-links">
         <!-- Section: Links -->

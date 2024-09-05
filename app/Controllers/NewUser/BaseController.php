@@ -2,6 +2,8 @@
 
 namespace App\Controllers\NewUser;
 
+use App\Models\KategoriModel;
+use App\Models\KategoriVideoModels;
 use App\Models\TentangModels;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -58,19 +60,25 @@ abstract class BaseController extends Controller
     }
 
     protected $layoutData;
+    protected $categories;
 
     public function __construct()
     {
-
         // Load data layout (tentang)
         $tentang_model = new TentangModels();
         $this->layoutData = $tentang_model->first();
+
+        // Load categories data
+        $kategori_model = new KategoriVideoModels();
+        // Replace with your actual model
+        $this->categories = $kategori_model->findAll(); // Fetch all categories
     }
 
     protected function render($view, $data = [])
     {
         $data['layout'] = $this->layoutData;
-
+        $data['categories'] = $this->categories; // Pass categories data to view
+        
         // Render view dengan layout
         return view($view, $data);
     }
