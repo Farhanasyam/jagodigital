@@ -90,9 +90,11 @@
     /* Add this to your CSS file */
     .embed-responsive {
         position: relative;
-        display: block;
         width: 100%;
-        padding: 0;
+        height: 0;
+        padding-bottom: 56.25%;
+        /* 16:9 Aspect Ratio */
+        overflow: hidden;
     }
 
     .embed-responsive-item {

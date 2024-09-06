@@ -18,7 +18,7 @@
             <div class="col-6 col-lg-3">
                 <div class="app-card app-card-stat shadow-sm h-100">
                     <div class="app-card-body p-3 p-lg-4">
-                        <h4 class="stats-type mb-1">Member Provinsi</h4>
+                        <h4 class="stats-type mb-1">Total Provinsi</h4>
                         <div class="stats-figure"><?= $totalProvinsi; ?></div>
                     </div>
                     <a class="app-card-link-mask" href="<?= base_url('admin/dpd/index') ?>"></a>
@@ -28,7 +28,7 @@
             <div class="col-6 col-lg-3">
                 <div class="app-card app-card-stat shadow-sm h-100">
                     <div class="app-card-body p-3 p-lg-4">
-                        <h4 class="stats-type mb-1">Member Kabupaten / Kota</h4>
+                        <h4 class="stats-type mb-1">Total Kabupaten / Kota</h4>
                         <div class="stats-figure"><?= $totalKabkota; ?></div>
                     </div>
                     <a class="app-card-link-mask" href="<?= base_url('admin/dpc/index') ?>"></a>
@@ -108,7 +108,7 @@
             <div class="col-6 col-lg-3">
                 <div class="app-card app-card-stat shadow-sm h-100">
                     <div class="app-card-body p-3 p-lg-4">
-                        <h4 class="stats-type mb-1">Social Media</h4>
+                        <h4 class="stats-type mb-1">Media Sosial</h4>
                         <div class="stats-figure"><?= $totalSocialMedia; ?></div>
                     </div>
                     <a class="app-card-link-mask" href="<?= base_url('admin/social_media/index') ?>"></a>

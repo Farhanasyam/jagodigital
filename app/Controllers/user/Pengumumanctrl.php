@@ -18,7 +18,6 @@ class Pengumumanctrl extends BaseController
     public function __construct()
     {
         $this->PengumumanModels = new PengumumanModels();
-        $this->DPDModels = new DPDModels();
         $this->kategoriVideoModel = new KategoriVideoModels();
     }
 
@@ -36,7 +35,6 @@ class Pengumumanctrl extends BaseController
 
         $data = [
             'pengumuman' => $pengumuman_terdekat,
-            'dpd' => $this->DPDModels->findAll(),
             'videoCategories' => $this->kategoriVideoModel->findAll()
         ];
 
@@ -52,7 +50,7 @@ class Pengumumanctrl extends BaseController
         }
         $data = [
             'pengumuman' => $this->PengumumanModels->find($id_pengumuman),
-            'dpd' => $this->DPDModels->findAll(),
+    
             'videoCategories' => $this->kategoriVideoModel->findAll()
         ];
 

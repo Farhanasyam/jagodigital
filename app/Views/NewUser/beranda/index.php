@@ -30,6 +30,7 @@
                             sandbox="allow-scripts allow-same-origin"
                             frameborder="0"
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            loading="lazy"
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -71,7 +72,7 @@
             <div class="col-md-6 mt-5 d-flex flex-column align-items-center">
                 <?php foreach ($keuntungan as $item): ?>
                     <div class="card-custom">
-                        <img src="<?= base_url('uploads/icons/' . $item['icon_keuntungan']) ?>" alt="<?= $item['judul_keuntungan'] ?>" class="profile-img">
+                        <img src="<?= base_url('uploads/icons/' . $item['icon_keuntungan']) ?>" alt="<?= $item['judul_keuntungan'] ?>" class="profile-img" loading="lazy">
                         <div class="card-body">
                             <h5 class="card-title"><?= $item['judul_keuntungan'] ?></h5>
                             <p class="card-text"><?= $item['deskripsi_keuntungan'] ?></p>
@@ -119,6 +120,7 @@
                                 sandbox="allow-scripts allow-same-origin"
                                 frameborder="0"
                                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                loading="lazy"
                                 allowfullscreen>
                             </iframe>
                         </div>
@@ -135,7 +137,7 @@
     <div class="founders">
         <?php foreach ($founder as $founder): ?>
             <div class="founder-card">
-                <img src="<?= base_url('uploads/foto_founder/' . $founder->foto_founder) ?>" alt="<?= $founder->nama_founder ?>" class="profile-img">
+                <img src="<?= base_url('uploads/foto_founder/' . $founder->foto_founder) ?>" alt="<?= $founder->nama_founder ?>" class="profile-img" loading="lazy">
                 <img src="<?= base_url('assets-new/images/logo.png') ?>" class="logo" alt="Logo">
                 <div class="info">
                     <h3 class="card-title"><?= $founder->nama_founder ?></h3>
@@ -156,7 +158,7 @@
         <?php foreach ($pengumuman as $event): ?>
             <div class="event-card">
                 <div class="image-container">
-                    <img src="<?= base_url('assets-baru/img/' . $event['poster_pengumuman']) ?>" alt="<?= esc($event['judul_pengumuman']) ?>">
+                    <img src="<?= base_url('assets-baru/img/' . $event['poster_pengumuman']) ?>" loading="lazy" alt="<?= esc($event['judul_pengumuman']) ?> ">
                 </div>
                 <div class="event-details">
                     <h3><?= esc($event['judul_pengumuman']) ?></h3>
@@ -194,7 +196,7 @@
                             <p>Buat saya, <span class="highlight">ikut Jagoan Digital Marketing menambah hardskill dan pengetahuan untuk saya.</span> Proses belajar dari fasilitator juga enjoy dan seru. Saya ucapkan terimakasih banyak untuk tim JDM, Kak Fer sebagai fasilitator dan teman-teman di Pelatihan JDM. Sukses untuk kalian!</p>
                         </blockquote>
                         <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" alt="Reino Prajamukti" class="author-image">
+                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Reino Prajamukti" class="author-image">
                             <div class="author-info">
                                 <h5 class="author-name">Reino Prajamukti</h5>
                                 <p class="author-title">Application Support Analyst di <strong>3Dolphins.ai</strong></p>
@@ -211,7 +213,7 @@
                             <p>Testimoni kedua untuk <span class="highlight">Jagoan Digital Marketing</span>. Belajar yang sangat bermanfaat dan menambah wawasan saya.</p>
                         </blockquote>
                         <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" alt="Author Name" class="author-image">
+                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
                             <div class="author-info">
                                 <h5 class="author-name">Author Name</h5>
                                 <p class="author-title">Job Title di <strong>Company Name</strong></p>
@@ -228,7 +230,7 @@
                             <p>Testimoni ketiga. <span class="highlight">Jagoan Digital Marketing</span> adalah pelatihan terbaik yang pernah saya ikuti.</p>
                         </blockquote>
                         <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" alt="Author Name" class="author-image">
+                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
                             <div class="author-info">
                                 <h5 class="author-name">Author Name</h5>
                                 <p class="author-title">Job Title di <strong>Company Name</strong></p>
@@ -245,7 +247,7 @@
                             <p>Testimoni ketiga. <span class="highlight">Jagoan Digital Marketing</span> adalah pelatihan terbaik yang pernah saya ikuti.</p>
                         </blockquote>
                         <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" alt="Author Name" class="author-image">
+                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
                             <div class="author-info">
                                 <h5 class="author-name">Author Name</h5>
                                 <p class="author-title">Job Title di <strong>Company Name</strong></p>
@@ -262,7 +264,7 @@
                             <p>Testimoni ketiga. <span class="highlight">Jagoan Digital Marketing</span> adalah pelatihan terbaik yang pernah saya ikuti.</p>
                         </blockquote>
                         <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" alt="Author Name" class="author-image">
+                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
                             <div class="author-info">
                                 <h5 class="author-name">Author Name</h5>
                                 <p class="author-title">Job Title di <strong>Company Name</strong></p>

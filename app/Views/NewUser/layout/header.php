@@ -18,50 +18,73 @@ $username = $session->get('username'); // Get the logged-in user's name
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link px-3 <?= ($segment == 'index' || $segment == '') ? 'active' : ''; ?>" href="/" id="beranda-link">Beranda</a>
+          <?php if (!$loggedIn || $session->get('role') != 'user'): ?>
+            <a class="nav-link px-3 <?= ($segment == 'index' || $segment == '') ? 'active' : ''; ?>" href="/">Beranda</a>
+          <?php endif; ?>
         </li>
         <li class="nav-item">
-          <a class="nav-link px-3 <?= ($segment == 'about') ? 'active' : ''; ?>" href="/about" id="tentang-kami-link">Tentang Kami</a>
+          <?php if (!$loggedIn || $session->get('role') != 'user'): ?>
+            <a class="nav-link px-3 <?= ($segment == 'about') ? 'active' : ''; ?>" href="/about">Tentang Kami</a>
+          <?php endif; ?>
         </li>
+        <?php if ($loggedIn && ($session->get('role') == 'user' || $session->get('role') != 'admin')): ?>
+          <li class="nav-item">
+            <a class="nav-link px-3 <?= ($segment == 'pengumuman') ? 'active' : ''; ?>" href="/pengumuman" id="Pengumuman-link">Pengumuman</a>
+          </li>
+        <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link px-3 <?= ($segment == 'artikel') ? 'active' : ''; ?>" href="/artikel" id="artikel-link">Artikel</a>
         </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle px-3 <?= ($segment == 'materi-pembelajaran') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown <?= ($segment == 'materi-pembelajaran') ? 'active' : ''; ?>">
+    <?php if ($loggedIn): ?>
+        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Materi Pembelajaran
-          </a>
-          <ul class="dropdown-menu">
+        </a>
+        <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/video">Video Pembelajaran</a></li>
-            <?php if ($loggedIn): ?>
-              <?php if (!empty($categories)): ?>
+            <?php if (!empty($categories)): ?>
                 <li>
-                  <hr class="dropdown-divider">
+                    <hr class="dropdown-divider">
                 </li>
                 <?php foreach ($categories as $category): ?>
-                  <li><a class="dropdown-item" href="<?= base_url('/video/kategori/' . $category->id_katvideo) ?>"><?= $category->nama_kategori_video ?></a></li>
+                    <li><a class="dropdown-item" href="<?= base_url('/video/kategori/' . $category->id_katvideo) ?>"><?= esc($category->nama_kategori_video) ?></a></li>
                 <?php endforeach; ?>
-              <?php else: ?>
+            <?php else: ?>
                 <li><a class="dropdown-item" href="#">No Categories Available</a></li>
-              <?php endif; ?>
             <?php endif; ?>
-          </ul>
-        </li>
+        </ul>
+    <?php else: ?>
+        <a class="nav-link px-3" href="/video">
+            Materi Pembelajaran
+        </a>
+    <?php endif; ?>
+</li>
+
+        <?php if ($loggedIn && ($session->get('role') == 'user' || $session->get('role') != 'admin')): ?>
+          <li class="nav-item">
+            <a class="nav-link px-3 <?= ($segment == 'berita') ? 'active' : ''; ?>" href="/berita" id="berita-link">Berita</a>
+          </li>
+        <?php endif; ?>
         <li class="nav-item">
-          <a class="nav-link px-3 <?= ($segment == 'cara-pendaftaran') ? 'active' : ''; ?>" href="/cara-pendaftaran" id="cara-pendaftaran-link">Cara Pendaftaran</a>
+          <?php if (!$loggedIn || $session->get('role') != 'user'): ?>
+            <a class="nav-link px-3 <?= ($segment == 'cara-pendaftaran') ? 'active' : ''; ?>" href="/cara-pendaftaran" id="cara-pendaftaran-link">Cara Pendaftaran</a>
+          <?php endif; ?>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle px-3 <?= ($segment == 'Informasi') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Informasi
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="">Pengumuman</a></li>
-            <li><a class="dropdown-item" href="">Berita</a></li>
-            <li><a class="dropdown-item" href="">Artikel</a></li>
-          </ul>
-        </li>
+        <?php if (!$loggedIn || $session->get('role') != 'user'): ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-3 <?= ($segment == 'Informasi') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Informasi
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="">Pengumuman</a></li>
+              <li><a class="dropdown-item" href="">Berita</a></li>
+            </ul>
+          </li>
+        <?php endif; ?>
         <li class="nav-item">
-          <a class="nav-link px-3 <?= ($segment == 'kontak') ? 'active' : ''; ?>" href="/kontak" id="kontak-link">Kontak</a>
+          <?php if (!$loggedIn || $session->get('role') != 'user'): ?>
+            <a class="nav-link px-3 <?= ($segment == 'kontak') ? 'active' : ''; ?>" href="/kontak" id="kontak-link">Kontak</a>
+          <?php endif; ?>
         </li>
       </ul>
 
@@ -78,6 +101,9 @@ $username = $session->get('username'); // Get the logged-in user's name
               <li>
                 <hr class="dropdown-divider">
               </li>
+              <?php if ($loggedIn && ($session->get('role') == 'admin' || $session->get('role') != 'user')): ?>
+                <li><a class="dropdown-item" href="<?= base_url('admin/dashboard') ?>">Tampilan Admin</a></li>
+              <?php endif; ?>
               <li><a class="dropdown-item" href="<?= base_url('logout') ?>">Logout</a></li>
             </ul>
           </li>

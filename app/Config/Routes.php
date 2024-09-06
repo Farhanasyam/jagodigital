@@ -35,13 +35,20 @@ $routes->get('/',  'NewUser\BerandaController::index');
 $routes->get('/about', 'NewUser\BerandaController::about');
 
 $routes->get('/video', 'NewUser\VideoController::index');
-$routes->get('/video/(:num)', 'NewUser\VideoController::categoryDetails/$1');
-$routes->get('/video/category/(:num)', 'NewUser\VideoController::detail/$1');
-
+$routes->get('/video/detail/(:num)', 'NewUser\VideoController::detail/$1');
+$routes->get('/video/kategori/(:num)', 'NewUser\VideoController::categoryDetails/$1');
 
 $routes->get('/artikel', 'NewUser\ArtikelController::artikel');
 $routes->get('/artikel/all', 'NewUser\ArtikelController::all');
 $routes->get('/artikel/(:segment)', 'NewUser\ArtikelController::detail/$1');
+
+$routes->get('/pengumuman', 'NewUser\PengumumanController::pengumuman');
+$routes->get('/pengumuman/all', 'NewUser\PengumumanController::all');
+$routes->get('/pengumuman/(:segment)', 'NewUser\PengumumanController::detail/$1');
+
+$routes->get('/berita', 'NewUser\BeritaController::berita');
+$routes->get('/berita/all', 'NewUser\BeritaController::all');
+$routes->get('/berita/(:segment)', 'NewUser\BeritaController::detail/$1');
 
 $routes->get('/kontak', 'NewUser\BerandaController::kontak');
 
@@ -77,7 +84,7 @@ $routes->get('admin/kategori/edit/(:num)', 'admin\Kategori::edit/$1');
 $routes->post('admin/kategori/proses_edit/(:num)', 'admin\Kategori::proses_edit/$1');
 $routes->get('admin/kategori/delete/(:any)', 'admin\Kategori::delete/$1');
 
-$routes->group('admin', function($routes) {
+$routes->group('admin', function ($routes) {
     // Routes for Provinsi
     $routes->get('provinsi', 'admin\Provinsi::index');
     $routes->get('provinsi/tambah', 'admin\Provinsi::tambah');
@@ -170,7 +177,7 @@ $routes->group('admin', function ($routes) {
 });
 // });
 
-$routes->group('admin', function($routes) {
+$routes->group('admin', function ($routes) {
     $routes->get('kategori_videos/index', 'admin\KategoriVideo::index');
     $routes->get('kategori_videos/tambah', 'admin\KategoriVideo::tambah');
     $routes->post('kategori_videos/proses_tambah', 'admin\KategoriVideo::proses_tambah');
@@ -187,6 +194,7 @@ $routes->get('admin/socialmedia/edit/(:num)', 'admin\Socialmedia::edit/$1');
 $routes->post('admin/socialmedia/proses_edit/(:num)', 'admin\Socialmedia::proses_edit/$1');
 $routes->get('admin/socialmedia/delete/(:any)', 'admin\Socialmedia::delete/$1');
 
+<<<<<<< HEAD
 // Admin Keuntungan
 $routes->group('admin', function($routes) {
     $routes->get('keuntungan/index', 'admin\Keuntungan::index');
@@ -195,23 +203,32 @@ $routes->group('admin', function($routes) {
     $routes->get('keuntungan/edit/(:num)', 'admin\Keuntungan::edit/$1');
     $routes->post('keuntungan/proses_edit/(:num)', 'admin\Keuntungan::proses_edit/$1');
     $routes->post('keuntungan/delete/(:num)', 'admin\Keuntungan::delete/$1');
+=======
+$routes->group('admin', ['namespace' => 'App\Controllers\admin'], function ($routes) {
+    $routes->get('keuntungan', 'Keuntungan::index');
+    $routes->get('keuntungan/tambah', 'Keuntungan::tambah');
+    $routes->post('keuntungan/proses_tambah', 'Keuntungan::proses_tambah');
+    $routes->get('keuntungan/edit/(:num)', 'Keuntungan::edit/$1');
+    $routes->post('keuntungan/proses_edit/(:num)', 'Keuntungan::proses_edit/$1');
+    $routes->get('keuntungan/delete/(:num)', 'Keuntungan::delete/$1');
+>>>>>>> a3a2e4aff0bfacb51441fb8254e91041a21e049d
 });
+
+
 //USER
 // start frond end routes
-$routes->get('/', 'user\Pengumumanctrl::index');
+// $routes->get('/', 'user\Pengumumanctrl::index');
 $routes->get('/detail/(:any)', 'user\Pengumumanctrl::viewPengumuman/$1');
-// route halaman member
-$routes->get('/member', 'user\Memberctrl::index');
-$routes->get('/member/(:num)', 'user\Memberctrl::indexdpd/$1');
-$routes->get('/member/detail/(:num)/(:any)', 'user\Memberctrl::viewMember/$1/$2');
-$routes->get('/member/search', 'user\Memberctrl::search');
-// route halaman profil
-$routes->get('/profil', 'user\Profilctrl::edit');
-$routes->post('/profil/proses_edit', 'user\Profilctrl::edit');
+// // route halaman member
+// $routes->get('/member', 'user\Memberctrl::index');
+// $routes->get('/member/(:num)', 'user\Memberctrl::indexdpd/$1');
+// $routes->get('/member/detail/(:num)/(:any)', 'user\Memberctrl::viewMember/$1/$2');
+// $routes->get('/member/search', 'user\Memberctrl::search');
+// // route halaman profil
+// $routes->get('/profil', 'user\Profilctrl::edit');
+// $routes->post('/profil/proses_edit', 'user\Profilctrl::edit');
 // end frond end routes
-$routes->get('/videos', 'user\Videoctrl::index');
-$routes->get('/videos/(:num)', 'user\Videoctrl::categoryDetails/$1');
-$routes->get('/video/detail/(:num)', 'user\Videoctrl::detail/$1');
+
 
 
 // route language home
