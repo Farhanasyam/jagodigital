@@ -10,7 +10,7 @@ class MemberModels extends Model
     protected $table = "tb_member";
     protected $primaryKey = "id_member";
     protected $returnType = "object";
-    protected $allowedFields = ['id_member','role', 'username','password','nama_member', 'id_dpc','status_kepengurusan','alamat_member','no_hp_member','email_member','ig_member','fb_member','pendidikan_member','pekerjaan_member','sertifikasi_member','jenis_kelamin','foto_member','slug', 'cv_member'];
+    protected $allowedFields = ['id_member','role', 'username','password','nama_member', 'id_kabkota','status_kepengurusan','alamat_member','no_hp_member','email_member','ig_member','fb_member','pendidikan_member','pekerjaan_member','sertifikasi_member','jenis_kelamin','foto_member','slug', 'cv_member'];
 
 
     public function getMember()
@@ -34,7 +34,7 @@ class MemberModels extends Model
     public function getMemberAdmin()
     {
          return $this->db->table('tb_member')
-         ->join('tb_dpc','tb_dpc.id_dpc=tb_member.id_dpc')
+         ->join('tb_kabkota','tb_kabkota.id_kabkota=tb_member.id_kabkota')
          ->where('role', 'user')
          ->orderBy('id_member', 'desc')
          ->get()->getResultArray();  
@@ -43,7 +43,7 @@ class MemberModels extends Model
     public function getMemberUser()
     {
          return $this->db->table('tb_member')
-         ->join('tb_dpc','tb_dpc.id_dpc=tb_member.id_dpc')
+         ->join('tb_kabkota','tb_kabkota.id_kabkota=tb_member.id_kabkota')
          ->where('role', 'user')
          ->orderBy('RAND()')
          ->get()->getResultArray();  
@@ -52,7 +52,7 @@ class MemberModels extends Model
     public function getDetailMember($id_member, $slug)
     {
          return $this->db->table('tb_member')
-         ->join('tb_dpc','tb_dpc.id_dpc=tb_member.id_dpc')
+         ->join('tb_kabkota','tb_kabkota.id_kabkota=tb_member.id_kabkota')
          ->where('tb_member.id_member', $id_member)
          ->where('tb_member.slug', $slug)
          ->get()->getResultArray();  
@@ -61,7 +61,7 @@ class MemberModels extends Model
     public function getMemberLainnya($id_member)
     {
         return $this->db->table('tb_member')
-            ->join('tb_dpc','tb_dpc.id_dpc=tb_member.id_dpc')
+            ->join('tb_kabkota','tb_kabkota.id_kabkota=tb_member.id_kabkota')
             ->where('id_member !=', $id_member)
             ->where('role', 'user')
             ->orderBy('RAND()')
@@ -69,11 +69,11 @@ class MemberModels extends Model
             ->get()->getResultArray();
     }
     
-    public function getMembersByDPD($id_dpd)
+    public function getMembersByprovinsi($id_provinsi)
     {
         return $this->table('tb_member')
-            ->join('tb_dpc', 'tb_dpc.id_dpc=tb_member.id_dpc')
-            ->where('tb_dpc.id_dpd', $id_dpd)
+            ->join('tb_kabkota', 'tb_kabkota.id_kabkota=tb_member.id_kabkota')
+            ->where('tb_kabkota.id_provinsi', $id_provinsi)
             ->where('role', 'user') // Hanya tampilkan member dengan role 'user'
             ->orderBy('RAND()') // Sesuaikan dengan field yang sesuai
             ->get()
@@ -81,14 +81,14 @@ class MemberModels extends Model
     }
 
     
-    public function searchMember($dpc, $search)
+    public function searchMember($kabkota, $search)
     {
         $query = $this->table('tb_member')
-            ->join('tb_dpc', 'tb_dpc.id_dpc=tb_member.id_dpc')
+            ->join('tb_kabkota', 'tb_kabkota.id_kabkota=tb_member.id_kabkota')
             ->where('role', 'user');
     
-        if (!empty($dpc)) {
-            $query->like('nama_dpc', $dpc);
+        if (!empty($kabkota)) {
+            $query->like('nama_kabkota', $kabkota);
         }
     
         if (!empty($search)) {
@@ -110,4 +110,13 @@ class MemberModels extends Model
     
         return $query->get()->getResultArray();
     }
+    public function getAllMembersWithLocation()
+    {
+        return $this->select('tb_member.*, tb_provinsi.nama_provinsi, tb_kabkota.nama_kabkota')
+                    ->join('tb_provinsi', 'tb_member.id_provinsi = tb_provinsi.id_provinsi', 'left')
+                    ->join('tb_kabkota', 'tb_member.id_kabkota = tb_kabkota.id_kabkota', 'left')
+                    ->findAll();
+    }
+    
+    
 }
