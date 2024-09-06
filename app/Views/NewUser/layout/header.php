@@ -9,7 +9,7 @@ $username = $session->get('username'); // Get the logged-in user's name
 
 <nav class="navbar navbar-expand-lg bg-light sticky-top" style="padding: 15px;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#" style="margin-left: 40px; margin-right: 100px;">
+    <a class="navbar-brand" href="/" style="margin-left: 40px; margin-right: 100px;">
       <img src="<?= base_url('assets-new/images/logo.png') ?>" alt="Logo" style="height: 40px;">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,29 +36,29 @@ $username = $session->get('username'); // Get the logged-in user's name
           <a class="nav-link px-3 <?= ($segment == 'artikel') ? 'active' : ''; ?>" href="/artikel" id="artikel-link">Artikel</a>
         </li>
         <li class="nav-item dropdown <?= ($segment == 'materi-pembelajaran') ? 'active' : ''; ?>">
-    <?php if ($loggedIn): ?>
-        <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Materi Pembelajaran
-        </a>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/video">Video Pembelajaran</a></li>
-            <?php if (!empty($categories)): ?>
+          <?php if ($loggedIn): ?>
+            <a class="nav-link dropdown-toggle px-3" <?= ($segment == 'video') ? 'active' : ''; ?> href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Materi Pembelajaran
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/video">Video Pembelajaran</a></li>
+              <?php if (!empty($categories)): ?>
                 <li>
-                    <hr class="dropdown-divider">
+                  <hr class="dropdown-divider">
                 </li>
                 <?php foreach ($categories as $category): ?>
-                    <li><a class="dropdown-item" href="<?= base_url('/video/kategori/' . $category->id_katvideo) ?>"><?= esc($category->nama_kategori_video) ?></a></li>
+                  <li><a class="dropdown-item" href="<?= base_url('/video/kategori/' . $category->id_katvideo) ?>"><?= esc($category->nama_kategori_video) ?></a></li>
                 <?php endforeach; ?>
-            <?php else: ?>
+              <?php else: ?>
                 <li><a class="dropdown-item" href="#">No Categories Available</a></li>
-            <?php endif; ?>
-        </ul>
-    <?php else: ?>
-        <a class="nav-link px-3" href="/video">
-            Materi Pembelajaran
-        </a>
-    <?php endif; ?>
-</li>
+              <?php endif; ?>
+            </ul>
+          <?php else: ?>
+            <a class="nav-link px-3 <?= ($segment == 'video') ? 'active' : ''; ?>" href="/video">
+              Materi Pembelajaran
+            </a>
+          <?php endif; ?>
+        </li>
 
         <?php if ($loggedIn && ($session->get('role') == 'user' || $session->get('role') != 'admin')): ?>
           <li class="nav-item">
@@ -72,12 +72,12 @@ $username = $session->get('username'); // Get the logged-in user's name
         </li>
         <?php if (!$loggedIn || $session->get('role') != 'user'): ?>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle px-3 <?= ($segment == 'Informasi') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle px-3 <?= ($segment == 'Informasi' || $segment == 'pengumuman' || $segment == 'berita') ? 'active' : ''; ?>" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Informasi
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="">Pengumuman</a></li>
-              <li><a class="dropdown-item" href="">Berita</a></li>
+              <li><a class="dropdown-item <?= ($segment == 'pengumuman') ? 'active' : ''; ?>" href="/pengumuman">Pengumuman</a></li>
+              <li><a class="dropdown-item <?= ($segment == 'berita') ? 'active' : ''; ?>" href="/berita">Berita</a></li>
             </ul>
           </li>
         <?php endif; ?>

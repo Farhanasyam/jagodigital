@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="in">
 
 <head>
   <meta charset="UTF-8">
@@ -15,7 +15,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 
-  <title><?= $title ?? 'Jago Digital Marketing' ?></title>
+  <title><?= $title ?? 'Title' ?> | Jago Digital Marketing</title>
 
   <link rel="icon" type="image/x-icon" href="<?= base_url('assets-new/images/favicon.png') ?>">
   <link href="<?= base_url('assets-new/css/jdm.css') ?>" rel="stylesheet">
@@ -33,7 +33,7 @@
 
 
   <!-- Remove the container if you want to extend the Footer to full width. -->
-  <div class="container-fluid mt-5">
+  <div class="section mt-5">
     <!-- Footer -->
     <footer
       class="text-center text-lg-start text-white"

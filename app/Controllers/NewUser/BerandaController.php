@@ -32,7 +32,7 @@ class BerandaController extends BaseController
 
         $metaTitle = 'Selamat Datang di Beranda Kami';
         $metaDesc = 'Temukan informasi terbaru, keuntungan bergabung, dan pendiri kami. Jelajahi pengumuman terbaru dan ketahui lebih lanjut tentang kami.';
-        $canonicalUrl = base_url('beranda'); 
+        $canonicalUrl = base_url('beranda');
 
         return $this->render('NewUser/beranda/index', [
             'title' => 'Beranda',

@@ -31,8 +31,12 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 
-$routes->get('/',  'NewUser\BerandaController::index');
-$routes->get('/about', 'NewUser\BerandaController::about');
+// Route before login
+$routes->group('', ['filter' => 'beforeLogin'], function ($routes) {
+    $routes->get('/',  'NewUser\BerandaController::index');
+    $routes->get('/about', 'NewUser\BerandaController::about');
+    $routes->get('/kontak', 'NewUser\BerandaController::kontak');
+});
 
 $routes->get('/video', 'NewUser\VideoController::index');
 $routes->get('/video/detail/(:num)', 'NewUser\VideoController::detail/$1');
@@ -50,7 +54,6 @@ $routes->get('/berita', 'NewUser\BeritaController::berita');
 $routes->get('/berita/all', 'NewUser\BeritaController::all');
 $routes->get('/berita/(:segment)', 'NewUser\BeritaController::detail/$1');
 
-$routes->get('/kontak', 'NewUser\BerandaController::kontak');
 
 
 //ADMIN
