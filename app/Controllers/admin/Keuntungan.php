@@ -22,7 +22,7 @@ class Keuntungan extends BaseController
         $keuntungan_model = new KeuntunganModel();
         $keuntungan = $keuntungan_model->findAll();
 
-        return view('admin/keuntungan/index', [
+        return view('admin/Keuntungan/index', [
             'keuntungan' => $keuntungan
         ]);
     }
@@ -39,7 +39,7 @@ class Keuntungan extends BaseController
             return redirect()->to(base_url('/'));
         }
 
-        return view('admin/keuntungan/tambah');
+        return view('admin/Keuntungan/tambah');
     }
 
     public function proses_tambah()
@@ -94,7 +94,7 @@ class Keuntungan extends BaseController
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Keuntungan tidak ditemukan');
         }
 
-        return view('admin/keuntungan/edit', [
+        return view('admin/Keuntungan/edit', [
             'keuntungan' => $keuntungan
         ]);
     }
