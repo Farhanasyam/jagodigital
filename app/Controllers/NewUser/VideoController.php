@@ -44,6 +44,8 @@ class VideoController extends BaseController
         // Fetch the video by ID
         $video = $this->videoPembelajaranModels->getVideoWithCategory($id);
 
+       //var_dump($video); die();
+
         // Fetch related videos in the same category, excluding the current video
         $related_videos = $this->videoPembelajaranModels->getRelatedVideos($id, $video->id_katvideo);
 

@@ -7,15 +7,15 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="position-relative mb-3">
-                    <div class="bg-white border border-top-0 p-4 rounded shadow-sm">
+                    <div class="bg-light border border-top-0 p-4 rounded shadow-sm">
                         <!-- Category Badge -->
                         <div class="mb-3">
-                            <a class="badge badge-primary text-uppercase font-weight-semi-bold p-2 mr-2"
-                                href="<?= base_url('kategori/' . $video->id_katvideo) ?>"><?= $video->nama_kategori_video ?></a>
-                            <a class="text-body"></a>
+                            <a class="badge text-uppercase font-weight-semi-bold p-2 mr-2 custom-badge-color"
+                                href="<?= base_url('/video/kategori/' . $video->id_katvideo) ?>"><?= $video->nama_kategori_video ?></a>
                         </div>
+
                         <!-- Video Title -->
-                        <h4 class="mb-3 text-secondary text-uppercase font-weight-bold"><?= $video->judul_video; ?></h4>
+                        <h4 class="mb-3 text-dark text-uppercase font-weight-bold"><?= $video->judul_video; ?></h4>
                         <!-- Video Player Start -->
                         <div class="embed-responsive embed-responsive-16by9 mb-3">
                             <iframe
@@ -33,7 +33,7 @@
                         <!-- Video Player End -->
                         <!-- Description -->
                         <div class="mb-3">
-                            <h5 class="text-secondary font-weight-bold">Deskripsi</h5>
+                            <h5 class="text-dark font-weight-bold">Deskripsi</h5>
                             <p><?= $video->deskripsi_video; ?></p>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             Video Lainnya
                             <?php if (!empty($related_videos)): ?>
                                 <?php if (!empty($related_videos[0]->nama_kategori_video)): ?>
-                                    <a class="badge badge-primary text-uppercase font-weight-semi-bold p-1 mr-2 text-truncate"
+                                    <a class="badge badge-secondary text-uppercase font-weight-semi-bold p-1 mr-2 text-truncate"
                                         href="<?= base_url('kategori/' . $related_videos[0]->id_katvideo) ?>"
                                         style="font-size: 10px;">
                                         <?= $related_videos[0]->nama_kategori_video ?>
@@ -57,7 +57,7 @@
                             <?php endif; ?>
                         </h4>
                     </div>
-                    <div class="bg-white border border-top-0 p-3 rounded shadow-sm">
+                    <div class="bg-light border border-top-0 p-3 rounded shadow-sm">
                         <?php if (!empty($related_videos)): ?>
                             <?php foreach ($related_videos as $related_video) : ?>
                                 <div class="d-flex align-items-center bg-white mb-3 rounded border border-light overflow-hidden shadow-sm">
@@ -65,7 +65,7 @@
                                         src="<?= base_url('uploads/thumbnails/' . $related_video->thumbnail) ?>" alt="">
                                     <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center">
                                         <a href="<?= base_url('/video/detail/' . $related_video->id_video) ?>"
-                                            class="text-secondary text-uppercase font-weight-bold text-truncate"
+                                            class="text-dark text-uppercase font-weight-bold text-truncate"
                                             style="font-size: 12px; flex-grow: 0; margin-bottom: 10px; word-wrap: break-word; white-space: normal;">
                                             <?= $related_video->judul_video; ?>
                                         </a>
@@ -79,15 +79,12 @@
                 </div>
                 <!-- Related Videos End -->
             </div>
-
-
         </div>
     </div>
 </div>
 <!-- Video Details End -->
 
 <style>
-    /* Add this to your CSS file */
     .embed-responsive {
         position: relative;
         width: 100%;
@@ -114,7 +111,6 @@
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     }
 
-    /* Add this to your CSS file */
     .text-truncate {
         white-space: nowrap;
         overflow: hidden;
@@ -128,6 +124,26 @@
 
     .d-flex {
         display: flex;
+    }
+
+    .bg-light {
+        background-color: #f8f9fa;
+    }
+
+    .text-dark {
+        color: #343a40;
+    }
+
+
+
+    .custom-badge-color {
+        color: #007bff;
+        /* Adjust the color to your preference */
+    }
+
+    .custom-badge-color:hover {
+        color: #0056b3;
+        /* Darker shade for hover effect */
     }
 </style>
 

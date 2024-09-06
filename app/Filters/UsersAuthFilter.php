@@ -10,12 +10,6 @@ class UsersAuthFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        // Periksa apakah pengguna mengakses halaman registrasi
-        // if ($request->uri->getPath() === 'register') {
-        //     // Jika pengguna mengakses halaman registrasi, lewati filter
-        //     return;
-        // }
-
         // Periksa apakah pengguna sudah login
         if (is_null(session()->get('logged_in'))) {
             // Jika pengguna belum login, arahkan ke halaman login
