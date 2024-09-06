@@ -16,10 +16,6 @@
                                 <input type="text" class="form-control" name="nama_founder" value="<?= $founder->nama_founder ?>" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Jabatan Founder</label>
-                                <textarea class="form-control" name="jabatan_founder"><?= $founder->jabatan_founder?></textarea>
-                            </div>
-                            <div class="mb-3">
                                 <label class="form-label">Foto Founder</label>
                                 <input type="file" class="form-control" name="thumbnail">
                                 <?php if ($founder->foto_founder): ?>

@@ -64,7 +64,6 @@ class Founder extends BaseController
             $founder_model = new FounderModels();
             $data = [
                 'nama_founder' => $this->request->getVar("nama_founder"),
-                'jabatan_founder' => $this->request->getVar("jabatan_founder"),
                 'deskripsi_founder' => $this->request->getVar("deskripsi_founder"),
                 'foto_founder' => $file_name
             ];
@@ -124,14 +123,12 @@ public function proses_edit($id_founder = null)
         $founder_model->update($id_founder, [
             'foto_founder' => $newFileName,
             'nama_founder' => $this->request->getVar("nama_founder"),
-            'jabatan_founder' => $this->request->getVar("jabatan_founder"),
             'deskripsi_founder' => $this->request->getVar("deskripsi_founder"),
         ]);
     } else {
         // Jika tidak ada file baru, hanya update data lainnya
         $founder_model->update($id_founder, [
             'nama_founder' => $this->request->getVar("nama_founder"),
-            'jabatan_founder' => $this->request->getVar("jabatan_founder"),
             'deskripsi_founder' => $this->request->getVar("deskripsi_founder"),
         ]);
     }

@@ -187,13 +187,14 @@ $routes->get('admin/socialmedia/edit/(:num)', 'admin\Socialmedia::edit/$1');
 $routes->post('admin/socialmedia/proses_edit/(:num)', 'admin\Socialmedia::proses_edit/$1');
 $routes->get('admin/socialmedia/delete/(:any)', 'admin\Socialmedia::delete/$1');
 
-$routes->group('admin', ['namespace' => 'App\Controllers\admin'], function($routes) {
-    $routes->get('keuntungan', 'Keuntungan::index');
-    $routes->get('keuntungan/tambah', 'Keuntungan::tambah');
-    $routes->post('keuntungan/proses_tambah', 'Keuntungan::proses_tambah');
-    $routes->get('keuntungan/edit/(:num)', 'Keuntungan::edit/$1');
-    $routes->post('keuntungan/proses_edit/(:num)', 'Keuntungan::proses_edit/$1');
-    $routes->get('keuntungan/delete/(:num)', 'Keuntungan::delete/$1');
+// Admin Keuntungan
+$routes->group('admin', function($routes) {
+    $routes->get('keuntungan/index', 'admin\Keuntungan::index');
+    $routes->get('keuntungan/tambah', 'admin\Keuntungan::tambah');
+    $routes->post('keuntungan/proses_tambah', 'admin\Keuntungan::proses_tambah');
+    $routes->get('keuntungan/edit/(:num)', 'admin\Keuntungan::edit/$1');
+    $routes->post('keuntungan/proses_edit/(:num)', 'admin\Keuntungan::proses_edit/$1');
+    $routes->post('keuntungan/delete/(:num)', 'admin\Keuntungan::delete/$1');
 });
 //USER
 // start frond end routes

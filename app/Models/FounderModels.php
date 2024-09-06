@@ -10,7 +10,7 @@ class FounderModels extends Model
     protected $primaryKey = 'id_founder';
     protected $returnType = "object";
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nama_founder', 'foto_founder','jabatan_founder', 'deskripsi_founder'];
+    protected $allowedFields = ['nama_founder', 'foto_founder', 'deskripsi_founder'];
 
     public function getAllFounders()
     {

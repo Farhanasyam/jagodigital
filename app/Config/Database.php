@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => '',
-        'database' => 'jagodm',
+        'username' => 'u1658729_user',
+        'password' => '#Jpf*KGKf-w!',
+        'database' => 'u1658729_jagodm',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

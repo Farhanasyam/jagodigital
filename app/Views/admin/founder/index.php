@@ -7,7 +7,7 @@
         <?= session()->getFlashdata('success') ? '<div class="alert alert-success">' . session()->getFlashdata('success') . '</div>' : '' ?>
         <hr class="mb-4">
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="<?= base_url('admin/founder/tambah') ?>" class="btn btn-primary me-md-2"> + Tambah Founder</a>
+            <a href="<?= base_url('admin/founder/tambah') ?>" class="btn btn-primary me-md-2"> + Founder</a>
         </div>
         <div class="row g-4 settings-section">
             <div class="col-12">
@@ -18,7 +18,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Founder</th>
-                                    <th>Jabatan Founder</th>
                                     <th>Foto Founder</th>
                                     <th>Deskripsi Founder</th>
                 
@@ -28,8 +27,7 @@
                                 <?php foreach ($founders as $index => $founder) : ?>
                                     <tr>
                                         <td><?= $index + 1 ?></td>
-                                        <td><?= $founder->nama_founder?></td>
-                                        <td><?= $founder->jabatan_founder?></td>  
+                                        <td><?= $founder->nama_founder?></td>  
                                         <td>
                                             <?php if ($founder->foto_founder) : ?>
                                                 <img src="<?= base_url('uploads/foto_founder/' . $founder->foto_founder) ?>" alt="Foto_founder" class="img-Foto_founder" style="max-width: 100px;">

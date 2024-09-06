@@ -1,0 +1,405 @@
+INFO - 2024-09-05 02:34:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:34:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:34:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-05 02:35:13 --> Trying to access array offset on value of type null
+in APPPATH\Views\NewUser\beranda\about.php on line 19.
+ 1 APPPATH\Views\NewUser\beranda\about.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php', 19)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('NewUser/beranda/about', [], true)
+ 5 APPPATH\Controllers\NewUser\BaseController.php(75): view('NewUser/beranda/about', [...])
+ 6 APPPATH\Controllers\NewUser\BerandaController.php(57): App\Controllers\NewUser\BaseController->render('NewUser/beranda/about', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\NewUser\BerandaController->about()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\NewUser\BerandaController))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 02:35:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-05 02:35:23 --> Trying to access array offset on value of type null
+in APPPATH\Views\NewUser\beranda\about.php on line 19.
+ 1 APPPATH\Views\NewUser\beranda\about.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php', 19)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('NewUser/beranda/about', [], true)
+ 5 APPPATH\Controllers\NewUser\BaseController.php(75): view('NewUser/beranda/about', [...])
+ 6 APPPATH\Controllers\NewUser\BerandaController.php(57): App\Controllers\NewUser\BaseController->render('NewUser/beranda/about', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\NewUser\BerandaController->about()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\NewUser\BerandaController))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 02:35:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:36 --> CSRF token verified.
+INFO - 2024-09-05 02:35:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 02:35:37 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 02:35:37 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 02:35:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 02:35:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 02:35:43 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 02:35:43 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 04:06:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:06:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:06:33 --> CSRF token verified.
+INFO - 2024-09-05 04:06:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:06:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:06:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 04:06:33 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 04:06:33 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 04:07:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:07:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 04:07:28 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 04:07:28 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+ERROR - 2024-09-05 04:08:59 --> mysqli_sql_exception: Duplicate entry 'admin' for key 'tb_member.username' in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1801): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(2192): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Database\Seeds\TbMemberSeeder.php(96): CodeIgniter\Database\BaseBuilder->insertBatch(Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\Database\Seeder.php(146): App\Database\Seeds\TbMemberSeeder->run()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Database\Seed.php(77): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Seed->run(Array)
+#9 C:\laragon\www\PROJECT\JagoDigital\system\CLI\Console.php(37): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#10 C:\laragon\www\PROJECT\JagoDigital\spark(97): CodeIgniter\CLI\Console->run()
+#11 {main}
+INFO - 2024-09-05 04:09:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 04:09:13 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 04:09:13 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 04:09:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:09:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:09:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:09:28 --> CSRF token verified.
+INFO - 2024-09-05 04:09:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:09:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 04:09:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 04:09:29 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 04:09:29 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 14:49:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:49:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:49:52 --> CSRF token verified.
+INFO - 2024-09-05 14:49:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:49:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:49:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 14:49:53 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 14:49:53 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+ERROR - 2024-09-05 14:51:00 --> mysqli_sql_exception: Duplicate entry 'admin' for key 'tb_member.username' in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('INSERT INTO `tb...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `tb...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `tb...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1801): CodeIgniter\Database\BaseConnection->query('INSERT INTO `tb...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(2192): CodeIgniter\Database\BaseBuilder->batchExecute('_insertBatch', 100)
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Database\Seeds\TbMemberSeeder.php(96): CodeIgniter\Database\BaseBuilder->insertBatch(Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\Database\Seeder.php(146): App\Database\Seeds\TbMemberSeeder->run()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Database\Seed.php(77): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CLI\Commands.php(65): CodeIgniter\Commands\Database\Seed->run(Array)
+#9 C:\laragon\www\PROJECT\JagoDigital\system\CLI\Console.php(37): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#10 C:\laragon\www\PROJECT\JagoDigital\spark(97): CodeIgniter\CLI\Console->run()
+#11 {main}
+INFO - 2024-09-05 14:53:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-05 14:53:01 --> mysqli_sql_exception: Table 'jagodm.tb_kabkota' doesn't exist in C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php:295
+Stack trace:
+#0 C:\laragon\www\PROJECT\JagoDigital\system\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\laragon\www\PROJECT\JagoDigital\system\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', NULL, false)
+#4 C:\laragon\www\PROJECT\JagoDigital\system\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+#5 C:\laragon\www\PROJECT\JagoDigital\app\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', Array)
+#6 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+#7 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+#8 C:\laragon\www\PROJECT\JagoDigital\system\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\laragon\www\PROJECT\JagoDigital\public\index.php(67): CodeIgniter\CodeIgniter->run()
+#10 C:\laragon\www\PROJECT\JagoDigital\system\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\...')
+#11 {main}
+CRITICAL - 2024-09-05 14:53:01 --> Table 'jagodm.tb_kabkota' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 295.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(295): mysqli->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(692): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(606): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1645): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows` FROM `tb_kabkota`', null, false)
+ 5 SYSTEMPATH\Model.php(836): CodeIgniter\Database\BaseBuilder->countAll()
+ 6 APPPATH\Controllers\admin\Dashboardctrl.php(67): CodeIgniter\Model->__call('countAll', [])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\admin\Dashboardctrl->index()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\admin\Dashboardctrl))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 14:58:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:58:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:58:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:58:37 --> CSRF token verified.
+INFO - 2024-09-05 14:58:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:58:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:58:51 --> CSRF token verified.
+INFO - 2024-09-05 14:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 14:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:00:29 --> CSRF token verified.
+INFO - 2024-09-05 15:00:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:00:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:00:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:00:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:00:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:01:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:01:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:01:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:01:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:01:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:02:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:02:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:02:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-05 15:02:36 --> Trying to access array offset on value of type null
+in APPPATH\Views\NewUser\beranda\about.php on line 19.
+ 1 APPPATH\Views\NewUser\beranda\about.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php', 19)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('NewUser/beranda/about', [], true)
+ 5 APPPATH\Controllers\NewUser\BaseController.php(75): view('NewUser/beranda/about', [...])
+ 6 APPPATH\Controllers\NewUser\BerandaController.php(57): App\Controllers\NewUser\BaseController->render('NewUser/beranda/about', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\NewUser\BerandaController->about()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\NewUser\BerandaController))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 15:02:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:02:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-05 15:03:09 --> Trying to access array offset on value of type null
+in APPPATH\Views\NewUser\beranda\about.php on line 19.
+ 1 APPPATH\Views\NewUser\beranda\about.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php', 19)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('NewUser/beranda/about', [], true)
+ 5 APPPATH\Controllers\NewUser\BaseController.php(75): view('NewUser/beranda/about', [...])
+ 6 APPPATH\Controllers\NewUser\BerandaController.php(57): App\Controllers\NewUser\BaseController->render('NewUser/beranda/about', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\NewUser\BerandaController->about()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\NewUser\BerandaController))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 15:03:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:22 --> CSRF token verified.
+INFO - 2024-09-05 15:03:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-05 15:03:41 --> Trying to access array offset on value of type null
+in APPPATH\Views\NewUser\beranda\about.php on line 19.
+ 1 APPPATH\Views\NewUser\beranda\about.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php', 19)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('NewUser/beranda/about', [], true)
+ 5 APPPATH\Controllers\NewUser\BaseController.php(75): view('NewUser/beranda/about', [...])
+ 6 APPPATH\Controllers\NewUser\BerandaController.php(57): App\Controllers\NewUser\BaseController->render('NewUser/beranda/about', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\NewUser\BerandaController->about()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\NewUser\BerandaController))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 15:03:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:03:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:04:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:04:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:04:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:04:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:04:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-05 15:04:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-05 15:04:20 --> Trying to access array offset on value of type null
+in APPPATH\Views\NewUser\beranda\about.php on line 19.
+ 1 APPPATH\Views\NewUser\beranda\about.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php', 19)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\laragon\\www\\PROJECT\\JagoDigital\\app\\Views\\NewUser\\beranda\\about.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1180): CodeIgniter\View\View->render('NewUser/beranda/about', [], true)
+ 5 APPPATH\Controllers\NewUser\BaseController.php(75): view('NewUser/beranda/about', [...])
+ 6 APPPATH\Controllers\NewUser\BerandaController.php(57): App\Controllers\NewUser\BaseController->render('NewUser/beranda/about', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(932): App\Controllers\NewUser\BerandaController->about()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\NewUser\BerandaController))
+ 9 SYSTEMPATH\CodeIgniter.php(366): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(67): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Commands\Server\rewrite.php(47): require_once('C:\\laragon\\www\\PROJECT\\JagoDigital\\public\\index.php')
+INFO - 2024-09-05 15:04:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

@@ -18,10 +18,6 @@
                                 <input type="text" class="form-control" name="nama_founder" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Jabatan Founder</label>
-                                <input type="text" class="form-control" name="jabatan_founder" required>
-                            </div>
-                            <div class="mb-3">
                                 <label class="form-label">Foto founder</label>
                                 <input type="file" class="form-control" name="foto_founder">
                             </div>
