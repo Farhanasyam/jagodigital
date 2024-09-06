@@ -36,7 +36,12 @@ class CreateTbMemberTable extends Migration
                 'constraint' => 50,
                 'null'       => false,
             ],
-            'id_dpc' => [
+            'id_provinsi' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'null'       => true,
+            ],
+            'id_kabkota' => [
                 'type'       => 'INT',
                 'constraint' => 11,
                 'null'       => true,

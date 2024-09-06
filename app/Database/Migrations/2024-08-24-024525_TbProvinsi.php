@@ -29,6 +29,6 @@ class CreateTbDpdTable extends Migration
     public function down()
     {
         // Menghapus tabel tb_dpd
-        $this->forge->dropTable('tb_dpd');
+        $this->forge->dropTable('tb_provinsi');
     }
 }

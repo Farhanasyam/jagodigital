@@ -1,85 +1,86 @@
 <?= $this->extend('admin/template/template'); ?>
 <?= $this->Section('content'); ?>
 
-
 <div class="app-content pt-3 p-md-3 p-lg-4">
     <div class="container-xl">
-        <div class="row g-3 mb-4 align-items-center justify-content-between">
-            <div class="col-auto">
-                <h1 class="app-page-title mb-0">Daftar Member</h1>
-            </div>
-            </br>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="<?php echo base_url() . "admin/member/tambah" ?>" class="btn btn-primary me-md-2"> + Tambah Member</a>
-            </div>
+        <h1 class="app-page-title">Daftar Member</h1>
+        <?= session()->getFlashdata('success') ? '<div class="alert alert-success">' . session()->getFlashdata('success') . '</div>' : '' ?>
+        <hr class="mb-4">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="<?= base_url('admin/member/tambah') ?>" class="btn btn-primary me-md-2"> + Tambah Member</a>
         </div>
-        <div class="tab-content" id="orders-table-tab-content">
-            <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-                <div class="app-card app-card-orders-table shadow-sm mb-5">
-                    <div class="app-card-body">
+        <div class="row g-4 settings-section">
+            <div class="col-12">
+                <div class="app-card app-card-settings shadow-sm p-4">
+                    <div class="card-body">
+                        <!-- Membungkus tabel dengan div yang memiliki properti overflow -->
                         <div class="table-responsive">
-                            <table class="table app-table-hover mb-0 text-left">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="text-center" valign="middle">No</th>
-                                        <th class="text-center" valign="middle">Username</th>
-                                        <th class="text-center" valign="middle">Password</th>
-                                        <th class="text-center" valign="middle">Nama</th>
-                                        <th class="text-center" valign="middle">DPC</th>
-                                        <th class="text-center" valign="middle">Status Kepengurusan</th>
-                                        <th class="text-center" valign="middle">Alamat</th>
-                                        <th class="text-center" valign="middle">No Hp</th>
-                                        <th class="text-center" valign="middle">Email</th>
-                                        <th class="text-center" valign="middle">IG</th>
-                                        <th class="text-center" valign="middle">FB</th>
-                                        <th class="text-center" valign="middle">Pendidikan</th>
-                                        <th class="text-center" valign="middle">Pekerjaan</th>
-                                        <th class="text-center" valign="middle">Sertifikasi</th>
-                                        <th class="text-center" valign="middle">Jenis Kelamin</th>
-                                        <th class="text-center" valign="middle">Foto</th>
-                                        <th class="text-center" valign="middle">Aksi</th>
+                                        <th>No</th>
+                                        <th>Username</th>
+                                        <th>Nama Member</th>
+                                        <th>Provinsi</th>
+                                        <th>Kabkota</th>
+                                        <th>Status Kepengurusan</th>
+                                        <th>Alamat</th>
+                                        <th>No HP</th>
+                                        <th>Email</th>
+                                        <th>Instagram</th>
+                                        <th>Facebook</th>
+                                        <th>Pendidikan</th>
+                                        <th>Pekerjaan</th>
+                                        <th>Sertifikasi</th>
+                                        <th>Jenis Kelamin</th>
+                                        <th>Foto</th>
+                                        <th>CV</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
-
                                 <tbody>
-                                    <?php $i = 1; ?>
-                                    <?php foreach ($all_data_member as $tampilMember) : ?>
+                                    <?php foreach ($members as $index => $member) : ?>
                                         <tr>
-                                            <td class="text-center" valign="middle"><?php echo $i; ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['username'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['password'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['nama_member'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['nama_dpc'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['status_kepengurusan'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['alamat_member'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['no_hp_member'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['email_member'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['ig_member'] ?></td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['fb_member'] ?></td>
-                                            <td class="text-center col-4" valign="middle"><?= substr(strip_tags($tampilMember['pendidikan_member']), 0, 60) ?>...</td>
-                                            <td class="text-center col-4" valign="middle"><?= substr(strip_tags($tampilMember['pekerjaan_member']), 0, 60) ?>...</td>
-                                            <td class="text-center col-4" valign="middle"><?= substr(strip_tags($tampilMember['sertifikasi_member']), 0, 60) ?>...</td>
-                                            <td class="text-center" valign="middle"><?= $tampilMember['jenis_kelamin'] ?></td>
-                                            <td class="text-center col-2" valign="middle"><img src="<?= base_url() . 'assets-baru/img/' . $tampilMember['foto_member'] ?>" class="img-fluid" alt="Foto Member"></td>
-                                            <td class="text-center col-2" valign="middle"><img src="<?= base_url() . 'assets-baru/img/' . $tampilMember['cv_member'] ?>" class="img-fluid" alt="CV Member"></td>
-                                            <td valign="middle">
-                                                <div class="d-grid gap-2">
-                                                    <a href="<?= base_url('admin/member/delete') . '/' . $tampilMember['id_member'] ?>" class="btn btn-danger">Hapus</a>
-                                                    <a href="<?= base_url('admin/member/edit') . '/' . $tampilMember['id_member'] ?>" class="btn btn-primary">Ubah</a>
-                                                    <a href="<?= base_url('/member/detail/' . $tampilMember['id_member'] . '/' . $tampilMember['slug']) ?>" class="btn btn-info" target="_blank">Preview</a>
-                                                </div>
+                                            <td><?= $index + 1 ?></td>
+                                            <td><?= $member->username ?></td>
+                                            <td><?= $member->nama_member ?></td>
+                                            <td><?= $member->nama_provinsi ?></td>
+                                            <td><?= $member->nama_kabkota ?></td>
+                                            <td><?= $member->status_kepengurusan ?></td>
+                                            <td><?= $member->alamat_member ?></td>
+                                            <td><?= $member->no_hp_member ?></td>
+                                            <td><?= $member->email_member ?></td>
+                                            <td><?= $member->ig_member ?></td>
+                                            <td><?= $member->fb_member ?></td>
+                                            <td><?= $member->pendidikan_member ?></td>
+                                            <td><?= $member->pekerjaan_member ?></td>
+                                            <td><?= $member->sertifikasi_member ?></td>
+                                            <td><?= $member->jenis_kelamin ?></td>
+                                            <td>
+                                                <?php if ($member->foto_member) : ?>
+                                                    <img src="<?= base_url('uploads/photos/' . $member->foto_member) ?>" alt="Foto" class="img-thumbnail" style="max-width: 50px;">
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php if ($member->cv_member) : ?>
+                                                    <a href="<?= base_url('uploads/cv/' . $member->cv_member) ?>" target="_blank">Download CV</a>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <a href="<?= base_url('admin/member/edit/' . $member->id_member) ?>" class="btn btn-warning btn-sm me-2">Edit</a>
+                                                <a href="<?= base_url('admin/member/delete/' . $member->id_member) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</a>
                                             </td>
                                         </tr>
-                                        <?php $i++; ?>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
-                        </div><!--//table-responsive-->
-                    </div><!--//app-card-body-->
+                        </div>
+                    </div>
                 </div><!--//app-card-->
-            </div><!--//tab-pane-->
-        </div><!--//container-fluid-->
-    </div><!--//app-content-->
-</div><!--//app-wrapper-->
+            </div>
+        </div><!--//row-->
+        <hr class="my-4">
+    </div><!--//container-fluid-->
+</div><!--//app-content-->
 
-<?= $this->endSection('content') ?>
+<?= $this->endSection(); ?>

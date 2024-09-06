@@ -40,6 +40,6 @@ class CreateTbDpcTable extends Migration
     public function down()
     {
         // Menghapus tabel tb_dpc
-        $this->forge->dropTable('tb_dpc');
+        $this->forge->dropTable('tb_kabkota');
     }
 }
