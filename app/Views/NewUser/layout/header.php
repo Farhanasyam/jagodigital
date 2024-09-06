@@ -31,6 +31,9 @@ $username = $session->get('username'); // Get the logged-in user's name
           <li class="nav-item">
             <a class="nav-link px-3 <?= ($segment == 'pengumuman') ? 'active' : ''; ?>" href="/pengumuman" id="Pengumuman-link">Pengumuman</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link px-3 <?= ($segment == 'Seo-Checker') ? 'active' : ''; ?>" href="/Seo-Checker" id="Seo-Checker-link">Seo-Checker</a>
+          </li>
         <?php endif; ?>
         <li class="nav-item">
           <a class="nav-link px-3 <?= ($segment == 'artikel') ? 'active' : ''; ?>" href="/artikel" id="artikel-link">Artikel</a>
