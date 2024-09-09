@@ -112,7 +112,7 @@
                                         <td class="text-center"><?= $i++ ?></td>
                                         <td contenteditable="true" data-id="<?= $item['id_sosial_media'] ?>" data-column="nama_sosial_media"><?= esc($item['nama_sosial_media']) ?></td>
                                         <td contenteditable="true" data-id="<?= $item['id_sosial_media'] ?>" data-column="warna_sosial_media">
-                                            <div style="display: flex; align-items: center;">
+                                            <div class="color-box" style="display: flex; align-items: center;">
                                                 <div style="width: 20px; height: 20px; background-color: <?= esc($item['warna_sosial_media']) ?>; border: 1px solid #000; margin-right: 5px;"></div>
                                                 <span><?= esc($item['warna_sosial_media']) ?></span>
                                             </div>
@@ -256,7 +256,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            // Fungsi untuk mengirim permintaan update
+            var csrfName = '<?= csrf_token() ?>'; // Nama token CSRF
+            var csrfHash = '<?= csrf_hash() ?>'; // Nilai token CSRF
+
+            function updateCsrfToken(newToken) {
+                csrfHash = newToken;
+            }
+
             function updateData(id, column, value, url) {
                 $.ajax({
                     url: url,
@@ -264,14 +270,69 @@
                     data: {
                         id: id,
                         column: column,
-                        value: value
+                        value: value,
+                        [csrfName]: csrfHash // Menambahkan token CSRF
                     },
-                    success: function(response) {
-                        // Optional: Tampilkan notifikasi sukses
-                        // alert('Data berhasil diperbarui');
+                    success: function(response, textStatus, xhr) {
+                        // Update token CSRF dari respons
+                        var newToken = xhr.getResponseHeader('X-CSRF-Token');
+                        if (newToken) {
+                            updateCsrfToken(newToken);
+                        }
+                        if (column === 'warna_sosial_media') {
+                            // Update warna div yang terkait
+                            var colorBox = $('td[data-id="' + id + '"][data-column="warna_sosial_media"] .color-box > div');
+                            colorBox.css('background-color', value);
+                            // Update span text dengan warna baru
+                            $('td[data-id="' + id + '"][data-column="warna_sosial_media"] .color-box > span').text(value);
+                        }
                     },
                     error: function() {
                         alert('Gagal memperbarui data');
+                    }
+                });
+            }
+
+            function deleteData(id, url) {
+                if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: {
+                            id: id,
+                            [csrfName]: csrfHash // Menambahkan token CSRF
+                        },
+                        success: function(response, textStatus, xhr) {
+                            // Update token CSRF dari respons
+                            var newToken = xhr.getResponseHeader('X-CSRF-Token');
+                            if (newToken) {
+                                updateCsrfToken(newToken);
+                            }
+                            location.reload();
+                        },
+                        error: function() {
+                            alert('Gagal menghapus data');
+                        }
+                    });
+                }
+            }
+
+            function addData(data, url) {
+                data[csrfName] = csrfHash; // Menambahkan token CSRF ke data
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: data,
+                    success: function(response, textStatus, xhr) {
+                        // Update token CSRF dari respons
+                        var newToken = xhr.getResponseHeader('X-CSRF-Token');
+                        if (newToken) {
+                            updateCsrfToken(newToken);
+                        }
+                        location.reload();
+                    },
+                    error: function() {
+                        alert('Gagal menambah data');
                     }
                 });
             }
@@ -281,9 +342,8 @@
                 var id = $(this).data('id');
                 var column = $(this).data('column');
                 var value = $(this).text().trim();
-                var table = $(this).closest('table').attr('id');
-
                 var url = '';
+
                 if ($(this).closest('table').find('th').eq(1).text().includes('Sosial Media')) {
                     url = '<?= base_url('/update_sosial_media') ?>';
                 } else if ($(this).closest('table').find('th').eq(1).text().includes('Content Type')) {
@@ -296,68 +356,6 @@
 
                 updateData(id, column, value, url);
             });
-
-            // Fungsi untuk menghapus data
-            function deleteData(id, url) {
-                if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                    $.ajax({
-                        url: url,
-                        method: 'POST',
-                        data: {
-                            id: id
-                        },
-                        success: function(response) {
-                            location.reload();
-                        },
-                        error: function() {
-                            alert('Gagal menghapus data');
-                        }
-                    });
-                }
-            }
-
-            // Handle delete Sosial Media
-            $('.delete-sosial-media').click(function() {
-                var id = $(this).data('id');
-                var url = '<?= base_url('/delete_sosial_media') ?>';
-                deleteData(id, url);
-            });
-
-            // Handle delete Content Type
-            $('.delete-content-type').click(function() {
-                var id = $(this).data('id');
-                var url = '<?= base_url('/delete_content_type') ?>';
-                deleteData(id, url);
-            });
-
-            // Handle delete Content Pillar
-            $('.delete-content-pillar').click(function() {
-                var id = $(this).data('id');
-                var url = '<?= base_url('/delete_content_pillar') ?>';
-                deleteData(id, url);
-            });
-
-            // Handle delete Status
-            $('.delete-status').click(function() {
-                var id = $(this).data('id');
-                var url = '<?= base_url('/delete_status') ?>';
-                deleteData(id, url);
-            });
-
-            // Fungsi untuk menambah data baru
-            function addData(data, url) {
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: data,
-                    success: function(response) {
-                        location.reload();
-                    },
-                    error: function() {
-                        alert('Gagal menambah data');
-                    }
-                });
-            }
 
             // Handle add Sosial Media
             $('#addSosialMedia').click(function() {

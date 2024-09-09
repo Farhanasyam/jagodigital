@@ -174,10 +174,15 @@ class ContentPlannerController extends BaseController
 
         if (in_array($column, ['nama_sosial_media', 'warna_sosial_media'])) {
             $this->sosialMediaModel->update($id, [$column => $value]);
-            return $this->response->setJSON(['status' => 'success']);
+            return $this->response
+                ->setJSON(['status' => 'success'])
+                ->setHeader('X-CSRF-Token', csrf_hash());
         }
 
-        return $this->response->setJSON(['status' => 'failed'], 400);
+        return $this->response
+            ->setJSON(['status' => 'failed'])
+            ->setStatusCode(400)
+            ->setHeader('X-CSRF-Token', csrf_hash());
     }
 
     public function delete_sosial_media()
@@ -205,10 +210,15 @@ class ContentPlannerController extends BaseController
 
         if (in_array($column, ['nama_content_type'])) {
             $this->contentTypeModel->update($id, [$column => $value]);
-            return $this->response->setJSON(['status' => 'success']);
+            return $this->response
+                ->setJSON(['status' => 'success'])
+                ->setHeader('X-CSRF-Token', csrf_hash());
         }
 
-        return $this->response->setJSON(['status' => 'failed'], 400);
+        return $this->response
+            ->setJSON(['status' => 'failed'])
+            ->setStatusCode(400)
+            ->setHeader('X-CSRF-Token', csrf_hash());
     }
 
     public function delete_content_type()
@@ -236,10 +246,15 @@ class ContentPlannerController extends BaseController
 
         if (in_array($column, ['nama_content_pillar'])) {
             $this->contentPillarModel->update($id, [$column => $value]);
-            return $this->response->setJSON(['status' => 'success']);
+            return $this->response
+                ->setJSON(['status' => 'success'])
+                ->setHeader('X-CSRF-Token', csrf_hash());
         }
 
-        return $this->response->setJSON(['status' => 'failed'], 400);
+        return $this->response
+            ->setJSON(['status' => 'failed'])
+            ->setStatusCode(400)
+            ->setHeader('X-CSRF-Token', csrf_hash());
     }
 
     public function delete_content_pillar()
@@ -267,10 +282,15 @@ class ContentPlannerController extends BaseController
 
         if (in_array($column, ['nama_status'])) {
             $this->statusModel->update($id, [$column => $value]);
-            return $this->response->setJSON(['status' => 'success']);
+            return $this->response
+                ->setJSON(['status' => 'success'])
+                ->setHeader('X-CSRF-Token', csrf_hash());
         }
 
-        return $this->response->setJSON(['status' => 'failed'], 400);
+        return $this->response
+            ->setJSON(['status' => 'failed'])
+            ->setStatusCode(400)
+            ->setHeader('X-CSRF-Token', csrf_hash());
     }
 
     public function delete_status()
