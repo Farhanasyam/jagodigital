@@ -6,14 +6,19 @@ use CodeIgniter\Model;
 
 class LinkedinMetrics extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'linkedinmetrics';
-    protected $primaryKey       = 'id';
+    protected $table            = 'tb_metrics_linkedin';
+    protected $primaryKey       = 'id_metrics_linkedin';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['nama_trend', 'januari', 'februari', 'maret', 'april', 'mei', 'juni', 'juli', 'agustus', 'september', 'oktober', 'november', 'desember', 'created_at'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;

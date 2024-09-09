@@ -6,14 +6,19 @@ use CodeIgniter\Model;
 
 class Status extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'statuses';
-    protected $primaryKey       = 'id';
+    protected $table            = 'tb_status';
+    protected $primaryKey       = 'id_status';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['nama_status'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;

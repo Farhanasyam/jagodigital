@@ -6,36 +6,30 @@ use CodeIgniter\Model;
 
 class TrendModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'trends';
-    protected $primaryKey       = 'id';
-    protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $table;
+    protected $allowedFields = [
+        'nama_trend',
+        'created_at',
+        'januari',
+        'februari',
+        'maret',
+        'april',
+        'mei',
+        'juni',
+        'juli',
+        'agustus',
+        'september',
+        'oktober',
+        'november',
+        'desember'
+    ];
 
-    // Dates
-    protected $useTimestamps = false;
-    protected $dateFormat    = 'datetime';
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
+    public function __construct($media = null)
+    {
+        parent::__construct();
 
-    // Validation
-    protected $validationRules      = [];
-    protected $validationMessages   = [];
-    protected $skipValidation       = false;
-    protected $cleanValidationRules = true;
-
-    // Callbacks
-    protected $allowCallbacks = true;
-    protected $beforeInsert   = [];
-    protected $afterInsert    = [];
-    protected $beforeUpdate   = [];
-    protected $afterUpdate    = [];
-    protected $beforeFind     = [];
-    protected $afterFind      = [];
-    protected $beforeDelete   = [];
-    protected $afterDelete    = [];
+        if ($media) {
+            $this->setTable('tb_metrics_' . $media);
+        }
+    }
 }

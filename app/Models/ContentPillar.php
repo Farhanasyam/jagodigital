@@ -6,14 +6,19 @@ use CodeIgniter\Model;
 
 class ContentPillar extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'contentpillars';
-    protected $primaryKey       = 'id';
+    protected $table            = 'tb_content_pillar';
+    protected $primaryKey       = 'id_content_pillar';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['nama_content_pillar'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;

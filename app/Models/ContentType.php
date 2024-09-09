@@ -6,14 +6,19 @@ use CodeIgniter\Model;
 
 class ContentType extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'contenttypes';
-    protected $primaryKey       = 'id';
+    protected $table            = 'tb_content_type';
+    protected $primaryKey       = 'id_content_type';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['nama_content_type'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;

@@ -6,14 +6,19 @@ use CodeIgniter\Model;
 
 class SosialMedia extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'sosialmedias';
-    protected $primaryKey       = 'id';
+    protected $table            = 'tb_sosial_media';
+    protected $primaryKey       = 'id_sosial_media';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['nama_sosial_media', 'warna_sosial_media'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;

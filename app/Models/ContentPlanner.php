@@ -6,14 +6,19 @@ use CodeIgniter\Model;
 
 class ContentPlanner extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'contentplanners';
-    protected $primaryKey       = 'id';
+    protected $table            = 'tb_content_planner';
+    protected $primaryKey       = 'id_content_planner';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['file_content', 'sosial_media', 'content_type', 'content_pillar', 'status', 'caption', 'cta_link', 'hashtag', 'created_at'];
+
+    protected bool $allowEmptyInserts = false;
+    protected bool $updateOnlyChanged = true;
+
+    protected array $casts = [];
+    protected array $castHandlers = [];
 
     // Dates
     protected $useTimestamps = false;
