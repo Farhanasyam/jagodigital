@@ -21,11 +21,11 @@ class CreateContentPillarTable extends Migration
             ],
         ]);
         $this->forge->addKey('id_content_pillar', true);
-        $this->forge->createTable('content_pillar');
+        $this->forge->createTable('tb_content_pillar');
     }
 
     public function down()
     {
-        $this->forge->dropTable('content_pillar');
+        $this->forge->dropTable('tb_content_pillar');
     }
 }

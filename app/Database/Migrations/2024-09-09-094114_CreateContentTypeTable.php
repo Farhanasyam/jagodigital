@@ -21,11 +21,11 @@ class CreateContentTypeTable extends Migration
             ],
         ]);
         $this->forge->addKey('id_content_type', true);
-        $this->forge->createTable('content_type');
+        $this->forge->createTable('tb_content_type');
     }
 
     public function down()
     {
-        $this->forge->dropTable('content_type');
+        $this->forge->dropTable('tb_content_type');
     }
 }

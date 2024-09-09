@@ -9,7 +9,7 @@ class CreateLinkedinMetricsTable extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_linkedin_metrics' => [
+            'id_metrics_linkedin' => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -71,12 +71,12 @@ class CreateLinkedinMetricsTable extends Migration
                 'type' => 'YEAR',
             ],
         ]);
-        $this->forge->addKey('id_linkedin_metrics', true);
-        $this->forge->createTable('linkedin_metrics');
+        $this->forge->addKey('id_metrics_linkedin', true);
+        $this->forge->createTable('tb_metrics_linkedin');
     }
 
     public function down()
     {
-        $this->forge->dropTable('linkedin_metrics');
+        $this->forge->dropTable('tb_metrics_linkedin');
     }
 }

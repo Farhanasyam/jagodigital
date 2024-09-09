@@ -9,7 +9,7 @@ class CreatePinterestMetricsTable extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_pinterest_metrics' => [
+            'id_metrics_pinterest' => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -71,12 +71,12 @@ class CreatePinterestMetricsTable extends Migration
                 'type' => 'YEAR',
             ],
         ]);
-        $this->forge->addKey('id_pinterest_metrics', true);
-        $this->forge->createTable('pinterest_metrics');
+        $this->forge->addKey('id_metrics_pinterest', true);
+        $this->forge->createTable('tb_metrics_pinterest');
     }
 
     public function down()
     {
-        $this->forge->dropTable('pinterest_metrics');
+        $this->forge->dropTable('tb_metrics_pinterest');
     }
 }

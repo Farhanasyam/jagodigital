@@ -9,7 +9,7 @@ class CreateTiktokMetricsTable extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_tiktok_metrics' => [
+            'id_metrics_tiktok' => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -71,12 +71,12 @@ class CreateTiktokMetricsTable extends Migration
                 'type' => 'YEAR',
             ],
         ]);
-        $this->forge->addKey('id_tiktok_metrics', true);
-        $this->forge->createTable('tiktok_metrics');
+        $this->forge->addKey('id_metrics_tiktok', true);
+        $this->forge->createTable('tb_metrics_tiktok');
     }
 
     public function down()
     {
-        $this->forge->dropTable('tiktok_metrics');
+        $this->forge->dropTable('tb_metrics_tiktok');
     }
 }

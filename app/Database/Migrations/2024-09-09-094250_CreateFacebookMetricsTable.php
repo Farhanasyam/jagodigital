@@ -9,7 +9,7 @@ class CreateFacebookMetricsTable extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_facebook_metrics' => [
+            'id_metrics_facebook' => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -71,12 +71,12 @@ class CreateFacebookMetricsTable extends Migration
                 'type' => 'YEAR',
             ],
         ]);
-        $this->forge->addKey('id_facebook_metrics', true);
-        $this->forge->createTable('facebook_metrics');
+        $this->forge->addKey('id_metrics_facebook', true);
+        $this->forge->createTable('tb_metrics_facebook');
     }
 
     public function down()
     {
-        $this->forge->dropTable('facebook_metrics');
+        $this->forge->dropTable('tb_metrics_facebook');
     }
 }

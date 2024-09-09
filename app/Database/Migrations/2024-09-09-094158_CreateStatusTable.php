@@ -21,11 +21,11 @@ class CreateStatusTable extends Migration
             ],
         ]);
         $this->forge->addKey('id_status', true);
-        $this->forge->createTable('status');
+        $this->forge->createTable('tb_status');
     }
 
     public function down()
     {
-        $this->forge->dropTable('status');
+        $this->forge->dropTable('tb_status');
     }
 }

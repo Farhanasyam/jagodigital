@@ -9,7 +9,7 @@ class CreateYoutubeMetricsTable extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_youtube_metrics' => [
+            'id_metrics_youtube' => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -71,12 +71,12 @@ class CreateYoutubeMetricsTable extends Migration
                 'type' => 'YEAR',
             ],
         ]);
-        $this->forge->addKey('id_youtube_metrics', true);
-        $this->forge->createTable('youtube_metrics');
+        $this->forge->addKey('id_metrics_youtube', true);
+        $this->forge->createTable('tb_metrics_youtube');
     }
 
     public function down()
     {
-        $this->forge->dropTable('youtube_metrics');
+        $this->forge->dropTable('tb_metrics_youtube');
     }
 }

@@ -56,11 +56,11 @@ class CreateContentPlannerTable extends Migration
             ],
         ]);
         $this->forge->addKey('id_content_planner', true);
-        $this->forge->createTable('content_planner');
+        $this->forge->createTable('tb_content_planner');
     }
 
     public function down()
     {
-        $this->forge->dropTable('content_planner');
+        $this->forge->dropTable('tb_content_planner');
     }
 }

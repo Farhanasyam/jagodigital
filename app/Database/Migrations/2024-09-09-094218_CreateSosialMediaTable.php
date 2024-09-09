@@ -25,11 +25,11 @@ class CreateSosialMediaTable extends Migration
             ],
         ]);
         $this->forge->addKey('id_sosial_media', true);
-        $this->forge->createTable('sosial_media');
+        $this->forge->createTable('tb_sosial_media');
     }
 
     public function down()
     {
-        $this->forge->dropTable('sosial_media');
+        $this->forge->dropTable('tb_sosial_media');
     }
 }

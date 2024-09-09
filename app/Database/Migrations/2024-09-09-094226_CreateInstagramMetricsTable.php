@@ -9,7 +9,7 @@ class CreateInstagramMetricsTable extends Migration
     public function up()
     {
         $this->forge->addField([
-            'id_instagram_metrics' => [
+            'id_metrics_instagram' => [
                 'type'           => 'INT',
                 'constraint'     => 5,
                 'unsigned'       => true,
@@ -71,12 +71,12 @@ class CreateInstagramMetricsTable extends Migration
                 'type' => 'YEAR',
             ],
         ]);
-        $this->forge->addKey('id_instagram_metrics', true);
-        $this->forge->createTable('instagram_metrics');
+        $this->forge->addKey('id_metrics_instagram', true);
+        $this->forge->createTable('tb_metrics_instagram');
     }
 
     public function down()
     {
-        $this->forge->dropTable('instagram_metrics');
+        $this->forge->dropTable('tb_metrics_instagram');
     }
 }
