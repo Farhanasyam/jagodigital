@@ -139,7 +139,7 @@ class ContentPlannerController extends BaseController
         $data['c_types'] = $content_type;
         $data['statuses'] = $status;
 
-        return view('NewUser/content-planner/input-data-content', $data);
+        return view('NewUser/content-planner/set-up', $data);
     }
 
     protected $sosialMediaModel;

@@ -62,9 +62,9 @@
             <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-between">
                 <h2 class="mb-3 mb-md-0">Key Performance Indicator</h2>
                 <div class="d-flex flex-wrap gap-2">
-                    <a href="/"><button type="button" class="btn btn-primary">Content Calendar</button></a>
+                    <a href="/content-calendar"><button type="button" class="btn btn-primary">Content Calendar</button></a>
                     <a href="/content-planner"><button type="button" class="btn btn-success">Content Planner</button></a>
-                    <a href="/input-data-content"><button type="button" class="btn btn-secondary">Set Up</button></a>
+                    <a href="/set-up"><button type="button" class="btn btn-secondary">Set Up</button></a>
                 </div>
             </div>
         </div>
