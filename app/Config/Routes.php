@@ -38,6 +38,10 @@ $routes->group('', ['filter' => 'beforeLogin'], function ($routes) {
     $routes->get('/kontak', 'NewUser\BerandaController::kontak');
 });
 
+$routes->get('/member', 'NewUser\MemberController::index');
+$routes->get('/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
+$routes->get('/NewUser/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
+
 $routes->get('/video', 'NewUser\VideoController::index');
 $routes->get('/video/detail/(:num)', 'NewUser\VideoController::detail/$1');
 $routes->get('/video/kategori/(:num)', 'NewUser\VideoController::categoryDetails/$1');
