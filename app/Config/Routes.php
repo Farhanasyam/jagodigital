@@ -54,7 +54,9 @@ $routes->get('/berita', 'NewUser\BeritaController::berita');
 $routes->get('/berita/all', 'NewUser\BeritaController::all');
 $routes->get('/berita/(:segment)', 'NewUser\BeritaController::detail/$1');
 
-
+// Hashtag Generator
+$routes->get('/hashtag', 'NewUser\HashtagController::index');
+$routes->get('/generate-hashtags', 'NewUser\HashtagController::generate');
 
 //ADMIN
 $routes->get('login', 'Login::index');

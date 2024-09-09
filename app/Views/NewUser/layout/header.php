@@ -68,6 +68,19 @@ $username = $session->get('username'); // Get the logged-in user's name
             <a class="nav-link px-3 <?= ($segment == 'berita') ? 'active' : ''; ?>" href="/berita" id="berita-link">Berita</a>
           </li>
         <?php endif; ?>
+
+        <li class="nav-item dropdown <?= ($segment == 'Aplikasi') ? 'active' : ''; ?>">
+          <?php if ($loggedIn): ?>
+            <a class="nav-link dropdown-toggle px-3" <?= ($segment == 'Aplikasi') ? 'active' : ''; ?> href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Aplikasi
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Content Planner</a></li>
+              <li><a class="dropdown-item" href="/hashtag">Hashtag Generator</a></li>
+            </ul>
+          <?php endif; ?>
+        </li>
+
         <li class="nav-item">
           <?php if (!$loggedIn || $session->get('role') != 'user'): ?>
             <a class="nav-link px-3 <?= ($segment == 'cara-pendaftaran') ? 'active' : ''; ?>" href="/cara-pendaftaran" id="cara-pendaftaran-link">Cara Pendaftaran</a>
