@@ -15,28 +15,28 @@ class BeritaController extends BaseController
         $today = date('Y-m-d'); // Mengambil tanggal hari ini
 
         // Ambil berita yang aktif sesuai dengan tanggal hari ini
-        $initialBerita = $beritaModel->getHomeBerita($today);
+        $activeBerita = $beritaModel->getHomeBerita($today);
 
         return $this->render('NewUser/berita/index', [
             'title' => 'Berita Terbaru',
-            'initialBerita' => $initialBerita 
+            'activeBerita' => $activeBerita 
         ]);
     }
+
 
     public function all()
     {
         helper('text');
         $beritaModel = new BeritaModels();
+        $today = date('Y-m-d'); // Get today's date
+        // Get all pengumuman
 
-        // Get all berita
-        $allBerita = $beritaModel->orderBy('created_at', 'desc')->findAll();
+        $activeBerita = $beritaModel->getHomeBeritaAll($today);
 
         // Pass data to the view
         return $this->render('NewUser/berita/index', [
-            'title' => 'Berita',
-            'initialBerita' => $allBerita,
-            'allBerita' => $allBerita,
-            'initialLimit' => count($allBerita)
+            'title' => 'Berita Terbaru',
+            'activeBerita' => $activeBerita
         ]);
     }
 

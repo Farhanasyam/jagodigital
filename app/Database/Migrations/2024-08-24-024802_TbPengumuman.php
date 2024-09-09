@@ -38,6 +38,11 @@ class CreateTbPengumumanTable extends Migration
                 'type' => 'DATE',
                 'null' => false,
             ],
+            'slug' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+            ],
         ]);
 
         $this->forge->addKey('id_pengumuman', true); // Primary key

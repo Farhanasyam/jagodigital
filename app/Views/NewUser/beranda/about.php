@@ -1,7 +1,6 @@
 <?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
 
-
 <!-- about us section start -->
 <section class="about-us-section">
     <div class="container">
@@ -15,11 +14,9 @@
 <section class="paragraf-section">
     <div class="container">
         <h4>
-            <!-- Seiring dengan kemajuan Jago Digital Marketing, prinsip-prinsip dan sasaran perusahaan dituangkan dalam visi dan misi. Pemadatan prinsip dan sasaran tersebut diharapkan dapat menjadi fondasi bagi Jago Digital Marketing serta seluruh pihak yang terlibat, mulai dari para pendiri hingga akademisi. -->
-            <?= $tentang['deskripsi_tentang']; ?>
+            <?= isset($tentang['deskripsi_tentang']) ? esc($tentang['deskripsi_tentang']) : 'Deskripsi tidak tersedia.'; ?>
         </h4>
     </div>
-
 </section>
 <!-- paragraf section end -->
 
@@ -36,11 +33,11 @@
     <div class="container">
         <div class="visi">
             <h3>Visi</h3>
-            <p><?= $tentang['visi'] ?></p>
+            <p><?= isset($tentang['visi']) ? esc($tentang['visi']) : 'Visi tidak tersedia.'; ?></p>
         </div>
         <div class="misi">
             <h3>Misi</h3>
-            <p><?= $tentang['misi'] ?></p>
+            <p><?= isset($tentang['misi']) ? esc($tentang['misi']) : 'Misi tidak tersedia.'; ?></p>
         </div>
     </div>
 </section>
@@ -49,16 +46,20 @@
     <h2>Founder of Jago Digital Marketing</h2>
     <p>Siapa sih pendiri dari Jago Digital Marketing? Yuk kenalan dulu!</p>
     <div class="founders">
-        <?php foreach ($founder as $founder): ?>
-            <div class="founder-card">
-                <img src="<?= base_url('uploads/foto_founder/' . $founder->foto_founder) ?>" alt="<?= $founder->nama_founder ?>" class="profile-img">
-                <img src="<?= base_url('assets-new/images/logo.png') ?>" class="logo" alt="Logo">
-                <div class="info">
-                    <h3 class="card-title"><?= $founder->nama_founder ?></h3>
-                    <p class="card-text"><?= $founder->jabatan_founder ?></p>
+        <?php if (!empty($founder)): ?>
+            <?php foreach ($founder as $founderItem): ?>
+                <div class="founder-card">
+                    <img src="<?= base_url('uploads/foto_founder/' . $founderItem->foto_founder) ?>" alt="<?= esc($founderItem->nama_founder) ?>" class="profile-img">
+                    <img src="<?= base_url('assets-new/images/logo.png') ?>" class="logo" alt="Logo">
+                    <div class="info">
+                        <h3 class="card-title"><?= esc($founderItem->nama_founder) ?></h3>
+                        <p class="card-text"><?= esc($founderItem->jabatan_founder) ?></p>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Informasi pendiri tidak tersedia.</p>
+        <?php endif; ?>
     </div>
 </section>
 

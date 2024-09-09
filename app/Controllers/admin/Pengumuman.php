@@ -68,6 +68,11 @@ class Pengumuman extends BaseController
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         } else {
+            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+            $judul = $this->request->getVar('judul_pengumuman');
+            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
             $file_foto = $this->request->getFile('poster_pengumuman');
             $file_foto->move('assets-baru/img/');
             $file_name = $file_foto->getName();
@@ -77,7 +82,8 @@ class Pengumuman extends BaseController
                 'deskripsi_pengumuman' => $this->request->getVar("deskripsi_pengumuman"),
                 'mulai_pengumuman' => $this->request->getVar("mulai_pengumuman"),
                 'akhir_pengumuman' => $this->request->getVar("akhir_pengumuman"),
-                'poster_pengumuman' => $file_name
+                'poster_pengumuman' => $file_name,
+                'slug' => $slug
             ];
             $PengumumanModels->save($data);
 
@@ -130,6 +136,11 @@ class Pengumuman extends BaseController
             $fotoName = $dataPengumuman->getRandomName();
             $dataPengumuman->move('assets-baru/img/', $fotoName);
 
+            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+            $judul = $this->request->getVar('judul_pengumuman');
+            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
             // Update the 'foto_penulis' field in the database with a "where" clause
             $PengumumanModels->where('id_pengumuman', $id_pengumuman)->set([
                 'poster_pengumuman' => $fotoName,
@@ -137,14 +148,20 @@ class Pengumuman extends BaseController
                 'deskripsi_pengumuman' => $this->request->getVar("deskripsi_pengumuman"),
                 'mulai_pengumuman' => $this->request->getVar("mulai_pengumuman"),
                 'akhir_pengumuman' => $this->request->getVar("akhir_pengumuman"),
+                'slug' => $slug,
             ])->update();
         } else {
+            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+            $judul = $this->request->getVar('judul_pengumuman');
+            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
             // If no new 'foto_penulis' file is uploaded, update only the other fields
             $PengumumanModels->where('id_pengumuman', $id_pengumuman)->set([
                 'judul_pengumuman' => $this->request->getVar("judul_pengumuman"),
                 'deskripsi_pengumuman' => $this->request->getVar("deskripsi_pengumuman"),
                 'mulai_pengumuman' => $this->request->getVar("mulai_pengumuman"),
                 'akhir_pengumuman' => $this->request->getVar("akhir_pengumuman"),
+                'slug' => $slug,
             ])->update();
         }
 

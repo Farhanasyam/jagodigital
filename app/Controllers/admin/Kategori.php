@@ -27,8 +27,14 @@ class Kategori extends BaseController
 
     public function proses_tambah()
     {
+         // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+         $judul = $this->request->getVar('nama_kategori');
+         $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+         $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
         $this->kategoriModel->save([
             'nama_kategori' => $this->request->getVar("nama_kategori"),
+            'slug' => $slug,
         ]);
 
         session()->setFlashdata('success', 'Kategori berhasil ditambahkan');
@@ -43,8 +49,14 @@ class Kategori extends BaseController
 
     public function proses_edit($id_kategori)
     {
+         // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+         $judul = $this->request->getVar('nama_kategori');
+         $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+         $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
         $this->kategoriModel->update($id_kategori, [
             'nama_kategori' => $this->request->getVar("nama_kategori"),
+            'slug' => $slug,
         ]);
 
         session()->setFlashdata('success', 'Kategori berhasil diperbarui');

@@ -36,6 +36,8 @@ $routes->group('', ['filter' => 'beforeLogin'], function ($routes) {
     $routes->get('/',  'NewUser\BerandaController::index');
     $routes->get('/about', 'NewUser\BerandaController::about');
     $routes->get('/kontak', 'NewUser\BerandaController::kontak');
+    $routes->get('/pendaftaran_member', 'user\PendaftaranMemberCotroller::pendaftaran_member');
+
 });
 
 $routes->get('/member', 'NewUser\MemberController::index');
@@ -43,12 +45,13 @@ $routes->get('/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
 $routes->get('/NewUser/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
 
 $routes->get('/video', 'NewUser\VideoController::index');
-$routes->get('/video/detail/(:num)', 'NewUser\VideoController::detail/$1');
-$routes->get('/video/kategori/(:num)', 'NewUser\VideoController::categoryDetails/$1');
+$routes->get('/video/detail/(:segment)', 'NewUser\VideoController::detail/$1');
+$routes->get('/video/kategori/(:segment)', 'NewUser\VideoController::categoryDetails/$1');
 
 $routes->get('/artikel', 'NewUser\ArtikelController::artikel');
 $routes->get('/artikel/all', 'NewUser\ArtikelController::all');
 $routes->get('/artikel/(:segment)', 'NewUser\ArtikelController::detail/$1');
+
 
 $routes->get('/pengumuman', 'NewUser\PengumumanController::pengumuman');
 $routes->get('/pengumuman/all', 'NewUser\PengumumanController::all');

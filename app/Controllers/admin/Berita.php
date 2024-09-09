@@ -61,6 +61,11 @@ class Berita extends BaseController
             session()->setFlashdata('error', $this->validator->listErrors());
             return redirect()->back()->withInput();
         } else {
+            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+            $judul = $this->request->getVar('judul_berita');
+            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
             $file_foto = $this->request->getFile('poster_berita');
             $file_name = $file_foto->getRandomName();
             $file_foto->move('assets-baru/img/', $file_name);
@@ -71,7 +76,8 @@ class Berita extends BaseController
                 'deskripsi_berita' => $this->request->getVar("deskripsi_berita"),
                 'mulai_berita' => $this->request->getVar("mulai_berita"),
                 'akhir_berita' => $this->request->getVar("akhir_berita"),
-                'poster_berita' => $file_name
+                'poster_berita' => $file_name,
+                'slug' => $slug,
             ];
 
             $berita_model->save($data);
@@ -120,19 +126,31 @@ class Berita extends BaseController
             $fotoName = $file_foto->getRandomName();
             $file_foto->move('assets-baru/img/', $fotoName);
 
+            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+            $judul = $this->request->getVar('judul_berita');
+            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
             $berita_model->update($id_berita, [
                 'poster_berita' => $fotoName,
                 'judul_berita' => $this->request->getVar("judul_berita"),
                 'deskripsi_berita' => $this->request->getVar("deskripsi_berita"),
                 'mulai_berita' => $this->request->getVar("mulai_berita"),
                 'akhir_berita' => $this->request->getVar("akhir_berita"),
+                'slug' => $slug,
             ]);
         } else {
+            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+            $judul = $this->request->getVar('judul_berita');
+            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
             $berita_model->update($id_berita, [
                 'judul_berita' => $this->request->getVar("judul_berita"),
                 'deskripsi_berita' => $this->request->getVar("deskripsi_berita"),
                 'mulai_berita' => $this->request->getVar("mulai_berita"),
                 'akhir_berita' => $this->request->getVar("akhir_berita"),
+                'slug' => $slug,
+
             ]);
         }
 

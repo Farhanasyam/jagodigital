@@ -21,7 +21,13 @@ class CreateTbKategoriVideoTable extends Migration
                 'constraint' => 50,
                 'null'       => false,
             ],
+            'slug' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+            ],
         ]);
+        
 
         $this->forge->addKey('id_katvideo', true); // Primary key
         $this->forge->createTable('tb_kategori_video');  // Membuat tabel

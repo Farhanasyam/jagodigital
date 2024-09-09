@@ -167,7 +167,8 @@
             </div>
         <?php endforeach; ?>
     </div>
-    <button class="view-all-btn">Lihat semua</button>
+    <button class="view-all-btn" onclick="window.location.href='/pengumuman'">Lihat semua</button>
+
 </section>
 
 

@@ -15,7 +15,7 @@
     <div class="container">
         <div class="row justify-content-center text-center" id="berita-container">
             <!-- Initial berita -->
-            <?php foreach ($initialBerita as $item): ?>
+            <?php foreach ($activeBerita as $item): ?>
                 <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
                     <div class="card shadow-sm border-0 h-100">
                         <!-- Gambar berita -->
@@ -24,7 +24,7 @@
                         <div class="card-body d-flex flex-column justify-content-center">
                             <h5 class="card-title font-weight-bold"><?= esc($item['judul_berita']) ?></h5>
                             <p class="card-text"><?= character_limiter(strip_tags($item['deskripsi_berita']), 100) ?></p>
-                            <p class="text-muted small"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($item['created_at'])) ?></p>
+                            <p class="text-muted small"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($item['mulai_berita'])) ?></p>
                             <a href="/berita/<?= esc($item['slug']) ?>" class="btn btn-gold btn-block mt-3">Baca Selengkapnya</a>
                         </div>
                     </div>

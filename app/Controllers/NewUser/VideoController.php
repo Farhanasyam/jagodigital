@@ -31,23 +31,37 @@ class VideoController extends BaseController
         ]);
     }
 
-    public function categoryDetails($id_katvideo)
+    public function categoryDetails($slug)
     {
-        $data['selectedCategory'] = $this->kategoriVideoModels->find($id_katvideo);
-        $data['videos'] = $this->videoPembelajaranModels->where('id_katvideo', $id_katvideo)->findAll();
+        // Fetch the category using slug instead of the ID
+        $data['selectedCategory'] = $this->kategoriVideoModels
+            ->where('slug', $slug)
+            ->first();
+
+        // Fetch the videos for this category
+        if ($data['selectedCategory']) {
+            $data['videos'] = $this->videoPembelajaranModels
+                ->where('id_katvideo', $data['selectedCategory']->id_katvideo)
+                ->findAll();
+        } else {
+            $data['videos'] = [];
+        }
 
         return $this->render('NewUser/materi-pembelajaran/index_category', $data);
     }
 
-    public function detail($id)
+    public function detail($slug)
     {
-        // Fetch the video by ID
-        $video = $this->videoPembelajaranModels->getVideoWithCategory($id);
+        // Fetch the video by its slug
+        $video = $this->videoPembelajaranModels->getVideoWithCategory($slug);
 
-       //var_dump($video); die();
+        // Ensure the video exists before proceeding
+        if (!$video) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Video not found.');
+        }
 
-        // Fetch related videos in the same category, excluding the current video
-        $related_videos = $this->videoPembelajaranModels->getRelatedVideos($id, $video->id_katvideo);
+        // Fetch related videos in the same category, excluding the current video by its ID
+        $related_videos = $this->videoPembelajaranModels->getRelatedVideos($video->id_video, $video->id_katvideo);
 
         // Limit the related videos to 4 and shuffle them
         $related_videos = array_slice($related_videos, 0, 4); // Limit to 4 videos
