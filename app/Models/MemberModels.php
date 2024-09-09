@@ -112,11 +112,38 @@ class MemberModels extends Model
     }
     public function getAllMembersWithLocation()
     {
-        return $this->select('tb_member.*, tb_provinsi.nama_provinsi, tb_kabkota.nama_kabkota')
-                    ->join('tb_provinsi', 'tb_member.id_provinsi = tb_provinsi.id_provinsi', 'left')
-                    ->join('tb_kabkota', 'tb_member.id_kabkota = tb_kabkota.id_kabkota', 'left')
-                    ->findAll();
+        return $this->db->table('tb_member')
+        ->select('tb_member.*, tb_provinsi.nama_provinsi, tb_kabkota.nama_kabkota')
+        ->join('tb_provinsi', 'tb_member.id_provinsi = tb_provinsi.id_provinsi', 'left')
+        ->join('tb_kabkota', 'tb_member.id_kabkota = tb_kabkota.id_kabkota', 'left')
+        ->get()
+        ->getResult();
+
     }
     
     
+    public function getMembers()
+{
+    return $this->db->table('tb_member')
+        ->select('tb_member.*, tb_provinsi.nama_provinsi, tb_role.nama_role') // Sesuaikan tabel
+        ->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_member.id_provinsi', 'left') // Sesuaikan relasi
+        ->join('tb_role', 'tb_role.id_role = tb_member.id_role', 'left') // Sesuaikan relasi
+        ->get()
+        ->getResult();
+}
+public function getMemberById($id_member)
+{
+    return $this->db->table('tb_member')
+        ->select('tb_member.*, tb_provinsi.nama_provinsi, tb_kabkota.nama_kabkota') // Pastikan tb_kabkota juga diambil
+        ->join('tb_provinsi', 'tb_provinsi.id_provinsi = tb_member.id_provinsi', 'left')
+        ->join('tb_kabkota', 'tb_kabkota.id_kabkota = tb_member.id_kabkota', 'left') // Join ke tb_kabkota
+        ->where('tb_member.id_member', $id_member)
+        ->get()
+        ->getRow();
+}
+
+
+
+
+
 }

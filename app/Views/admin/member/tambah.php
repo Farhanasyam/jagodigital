@@ -28,22 +28,22 @@
                             <label class="form-label">Nama Member</label>
                             <input type="text" class="form-control" name="nama_member" required>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Provinsi</label>
-                            <select class="form-control" name="id_provinsi" required>
-                                <?php foreach ($provinsi as $prov) : ?>
-                                    <option value="<?= $prov->id_provinsi ?>"><?= $prov->nama_provinsi ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Kabkota</label>
-                            <select class="form-control" name="id_kabkota" required>
-                                <?php foreach ($kabkota as $kab) : ?>
-                                    <option value="<?= $kab->id_kabkota ?>"><?= $kab->nama_kabkota ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
+                        <select name="id_provinsi" id="id_provinsi" class="form-control">
+                        <option value="">Pilih Provinsi</option>
+                        <?php foreach ($provinsi as $prov): ?>
+                            <option value="<?= $prov->id_provinsi; ?>"><?= $prov->nama_provinsi; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+
+
+                    <select name="id_kabkota" id="id_kabkota" class="form-control">
+                        <option value="">Pilih Kabupaten/Kota</option>
+                        <?php foreach ($kabkota as $kab): ?>
+                            <option value="<?= $kab->id_kabkota; ?>"><?= $kab->nama_kabkota; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+
+
                         <div class="mb-3">
                             <label class="form-label">Status Kepengurusan</label>
                             <input type="text" class="form-control" name="status_kepengurusan">

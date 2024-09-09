@@ -15,7 +15,7 @@ class Member extends BaseController
     {
         $member_model = new MemberModels();
         $members = $member_model->getAllMembersWithLocation();
-
+        
         return view('admin/member/index', [
             'members' => $members
         ]);
@@ -38,6 +38,12 @@ class Member extends BaseController
     public function proses_tambah()
 {
     $member_model = new MemberModels();
+    $id_provinsi = $this->request->getVar('id_provinsi');
+
+    if (empty($id_provinsi)) {
+        // Debugging jika provinsi tidak ada
+        die('Provinsi tidak dipilih atau tidak diterima oleh server.');
+    }
     
     // Ambil file foto dari form
     $fotoFile = $this->request->getFile('foto_member');
@@ -156,4 +162,15 @@ public function proses_edit($id_member)
         session()->setFlashdata('success', 'Data berhasil dihapus');
         return redirect()->to(base_url('admin/member/index'));
     }
+
+    public function someMethod()
+{
+    $provinsiModel = new ProvinsiModels();  // Assuming you have a ProvinceModel
+    $provinsi = $provinsiModel->findAll();
+
+    return view('some_view', [
+        'provinsi' => $provinsi,
+        // Other data as needed
+    ]);
+}
 }
