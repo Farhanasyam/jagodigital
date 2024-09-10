@@ -119,10 +119,10 @@ class ContentPlannerController extends BaseController
         $model = new ContentPlanner();
         $model->insert($data);
 
-        return redirect()->to('/');
+        return redirect()->to('/content-calendar');
     }
 
-    public function all_input()
+    public function all_setup()
     {
         $modelSosmed = new SosialMedia();
         $modelCPillar = new ContentPillar();

@@ -158,6 +158,7 @@
     <hr class="line-separator">
 
     <form action="<?= base_url('/content-planner/add'); ?>" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
       <div class="card">
         <!-- Info Date -->
         <div class="mb-4 left-3">
@@ -288,33 +289,6 @@
 
   <!-- Upload Image with Preview -->
   <script>
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          $('#imageResult').attr('src', e.target.result);
-        };
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    $(function() {
-      $('#upload').on('change', function() {
-        readURL(this);
-      });
-    });
-
-    var input = document.getElementById('upload');
-    var infoArea = document.getElementById('upload-label');
-
-    input.addEventListener('change', showFileName);
-
-    function showFileName(event) {
-      var input = event.srcElement;
-      var fileName = input.files[0].name;
-      infoArea.textContent = 'File name: ' + fileName;
-    }
-
     document.addEventListener('DOMContentLoaded', function() {
       var dateInput = document.getElementById('dateInput');
       var dateDisplay = document.getElementById('dateDisplay');
@@ -339,6 +313,43 @@
         var formattedDate = selectedDate.toLocaleDateString('id-ID', options);
 
         dateDisplay.textContent = formattedDate;
+      });
+
+      var input = document.getElementById('upload');
+      var infoArea = document.getElementById('upload-label');
+
+      input.addEventListener('change', function(event) {
+        var fileName = event.target.files[0].name;
+        infoArea.textContent = 'File name: ' + fileName;
+        readURL(event.target);
+      });
+
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            document.getElementById('imageResult').src = e.target.result;
+          };
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      // Add CSRF token to form data and submit
+      document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(this);
+        fetch('<?= base_url('path/to/your/controller/add') ?>', {
+            method: 'POST',
+            body: formData
+          }).then(response => response.json())
+          .then(data => {
+            if (data.status === 'success') {
+              alert('File uploaded successfully!');
+            } else {
+              alert('Failed to upload file.');
+            }
+          });
       });
     });
   </script>
