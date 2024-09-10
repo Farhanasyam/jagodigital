@@ -65,6 +65,47 @@ $routes->get('/berita/(:segment)', 'NewUser\BeritaController::detail/$1');
 $routes->get('/hashtag', 'NewUser\HashtagController::index');
 $routes->get('/generate-hashtags', 'NewUser\HashtagController::generate');
 
+// [START] Content Planner
+    // File
+    $routes->get('serve-file/(:any)', 'NewUser\ContentPlannerController::serve/$1');
+
+    // Content Calendar
+    $routes->get('/content-calendar', 'NewUser\ContentPlannerController::calender');
+
+    // Content Planner
+    $routes->get('/content-planner', 'NewUser\ContentPlannerController::index');
+    $routes->post('/content-planner/add', 'NewUser\ContentPlannerController::add');
+
+    // Set Up
+    $routes->get('/set-up', 'NewUser\ContentPlannerController::all_input');
+
+    // Sosial Media
+    $routes->post('/add_sosial_media', 'NewUser\ContentPlannerController::add_sosial_media');
+    $routes->post('/update_sosial_media', 'NewUser\ContentPlannerController::update_sosial_media');
+    $routes->post('/delete_sosial_media', 'NewUser\ContentPlannerController::delete_sosial_media');
+
+    // Content Type
+    $routes->post('/add_content_type', 'NewUser\ContentPlannerController::add_content_type');
+    $routes->post('/update_content_type', 'NewUser\ContentPlannerController::update_content_type');
+    $routes->post('/delete_content_type', 'NewUser\ContentPlannerController::delete_content_type');
+
+    // Content Pillar
+    $routes->post('/add_content_pillar', 'NewUser\ContentPlannerController::add_content_pillar');
+    $routes->post('/update_content_pillar', 'NewUser\ContentPlannerController::update_content_pillar');
+    $routes->post('/delete_content_pillar', 'NewUser\ContentPlannerController::delete_content_pillar');
+
+    // Status
+    $routes->post('/add_status', 'NewUser\ContentPlannerController::add_status');
+    $routes->post('/update_status', 'NewUser\ContentPlannerController::update_status');
+    $routes->post('/delete_status', 'NewUser\ContentPlannerController::delete_status');
+
+    // KPI
+    $routes->get('/kpi', 'NewUser\ContentPlannerController::kpi');
+    $routes->post('trend/add', 'NewUser\ContentPlannerController::addTrend');
+    $routes->post('trend/update', 'NewUser\ContentPlannerController::updateTrend');
+    $routes->post('trend/delete', 'NewUser\ContentPlannerController::deleteTrend');
+// [END] Content Planner
+
 //ADMIN
 $routes->get('login', 'Login::index');
 $routes->post('login/process', 'Login::process');
