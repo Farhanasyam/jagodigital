@@ -40,6 +40,11 @@ class CreateTbVideoTable extends Migration
                 'constraint' => 11,
                 'null'       => false,
             ],
+            'slug' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+            ],
         ]);
 
         $this->forge->addKey('id_video', true); // Primary key

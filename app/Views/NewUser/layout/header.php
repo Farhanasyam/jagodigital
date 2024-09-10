@@ -50,7 +50,7 @@ $username = $session->get('username'); // Get the logged-in user's name
                   <hr class="dropdown-divider">
                 </li>
                 <?php foreach ($categories as $category): ?>
-                  <li><a class="dropdown-item" href="<?= base_url('/video/kategori/' . $category->id_katvideo) ?>"><?= esc($category->nama_kategori_video) ?></a></li>
+                  <li><a class="dropdown-item" href="<?= base_url('/video/kategori/' . $category->slug) ?>"><?= esc($category->nama_kategori_video) ?></a></li>
                 <?php endforeach; ?>
               <?php else: ?>
                 <li><a class="dropdown-item" href="#">No Categories Available</a></li>
@@ -59,6 +59,30 @@ $username = $session->get('username'); // Get the logged-in user's name
           <?php else: ?>
             <a class="nav-link px-3 <?= ($segment == 'video') ? 'active' : ''; ?>" href="/video">
               Materi Pembelajaran
+            </a>
+          <?php endif; ?>
+        </li>
+        <li class="nav-item dropdown <?= ($segment == 'member') ? 'active' : ''; ?>">
+          <?php if ($loggedIn): ?>
+            <a class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Member
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="<?= base_url('/member') ?>">All Members</a></li>
+              <?php if (!empty($provinsi)): ?>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <?php foreach ($provinsi as $province): ?>
+                  <li><a class="dropdown-item" href="<?= base_url('/member/provinsi/' . $province->id_provinsi) ?>"><?= esc($province->nama_provinsi) ?></a></li>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <li><a class="dropdown-item" href="#">Tidak ada Provinsi</a></li>
+              <?php endif; ?>
+            </ul>
+          <?php else: ?>
+            <a class="nav-link px-3" href="<?= base_url('/member') ?>">
+              Member
             </a>
           <?php endif; ?>
         </li>

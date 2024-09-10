@@ -24,7 +24,7 @@
             <div class="row mt-3">
                 <?php foreach ($videos as $video) : ?>
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
-                        <a href="<?= base_url('/video/detail/' . $video->id_video) ?>" style="text-decoration: none; color: inherit;">
+                        <a href="<?= base_url('/video/detail/' . $video->slug) ?>" style="text-decoration: none; color: inherit;">
                             <div class="card" style="width: 100%; height: 380px; display: flex; flex-direction: column; cursor: pointer; border-radius: 8px; transition: box-shadow 0.3s, transform 0.3s;">
                                 <img src="/uploads/thumbnails/<?= $video->thumbnail ?>" class="card-img-top" alt="<?= $video->judul_video ?>" style="height: 200px; object-fit: cover; border-top-left-radius: 8px; border-top-right-radius: 8px;">
                                 <div class="card-body d-flex flex-column" style="flex-grow: 1;">

@@ -7,7 +7,7 @@
         <h2>Pengumuman</h2>
         <p>Tetap up-to-date dengan pengumuman terbaru dari kami, <br>jangan lewatkan informasi penting yang mungkin berdampak pada kamu.</p>
     </div>
-</section>
+</section>  
 <!-- pengumuman section end -->
 
 <!-- pengumuman-list-section start -->
@@ -26,7 +26,7 @@
                             <h5 class="card-title font-weight-bold"><?= esc($item['judul_pengumuman']) ?></h5>
                             <p class="card-text"><?= character_limiter(strip_tags($item['deskripsi_pengumuman']), 100) ?></p>
                             <p class="text-muted small"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($item['mulai_pengumuman'])) ?></p>
-                            <a href="/pengumuman/" class="btn btn-gold btn-block mt-3">Baca Selengkapnya</a>
+                            <a href="/pengumuman/<?= esc($item['slug']) ?>" class="btn btn-gold btn-block mt-3">Baca Selengkapnya</a>
                         </div>
                     </div>
                 </div>

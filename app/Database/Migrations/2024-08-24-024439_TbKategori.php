@@ -21,6 +21,11 @@ class CreateTbKategoriTable extends Migration
                 'constraint' => 20,
                 'null'       => false,
             ],
+            'slug' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+            ],
         ]);
 
         $this->forge->addKey('id_kategori', true); // Primary key

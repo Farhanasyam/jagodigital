@@ -33,8 +33,10 @@
                                 <label for="id_kategori" class="form-label">Kategori</label>
                                 <select class="form-control" id="id_kategori" name="id_kategori" required>
                                     <option value="" disabled>Pilih Kategori</option>
-                                    <?php foreach ($kategori as $id => $nama): ?>
-                                        <option value="<?= $id; ?>" <?= ($id == $artikel['id_kategori']) ? 'selected' : '' ?>><?= $nama; ?></option>
+                                    <?php foreach ($kategori as $k): ?>
+                                        <option value="<?= $k['id_kategori']; ?>" <?= ($k['id_kategori'] == $artikel['id_kategori']) ? 'selected' : '' ?>>
+                                            <?= $k['nama_kategori']; ?>
+                                        </option>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
@@ -59,11 +61,6 @@
                             <div class="mb-3">
                                 <label for="tags" class="form-label">Tags</label>
                                 <input type="text" class="form-control" id="tags" name="tags" value="<?= old('tags', $artikel['tags']) ?>" placeholder="Pisahkan dengan koma" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="slug" class="form-label">Slug</label>
-                                <input type="text" class="form-control" id="slug" name="slug" value="<?= old('slug', $artikel['slug']) ?>" required>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

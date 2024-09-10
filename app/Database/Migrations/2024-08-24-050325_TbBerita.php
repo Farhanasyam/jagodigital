@@ -38,6 +38,11 @@ class TbBerita extends Migration
                 'type'       => 'DATETIME',
                 'null'       => false,
             ],
+            'slug' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+            ],
         ]);
 
         $this->forge->addKey('id_berita', true);

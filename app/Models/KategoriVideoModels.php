@@ -10,6 +10,6 @@ class KategoriVideoModels extends Model
     protected $primaryKey = 'id_katvideo';
     protected $returnType = "object";
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['nama_kategori_video'];
+    protected $allowedFields = ['nama_kategori_video', 'slug'];
     
 }

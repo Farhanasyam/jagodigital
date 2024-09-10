@@ -20,7 +20,8 @@ class ArtikelModel extends Model
         'deskripsi_artikel',
         'tags',
         'views',
-        'slug'
+        'slug',
+        'created_at',
     ];
 
     // Dates

@@ -1,44 +1,43 @@
 <?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
 
-<!-- artikel-detail section start -->
-<section class="artikel-detail-section">
+<!-- berita-detail section start -->
+<section class="berita-detail-section">
     <div class="container">
-        <!-- Article Header -->
-        <div class="artikel-detail-header text-center">
-            <h1><?= esc($artikel['judul_artikel']) ?></h1>
-            <p class="text-muted"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($artikel['created_at'])) ?></p>
+        <!-- Berita Header -->
+        <div class="berita-detail-header text-center">
+            <h1><?= esc($berita->judul_berita) ?></h1>
         </div>
 
-        <!-- Article Content -->
-        <div class="artikel-detail-content">
-            <img src="<?= base_url('uploads/upload_artikel/' . $artikel['foto_artikel']) ?>" class="artikel-img" alt="<?= esc($artikel['judul_artikel']) ?>">
-            <div class="artikel-text">
-                <p><?= esc($artikel['deskripsi_artikel']) ?></p>
+        <!-- Berita Content -->
+        <div class="berita-detail-content">
+            <img src="<?= base_url('assets-baru/img/' . $berita->poster_berita) ?>" class="berita-img" alt="<?= esc($berita->judul_berita) ?>">
+            <div class="berita-text">
+                <?= esc(strip_tags($berita->deskripsi_berita, '<b><i><u>')) ?>
             </div>
         </div>
 
         <!-- Back Button -->
-        <div class="artikel-detail-footer text-center">
-            <a href="<?= base_url('/artikel') ?>" class="btn btn-primary">Kembali ke Artikel</a>
+        <div class="berita-detail-footer text-center">
+            <a href="<?= base_url('/berita') ?>" class="btn btn-primary">Kembali ke Berita</a>
         </div>
     </div>
 </section>
-<!-- artikel-detail section end -->
+<!-- berita-detail section end -->
 
-<!-- recommended articles section start -->
-<section class="recommended-articles-section">
+<!-- recommended berita section start -->
+<section class="recommended-berita-section">
     <div class="container">
-        <h2 class="text-center">Artikel Rekomendasi</h2>
+        <h2 class="text-center">Berita Rekomendasi</h2>
         <div class="row">
-            <?php foreach ($recommendedArticles as $item): ?>
+            <?php foreach ($recommendedBerita as $item): ?>
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm border-0">
-                        <img src="<?= base_url('uploads/upload_artikel/' . $item['foto_artikel']) ?>" class="card-img-top" alt="<?= esc($item['judul_artikel']) ?>">
+                        <img src="<?= base_url('assets-baru/img/' . $item->poster_berita) ?>" class="card-img-top" alt="<?= esc($item->judul_berita) ?>">
                         <div class="card-body">
-                            <h5 class="card-title"><?= esc($item['judul_artikel']) ?></h5>
-                            <p class="card-text"><?= character_limiter(strip_tags($item['deskripsi_artikel']), 100) ?></p>
-                            <a href="/artikel/<?= esc($item['slug']) ?>" class="btn btn-primary">Baca Selengkapnya</a>
+                            <h5 class="card-title"><?= esc($item->judul_berita) ?></h5>
+                            <p class="card-text"><?= character_limiter(strip_tags($item->deskripsi_berita), 100) ?></p>
+                            <a href="/berita/<?= esc($item->slug) ?>" class="btn btn-primary">Baca Selengkapnya</a>
                         </div>
                     </div>
                 </div>
@@ -46,33 +45,33 @@
         </div>
     </div>
 </section>
-<!-- recommended articles section end -->
+<!-- recommended berita section end -->
 
 <style>
-    /* Artikel Detail Section */
-    .artikel-detail-section {
+    /* Berita Detail Section */
+    .berita-detail-section {
         padding: 60px 15px;
         background-color: #f9f9f9;
         border-bottom: 1px solid #ddd;
     }
 
-    .artikel-detail-header h1 {
+    .berita-detail-header h1 {
         font-size: 2.5rem;
         color: #333;
         margin-bottom: 10px;
     }
 
-    .artikel-detail-header p {
+    .berita-detail-header p {
         font-size: 1rem;
         color: #777;
     }
 
-    .artikel-detail-content {
+    .berita-detail-content {
         margin-top: 30px;
         text-align: center;
     }
 
-    .artikel-img {
+    .berita-img {
         width: 100%;
         max-width: 800px;
         max-height: 300px;
@@ -85,14 +84,14 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .artikel-text {
+    .berita-text {
         margin-top: 20px;
         line-height: 1.6;
         font-size: 1.1rem;
         color: #555;
     }
 
-    .artikel-detail-footer {
+    .berita-detail-footer {
         margin-top: 40px;
     }
 
@@ -110,13 +109,13 @@
         background-color: #66b2a5;
     }
 
-    /* Recommended Articles Section */
-    .recommended-articles-section {
+    /* Recommended Berita Section */
+    .recommended-berita-section {
         padding: 60px 15px;
         background-color: #fff;
     }
 
-    .recommended-articles-section h2 {
+    .recommended-berita-section h2 {
         font-size: 2rem;
         color: #333;
         margin-bottom: 20px;
@@ -175,15 +174,15 @@
     }
 
     @media (max-width: 768px) {
-        .artikel-detail-header h1 {
+        .berita-detail-header h1 {
             font-size: 2rem;
         }
 
-        .artikel-detail-content {
+        .berita-detail-content {
             padding: 0 15px;
         }
 
-        .artikel-text {
+        .berita-text {
             font-size: 1rem;
         }
     }

@@ -13,7 +13,7 @@ class Video extends BaseController
         $video_model = new VideoPembelajaranModels();
         $kategori_model = new KategoriVideoModels();
         $video_model->save($this->request->getPost());
-        
+
 
         $videos = $video_model->getAllVideosWithCategory();
         $kategori = $kategori_model->findAll();
@@ -40,6 +40,11 @@ class Video extends BaseController
     public function proses_tambah()
     {
         $video_model = new VideoPembelajaranModels();
+        // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+        $judul = $this->request->getVar('judul_video');
+        $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+        $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
         $data = [
             'judul_video' => $this->request->getVar('judul_video'),
             'video_url' => $this->request->getVar('video_url'),
@@ -47,13 +52,13 @@ class Video extends BaseController
             'judul_video' => $this->request->getVar('judul_video'),
             'video_url' => $this->request->getVar('video_url'),
             'id_katvideo' => $this->request->getVar('id_katvideo'),
+            'slug' => $slug
         ];
 
         if ($this->request->getFile('thumbnail')->isValid()) {
             $thumbnail = $this->request->getFile('thumbnail');
             $thumbnail->move('uploads/thumbnails');
             $data['thumbnail'] = $thumbnail->getName();
-
         }
 
         $video_model->save($data);
@@ -78,11 +83,18 @@ class Video extends BaseController
     public function proses_edit($id_video)
     {
         $video_model = new VideoPembelajaranModels();
+
+        // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+        $judul = $this->request->getVar('judul_video');
+        $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+        $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
         $data = [
             'judul_video' => $this->request->getVar('judul_video'),
             'video_url' => $this->request->getVar('video_url'),
             'deskripsi_video' => $this->request->getVar('deskripsi_video'),
             'id_katvideo' => $this->request->getVar('id_katvideo'),
+            'slug' => $slug
         ];
 
         if ($this->request->getFile('thumbnail')->isValid()) {

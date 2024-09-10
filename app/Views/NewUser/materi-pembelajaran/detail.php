@@ -10,9 +10,13 @@
                     <div class="bg-light border border-top-0 p-4 rounded shadow-sm">
                         <!-- Category Badge -->
                         <div class="mb-3">
-                            <a class="badge text-uppercase font-weight-semi-bold p-2 mr-2 custom-badge-color"
-                                href="<?= base_url('/video/kategori/' . $video->id_katvideo) ?>"><?= $video->nama_kategori_video ?></a>
+                            <?php if (isset($video->nama_kategori_video) && isset($video->category_slug)): ?>
+                                <a class="badge text-uppercase font-weight-semi-bold p-2 mr-2 custom-badge-color"
+                                    href="<?= base_url('/video/kategori/' . $video->category_slug) ?>"><?= htmlspecialchars($video->nama_kategori_video, ENT_QUOTES, 'UTF-8') ?></a>
+                            <?php endif; ?>
                         </div>
+
+
 
                         <!-- Video Title -->
                         <h4 class="mb-3 text-dark text-uppercase font-weight-bold"><?= $video->judul_video; ?></h4>
@@ -64,7 +68,7 @@
                                     <img class="img-fluid" style="object-fit: cover; width: 100px; height: 100px;"
                                         src="<?= base_url('uploads/thumbnails/' . $related_video->thumbnail) ?>" alt="">
                                     <div class="w-100 h-100 px-3 d-flex flex-column justify-content-center">
-                                        <a href="<?= base_url('/video/detail/' . $related_video->id_video) ?>"
+                                        <a href="<?= base_url('/video/detail/' . $related_video->slug) ?>"
                                             class="text-dark text-uppercase font-weight-bold text-truncate"
                                             style="font-size: 12px; flex-grow: 0; margin-bottom: 10px; word-wrap: break-word; white-space: normal;">
                                             <?= $related_video->judul_video; ?>
