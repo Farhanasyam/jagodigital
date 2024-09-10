@@ -21,13 +21,12 @@
                                 <img src="<?= base_url('/asset-user/images/Favicon_PRIBADI-Indonesia_20012024041928.jpeg') ?>" alt="user profile">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                <li><a class="dropdown-item" href="<?= site_url('/') ?>">Tampilan User</a></li>
+                                <li><a class="dropdown-item" href="/pengumuman?view=member">Tampilan Member</a></li>
+                                <li><a class="dropdown-item" href="/?view=nonmember">Tampilan Non Member</a></li>
                                 <li><a class="dropdown-item" href="<?= site_url('logout') ?>">Log Out</a></li>
                             </ul>
                         </div>
                     </div>
-
-
                 </div><!--//row-->
             </div><!--//app-header-content-->
         </div><!--//container-fluid-->

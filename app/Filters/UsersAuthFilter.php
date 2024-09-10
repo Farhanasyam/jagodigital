@@ -13,7 +13,7 @@ class UsersAuthFilter implements FilterInterface
         // Periksa apakah pengguna sudah login
         if (is_null(session()->get('logged_in'))) {
             // Jika pengguna belum login, arahkan ke halaman login
-            return redirect()->to(base_url('login'));
+            return redirect()->back();
         }
 
     }

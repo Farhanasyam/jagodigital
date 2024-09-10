@@ -14,7 +14,7 @@ use App\Models\VideoPembelajaranModels;
 use App\Models\KeuntunganModel;
 use App\Models\KontakModels;
 use App\Models\ArtikelModel;
-use App\models\KategoriModel;
+use App\Models\KategoriModel;
 use App\Models\SocialMediaModels;
 
 class Dashboardctrl extends BaseController

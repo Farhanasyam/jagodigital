@@ -1,4 +1,4 @@
-<?= $this->extend('NewUser/layout/app_no_footer'); ?>
+<?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
 
 <link href="<?= base_url('assets-new/css/pendaftaran_member.css') ?>" rel="stylesheet">
