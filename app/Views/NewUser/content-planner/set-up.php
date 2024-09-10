@@ -317,6 +317,34 @@
                 }
             }
 
+            // Handle delete Sosial Media
+            $('.delete-sosial-media').click(function() {
+                var id = $(this).data('id');
+                var url = '<?= base_url('/delete_sosial_media') ?>';
+                deleteData(id, url);
+            });
+
+            // Handle delete Content Type
+            $('.delete-content-type').click(function() {
+                var id = $(this).data('id');
+                var url = '<?= base_url('/delete_content_type') ?>';
+                deleteData(id, url);
+            });
+
+            // Handle delete Content Pillar
+            $('.delete-content-pillar').click(function() {
+                var id = $(this).data('id');
+                var url = '<?= base_url('/delete_content_pillar') ?>';
+                deleteData(id, url);
+            });
+
+            // Handle delete Status
+            $('.delete-status').click(function() {
+                var id = $(this).data('id');
+                var url = '<?= base_url('/delete_status') ?>';
+                deleteData(id, url);
+            });
+
             function addData(data, url) {
                 data[csrfName] = csrfHash; // Menambahkan token CSRF ke data
                 $.ajax({
