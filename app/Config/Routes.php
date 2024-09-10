@@ -63,7 +63,7 @@ $routes->group('', ['filter' => 'usersAuth'], function ($routes) {
     $routes->post('/content-planner/add', 'NewUser\ContentPlannerController::add');
 
     // Set Up
-    $routes->get('/set-up', 'NewUser\ContentPlannerController::all_input');
+    $routes->get('/set-up', 'NewUser\ContentPlannerController::all_setup');
 
     // Sosial Media
     $routes->post('/add_sosial_media', 'NewUser\ContentPlannerController::add_sosial_media');

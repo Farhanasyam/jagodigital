@@ -144,6 +144,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
+        const csrfName = '<?= csrf_token() ?>'; // Name of the CSRF token
+        let csrfHash = '<?= csrf_hash() ?>'; // Value of the CSRF token
+
+        function updateCsrfToken(newToken) {
+            csrfHash = newToken;
+        }
+
         document.getElementById('add-data-btn').addEventListener('click', function() {
             const trendName = document.getElementById('new-trend').value;
 
@@ -157,11 +164,17 @@
                         body: new URLSearchParams({
                             trend_name: trendName,
                             media: currentMedia,
-                            year: currentYear
+                            year: currentYear,
+                            [csrfName]: csrfHash
                         })
                     }).then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
+                            // Jika ada token CSRF baru, perbarui
+                            if (data.new_csrf_token) {
+                                updateCsrfToken(data.new_csrf_token);
+                            }
+
                             // Cari dan hapus baris "No data available for this year." jika ada
                             const noDataRow = document.querySelector('#data-body tr td[colspan="14"]');
                             if (noDataRow) {
@@ -170,24 +183,26 @@
 
                             // Tambahkan baris baru ke tabel tanpa refresh seluruh halaman
                             const newRow = document.createElement('tr');
+                            const trendData = data.data;
+
                             newRow.innerHTML = `
-                    <td class="fw-bold" contenteditable="true" data-type"nama_trend">${data.data.nama_trend}</td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td contenteditable="true"></td>
-                    <td class="text-center">
-                        <button class="btn btn-danger btn-sm delete-content-type" style="width: 100%; min-width: 80px;">Delete</button>
-                    </td>
-                `;
+                                <td class="fw-bold" contenteditable="true" data-type="nama_trend">${trendData.nama_trend}</td>
+                                <td contenteditable="true">${trendData.januari !== null ? trendData.januari : ''}</td>
+                                <td contenteditable="true">${trendData.februari !== null ? trendData.februari : ''}</td>
+                                <td contenteditable="true">${trendData.maret !== null ? trendData.maret : ''}</td>
+                                <td contenteditable="true">${trendData.april !== null ? trendData.april : ''}</td>
+                                <td contenteditable="true">${trendData.mei !== null ? trendData.mei : ''}</td>
+                                <td contenteditable="true">${trendData.juni !== null ? trendData.juni : ''}</td>
+                                <td contenteditable="true">${trendData.juli !== null ? trendData.juli : ''}</td>
+                                <td contenteditable="true">${trendData.agustus !== null ? trendData.agustus : ''}</td>
+                                <td contenteditable="true">${trendData.september !== null ? trendData.september : ''}</td>
+                                <td contenteditable="true">${trendData.oktober !== null ? trendData.oktober : ''}</td>
+                                <td contenteditable="true">${trendData.november !== null ? trendData.november : ''}</td>
+                                <td contenteditable="true">${trendData.desember !== null ? trendData.desember : ''}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger btn-sm delete-content-type" style="width: 100%; min-width: 80px;">Delete</button>
+                                </td>
+                            `;
                             document.getElementById('data-body').appendChild(newRow);
 
                             // Kosongkan input setelah menambah data
@@ -253,11 +268,17 @@
                         september: monthData[8] || null,
                         oktober: monthData[9] || null,
                         november: monthData[10] || null,
-                        desember: monthData[11] || null
+                        desember: monthData[11] || null,
+                        [csrfName]: csrfHash
                     })
                 }).then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
+                        // Jika ada token CSRF baru, perbarui
+                        if (data.new_csrf_token) {
+                            updateCsrfToken(data.new_csrf_token);
+                        }
+
                         // Perbarui tampilan atau lakukan tindakan lainnya jika perlu
                     } else {
                         alert('Failed to update trend. Please try again.');
@@ -275,16 +296,35 @@
                     body: new URLSearchParams({
                         trend_name: trendName,
                         media: currentMedia,
-                        year: currentYear
+                        year: currentYear,
+                        [csrfName]: csrfHash
                     })
                 }).then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
+                        // Jika ada token CSRF baru, perbarui
+                        if (data.new_csrf_token) {
+                            updateCsrfToken(data.new_csrf_token);
+                        }
+
+                        // Hapus baris dari tabel
                         row.remove();
+
+                        // Periksa apakah tabel menjadi kosong dan tambahkan baris "No data available" jika perlu
+                        checkIfNoDataAvailable();
                     } else {
                         alert('Failed to delete trend. Please try again.');
                     }
                 });
+        }
+
+        function checkIfNoDataAvailable() {
+            const dataBody = document.getElementById('data-body');
+            const rows = dataBody.querySelectorAll('tr');
+
+            if (rows.length === 0) {
+                dataBody.innerHTML = '<tr><td colspan="14" class="text-center">No data available for this year.</td></tr>';
+            }
         }
 
         // Menyimpan tahun saat ini
