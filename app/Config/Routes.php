@@ -108,6 +108,9 @@ $routes->get('/berita', 'NewUser\BeritaController::berita');
 $routes->get('/berita/all', 'NewUser\BeritaController::all');
 $routes->get('/berita/(:segment)', 'NewUser\BeritaController::detail/$1');
 
+$routes->get('/PageChecker', 'NewUser\PageCheckerController');
+
+
 
 
 //ADMIN
