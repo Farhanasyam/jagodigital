@@ -24,9 +24,46 @@
 
 
 <body>
+  <?php
+  $session = session();
+  $loggedIn = $session->get('logged_in');
+
+  // Check if the 'view' query parameter is set in the URL
+  if (isset($_GET['view'])) {
+    $selectedView = $_GET['view'];
+
+    // Validate the selected view and store it in the session
+    if (in_array($selectedView, ['admin', 'member', 'nonmember'])) {
+      $session->set('admin_view', $selectedView);
+    }
+  }
+
+  // Get the current view from the session
+  $currentView = $session->get('admin_view');
+
+  // Admin can switch views based on their selection
+  if ($session->get('role') == 'admin' && $currentView) {
+    if ($currentView == 'admin') {
+      // Load admin view
+      echo $this->include('NewUser/layout/headerAdmin.php');
+    } elseif ($currentView == 'member') {
+      // Load member view
+      echo $this->include('NewUser/layout/headerMember.php');
+    } elseif ($currentView == 'nonmember') {
+      // Load non-member view
+      echo $this->include('NewUser/layout/headerNonMember.php');
+    }
+  } else {
+    // Default behavior for normal users (non-admins)
+    if ($loggedIn) {
+      echo $this->include('NewUser/layout/headerMember.php');
+    } else {
+      echo $this->include('NewUser/layout/headerNonMember.php');
+    }
+  }
+  ?>
 
 
-  <?= $this->include('NewUser/layout/header.php'); ?>
 
   <?= $this->renderSection('content'); ?>
 

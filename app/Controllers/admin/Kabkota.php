@@ -2,6 +2,8 @@
 
 namespace App\Controllers\admin;
 
+use App\Controllers\BaseController;
+
 use App\Models\KabkotaModels;
 use App\Models\ProvinsiModels;
 
@@ -23,7 +25,7 @@ class Kabkota extends BaseController
         $kabkota_model = new KabkotaModels();
         $all_data_kabkota = $kabkota_model->getKabkotaAdmin();
         $validation = \Config\Services::validation();
-        return view('admin/kabkota/index', [
+        return view('admin/Kabkota/index', [
             'all_data_Kabkota' => $all_data_kabkota,
             'validation' => $validation
         ]);
@@ -45,7 +47,7 @@ class Kabkota extends BaseController
         $provinsi_model = new ProvinsiModels();
         $all_data_provinsi = $provinsi_model->findAll();
         $validation = \Config\Services::validation();
-        return view('admin/kabkota/tambah', [
+        return view('admin/Kabkota/tambah', [
             'all_data_Provinsi' => $all_data_provinsi,
             'validation' => $validation
         ]);
@@ -62,7 +64,7 @@ class Kabkota extends BaseController
         $kabkotaModel->save($data);
 
         session()->setFlashdata('success', 'Data berhasil disimpan');
-        return redirect()->to(base_url('admin/kabkota/index'));
+        return redirect()->to(base_url('admin/Kabkota/index'));
     }
 
     public function edit($id_kabkota)
@@ -84,7 +86,7 @@ class Kabkota extends BaseController
         $all_data_provinsi = $provinsi_model->findAll();
         $validation = \Config\Services::validation();
 
-        return view('admin/kabkota/edit', [
+        return view('admin/Kabkota/edit', [
             'kabkotaData' => $kabkotaData,
             'all_data_Provinsi' => $all_data_provinsi,
             'validation' => $validation
@@ -105,7 +107,7 @@ class Kabkota extends BaseController
         ])->update();
 
         session()->setFlashdata('success', 'Berkas berhasil diperbarui');
-        return redirect()->to(base_url('admin/kabkota/index'));
+        return redirect()->to(base_url('admin/Kabkota/index'));
     }
 
     public function delete($id = false)
@@ -124,6 +126,6 @@ class Kabkota extends BaseController
         $kabkotaModel = new KabkotaModels();
         $kabkotaModel->delete($id);
 
-        return redirect()->to(base_url('admin/kabkota/index'));
+        return redirect()->to(base_url('admin/Kabkota/index'));
     }
 }
