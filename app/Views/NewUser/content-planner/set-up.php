@@ -77,7 +77,7 @@
                     <h2 class="display-7 mb-0">Set Up</h2>
                 </div>
                 <div class="dropdown">
-                    <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Halaman Saat Ini
                     </button>
                     <ul class="dropdown-menu  dropdown-menu-right">
@@ -343,6 +343,58 @@
                 });
             }
         }
+
+        function deleteData(id, url) {
+            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {
+                        id: id,
+                        [csrfName]: csrfHash // Menambahkan token CSRF
+                    },
+                    success: function(response, textStatus, xhr) {
+                        // Update token CSRF dari respons
+                        var newToken = xhr.getResponseHeader('X-CSRF-Token');
+                        if (newToken) {
+                            updateCsrfToken(newToken);
+                        }
+                        location.reload();
+                    },
+                    error: function() {
+                        alert('Gagal menghapus data');
+                    }
+                });
+            }
+        }
+
+        // Handle delete Sosial Media
+        $('.delete-sosial-media').click(function() {
+            var id = $(this).data('id');
+            var url = '<?= base_url('/delete_sosial_media') ?>';
+            deleteData(id, url);
+        });
+
+        // Handle delete Content Type
+        $('.delete-content-type').click(function() {
+            var id = $(this).data('id');
+            var url = '<?= base_url('/delete_content_type') ?>';
+            deleteData(id, url);
+        });
+
+        // Handle delete Content Pillar
+        $('.delete-content-pillar').click(function() {
+            var id = $(this).data('id');
+            var url = '<?= base_url('/delete_content_pillar') ?>';
+            deleteData(id, url);
+        });
+
+        // Handle delete Status
+        $('.delete-status').click(function() {
+            var id = $(this).data('id');
+            var url = '<?= base_url('/delete_status') ?>';
+            deleteData(id, url);
+        });
 
         function addData(data, url) {
             data[csrfName] = csrfHash; // Menambahkan token CSRF ke data

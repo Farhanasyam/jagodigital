@@ -148,7 +148,7 @@ class ArtikelController extends BaseController
         $data['deskripsi_artikel'] = $this->request->getPost('deskripsi_artikel');
         $data['tags'] = $this->request->getPost('tags');
         $data['slug'] = $slug; // Gunakan slug otomatis
-        $data['created_at'] = $$tanggal; // Gunakan slug otomatis
+        
 
         // Memastikan data tidak kosong sebelum melakukan update
         if (!empty($data)) {

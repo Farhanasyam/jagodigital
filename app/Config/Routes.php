@@ -37,35 +37,21 @@ $routes->group('', ['filter' => 'beforeLogin'], function ($routes) {
     $routes->get('/about', 'NewUser\BerandaController::about');
     $routes->get('/kontak', 'NewUser\BerandaController::kontak');
     $routes->get('/pendaftaran_member', 'user\PendaftaranMemberCotroller::pendaftaran_member');
-
 });
 
-$routes->get('/member', 'NewUser\MemberController::index');
-$routes->get('/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
-$routes->get('/NewUser/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
+$routes->group('', ['filter' => 'usersAuth'], function ($routes) {
+    $routes->get('/member', 'NewUser\MemberController::index');
+    $routes->get('/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
+    $routes->get('/NewUser/member/detail/(:num)', 'NewUser\MemberController::detail/$1');
 
-$routes->get('/video', 'NewUser\VideoController::index');
-$routes->get('/video/detail/(:segment)', 'NewUser\VideoController::detail/$1');
-$routes->get('/video/kategori/(:segment)', 'NewUser\VideoController::categoryDetails/$1');
+    $routes->get('/video/detail/(:segment)', 'NewUser\VideoController::detail/$1');
+    $routes->get('/video/kategori/(:segment)', 'NewUser\VideoController::categoryDetails/$1');
 
-$routes->get('/artikel', 'NewUser\ArtikelController::artikel');
-$routes->get('/artikel/all', 'NewUser\ArtikelController::all');
-$routes->get('/artikel/(:segment)', 'NewUser\ArtikelController::detail/$1');
+    // Hashtag Generator
+    $routes->get('/hashtag', 'NewUser\HashtagController::index');
+    $routes->get('/generate-hashtags', 'NewUser\HashtagController::generate');
 
-
-$routes->get('/pengumuman', 'NewUser\PengumumanController::pengumuman');
-$routes->get('/pengumuman/all', 'NewUser\PengumumanController::all');
-$routes->get('/pengumuman/(:segment)', 'NewUser\PengumumanController::detail/$1');
-
-$routes->get('/berita', 'NewUser\BeritaController::berita');
-$routes->get('/berita/all', 'NewUser\BeritaController::all');
-$routes->get('/berita/(:segment)', 'NewUser\BeritaController::detail/$1');
-
-// Hashtag Generator
-$routes->get('/hashtag', 'NewUser\HashtagController::index');
-$routes->get('/generate-hashtags', 'NewUser\HashtagController::generate');
-
-// [START] Content Planner
+    // [START] Content Planner
     // File
     $routes->get('serve-file/(:any)', 'NewUser\ContentPlannerController::serve/$1');
 
@@ -77,7 +63,7 @@ $routes->get('/generate-hashtags', 'NewUser\HashtagController::generate');
     $routes->post('/content-planner/add', 'NewUser\ContentPlannerController::add');
 
     // Set Up
-    $routes->get('/set-up', 'NewUser\ContentPlannerController::all_input');
+    $routes->get('/set-up', 'NewUser\ContentPlannerController::all_setup');
 
     // Sosial Media
     $routes->post('/add_sosial_media', 'NewUser\ContentPlannerController::add_sosial_media');
@@ -104,7 +90,28 @@ $routes->get('/generate-hashtags', 'NewUser\HashtagController::generate');
     $routes->post('trend/add', 'NewUser\ContentPlannerController::addTrend');
     $routes->post('trend/update', 'NewUser\ContentPlannerController::updateTrend');
     $routes->post('trend/delete', 'NewUser\ContentPlannerController::deleteTrend');
-// [END] Content Planner
+    // [END] Content Planner
+});
+
+$routes->get('/video', 'NewUser\VideoController::index');
+
+$routes->get('/artikel', 'NewUser\ArtikelController::artikel');
+$routes->get('/artikel/all', 'NewUser\ArtikelController::all');
+$routes->get('/artikel/(:segment)', 'NewUser\ArtikelController::detail/$1');
+
+
+$routes->get('/pengumuman', 'NewUser\PengumumanController::pengumuman');
+$routes->get('/pengumuman/all', 'NewUser\PengumumanController::all');
+$routes->get('/pengumuman/(:segment)', 'NewUser\PengumumanController::detail/$1');
+
+$routes->get('/berita', 'NewUser\BeritaController::berita');
+$routes->get('/berita/all', 'NewUser\BeritaController::all');
+$routes->get('/berita/(:segment)', 'NewUser\BeritaController::detail/$1');
+
+$routes->get('/seo-checker', 'NewUser\PageCheckerController');
+
+
+
 
 //ADMIN
 $routes->get('login', 'Login::index');
@@ -139,7 +146,7 @@ $routes->get('admin/kategori/delete/(:any)', 'admin\Kategori::delete/$1');
 
 $routes->group('admin', function ($routes) {
     // Routes for Provinsi
-    $routes->get('provinsi', 'admin\Provinsi::index');
+    $routes->get('provinsi/index', 'admin\Provinsi::index');
     $routes->get('provinsi/tambah', 'admin\Provinsi::tambah');
     $routes->post('provinsi/proses_tambah', 'admin\Provinsi::proses_tambah');
     $routes->get('provinsi/edit/(:num)', 'admin\Provinsi::edit/$1');
@@ -147,7 +154,7 @@ $routes->group('admin', function ($routes) {
     $routes->get('provinsi/delete/(:num)', 'admin\Provinsi::delete/$1');
 
     // Routes for Kabkota
-    $routes->get('kabkota', 'admin\Kabkota::index');
+    $routes->get('kabkota/index', 'admin\Kabkota::index');
     $routes->get('kabkota/tambah', 'admin\Kabkota::tambah');
     $routes->post('kabkota/proses_tambah', 'admin\Kabkota::proses_tambah');
     $routes->get('kabkota/edit/(:num)', 'admin\Kabkota::edit/$1');
@@ -221,7 +228,7 @@ $routes->post('admin/link_founder/proses_edit/(:num)', 'admin\LinkFounder::prose
 $routes->get('admin/link_founder/delete/(:any)', 'admin\LinkFounder::delete/$1');
 
 $routes->group('admin', function ($routes) {
-    $routes->get('kontak', 'admin\Kontak::index');
+    $routes->get('kontak/index', 'admin\Kontak::index');
     $routes->get('kontak/tambah', 'admin\Kontak::tambah');
     $routes->post('kontak/proses_tambah', 'admin\Kontak::proses_tambah');
     $routes->get('kontak/edit/(:num)', 'admin\Kontak::edit/$1');
@@ -240,21 +247,28 @@ $routes->group('admin', function ($routes) {
 });
 
 // Admin Social Media Routes
-$routes->get('admin/socialmedia/index', 'admin\Socialmedia::index');
-$routes->get('admin/socialmedia/tambah', 'admin\Socialmedia::tambah');
-$routes->post('admin/socialmedia/proses_tambah', 'admin\Socialmedia::proses_tambah');
-$routes->get('admin/socialmedia/edit/(:num)', 'admin\Socialmedia::edit/$1');
-$routes->post('admin/socialmedia/proses_edit/(:num)', 'admin\Socialmedia::proses_edit/$1');
-$routes->get('admin/socialmedia/delete/(:any)', 'admin\Socialmedia::delete/$1');
+$routes->get('admin/socialmedia/index', 'admin\SocialMedia::index');
+$routes->get('admin/socialmedia/tambah', 'admin\SocialMedia::tambah');
+$routes->post('admin/socialmedia/proses_tambah', 'admin\SocialMedia::proses_tambah');
+$routes->get('admin/socialmedia/edit/(:num)', 'admin\SocialMedia::edit/$1');
+$routes->post('admin/socialmedia/proses_edit/(:num)', 'admin\SocialMedia::proses_edit/$1');
+$routes->get('admin/socialmedia/delete/(:any)', 'admin\SocialMedia::delete/$1');
 
-$routes->group('admin', ['namespace' => 'App\Controllers\admin'], function ($routes) {
-    $routes->get('keuntungan', 'Keuntungan::index');
-    $routes->get('keuntungan/tambah', 'Keuntungan::tambah');
-    $routes->post('keuntungan/proses_tambah', 'Keuntungan::proses_tambah');
-    $routes->get('keuntungan/edit/(:num)', 'Keuntungan::edit/$1');
-    $routes->post('keuntungan/proses_edit/(:num)', 'Keuntungan::proses_edit/$1');
-    $routes->get('keuntungan/delete/(:num)', 'Keuntungan::delete/$1');
+$routes->group('admin', function ($routes) {
+    $routes->get('keuntungan/index', 'admin\Keuntungan::index');
+    $routes->get('keuntungan/tambah', 'admin\Keuntungan::tambah');
+    $routes->post('keuntungan/proses_tambah', 'admin\Keuntungan::proses_tambah');
+    $routes->get('keuntungan/edit/(:num)', 'admin\Keuntungan::edit/$1');
+    $routes->post('keuntungan/proses_edit/(:num)', 'admin\Keuntungan::proses_edit/$1');
+    $routes->post('keuntungan/delete/(:num)', 'admin\Keuntungan::delete/$1');
 });
+
+$routes->get('admin/tentang/index', 'admin\Tentang::index');
+$routes->get('admin/tentang/tambah', 'admin\Tentang::tambah');
+$routes->post('admin/tentang/proses_tambah', 'admin\Tentang::proses_tambah');
+$routes->get('admin/tentang/edit/(:num)', 'admin\Tentang::edit/$1');
+$routes->post('admin/tentang/proses_edit/(:num)', 'admin\Tentang::proses_edit/$1');
+$routes->delete('admin/tentang/delete/(:num)', 'Tentang::delete/$1');
 
 
 //USER

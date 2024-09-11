@@ -2,6 +2,8 @@
 
 namespace App\Controllers\admin;
 
+use App\Controllers\BaseController;
+
 use App\Models\ProvinsiModels;
 
 class Provinsi extends BaseController
@@ -22,7 +24,7 @@ class Provinsi extends BaseController
         $provinsi_model = new ProvinsiModels();
         $all_data_provinsi = $provinsi_model->findAll();
         $validation = \Config\Services::validation();
-        return view('admin/provinsi/index', [
+        return view('admin/Provinsi/index', [
             'all_data_Provinsi' => $all_data_provinsi,
             'validation' => $validation
         ]);
@@ -42,7 +44,7 @@ class Provinsi extends BaseController
         }
 
         $validation = \Config\Services::validation();
-        return view('admin/provinsi/tambah', [
+        return view('admin/Provinsi/tambah', [
             'validation' => $validation
         ]);
     }
@@ -56,7 +58,7 @@ class Provinsi extends BaseController
         $provinsiModel->save($data);
 
         session()->setFlashdata('success', 'Data berhasil disimpan');
-        return redirect()->to(base_url('admin/provinsi/index'));
+        return redirect()->to(base_url('admin/Provinsi/index'));
     }
 
     public function edit($id_provinsi)
@@ -76,7 +78,7 @@ class Provinsi extends BaseController
         $provinsiData = $provinsi_model->find($id_provinsi);
         $validation = \Config\Services::validation();
 
-        return view('admin/provinsi/edit', [
+        return view('admin/Provinsi/edit', [
             'provinsiData' => $provinsiData,
             'validation' => $validation
         ]);
@@ -94,7 +96,7 @@ class Provinsi extends BaseController
         ])->update();
 
         session()->setFlashdata('success', 'Berkas berhasil diperbarui');
-        return redirect()->to(base_url('admin/provinsi/index'));
+        return redirect()->to(base_url('admin/Provinsi/index'));
     }
 
     public function delete($id = false)
@@ -113,6 +115,6 @@ class Provinsi extends BaseController
         $provinsiModel = new ProvinsiModels();
         $provinsiModel->delete($id);
 
-        return redirect()->to(base_url('admin/provinsi/index'));
+        return redirect()->to(base_url('admin/Provinsi/index'));
     }
 }

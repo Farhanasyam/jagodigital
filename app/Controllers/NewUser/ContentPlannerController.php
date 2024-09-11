@@ -119,10 +119,10 @@ class ContentPlannerController extends BaseController
         $model = new ContentPlanner();
         $model->insert($data);
 
-        return redirect()->to('/');
+        return redirect()->to('/content-calendar');
     }
 
-    public function all_input()
+    public function all_setup()
     {
         $modelSosmed = new SosialMedia();
         $modelCPillar = new ContentPillar();
@@ -337,25 +337,28 @@ class ContentPlannerController extends BaseController
             $data = [
                 'nama_trend' => $trendName,
                 'created_at' => $year,
-                'januari' => null,
-                'februari' => null,
-                'maret' => null,
-                'april' => null,
-                'mei' => null,
-                'juni' => null,
-                'juli' => null,
-                'agustus' => null,
-                'september' => null,
-                'oktober' => null,
-                'november' => null,
-                'desember' => null
+                'januari' => 0,
+                'februari' => 0,
+                'maret' => 0,
+                'april' => 0,
+                'mei' => 0,
+                'juni' => 0,
+                'juli' => 0,
+                'agustus' => 0,
+                'september' => 0,
+                'oktober' => 0,
+                'november' => 0,
+                'desember' => 0
             ];
             $model->insert($data);
+
+            $newCsrfToken = csrf_hash(); // Dapatkan token CSRF baru
 
             // Kembalikan data yang baru dimasukkan sebagai respons JSON
             return $this->response->setJSON([
                 'status' => 'success',
-                'data' => $data
+                'data' => $data,
+                'new_csrf_token' => $newCsrfToken // Kembalikan token CSRF baru
             ]);
         }
 
@@ -394,8 +397,11 @@ class ContentPlannerController extends BaseController
             ->set($data)
             ->update();
 
+        $newCsrfToken = csrf_hash(); // Dapatkan token CSRF baru
+
         return $this->response->setJSON([
-            'status' => 'success'
+            'status' => 'success',
+            'new_csrf_token' => $newCsrfToken // Kembalikan token CSRF baru
         ]);
     }
 
@@ -411,8 +417,11 @@ class ContentPlannerController extends BaseController
                 ->where('created_at', $year)
                 ->delete();
 
+            $newCsrfToken = csrf_hash(); // Dapatkan token CSRF baru
+
             return $this->response->setJSON([
-                'status' => 'success'
+                'status' => 'success',
+                'new_csrf_token' => $newCsrfToken // Kembalikan token CSRF baru
             ]);
         }
 
