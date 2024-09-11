@@ -76,34 +76,47 @@
 
         .event-detail strong {
             display: inline-block;
-            width: 150px;
+            width: 110px;
         }
 
         .event-detail p {
             margin: 0.5em 0;
         }
 
-        .dropdown-menu .dropdown-item i {
-            margin-right: 10px;
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
         }
 
-        .dropdown-item[data-social="tiktok"] i,
-        .dropdown-item[data-social="tiktok"] {
-            color: #000000;
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            color: black;
         }
 
-        .dropdown-item[data-social="facebook"] i,
-        .dropdown-item[data-social="facebook"] {
-            color: #4267B2;
+        .tab button.active {
+            background-color: #555;
+            color: white;
         }
 
-        .dropdown-item[data-social="youtube"] i,
-        .dropdown-item[data-social="youtube"] {
-            color: #FF0000;
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
         }
 
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
+        .tab button.instagram:hover,
+        .tab button.instagram.active:hover {
+            background-color: #E1306C;
+            color: white;
         }
 
         @media (max-width: 768px) {
@@ -338,33 +351,31 @@
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title" id="eventModalLabel">Detail Content Plan: [Nama Content Pillar]</h5>
+                    <h5 class="modal-title" id="eventModalLabel1"></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <div class="mb-3">
-                            <a href=""><button type="button" class="btn" style="background-color: #010101; color: white;">Tiktok</button></a>
-                            <a href=""><button type="button" class="btn" style="background-color: #E4405F; color: white;">Instagram</button></a>
-                            <a href=""><button type="button" class="btn" style="background-color: #1877F2; color: white;">Facebook</button></a>
-                            <a href=""><button type="button" class="btn" style="background-color: #FF0000; color: white;">Youtube</button></a>
-                            <a href=""><button type="button" class="btn" style="background-color: #0077B5; color: white;">LinkedIn</button></a>
-                            <a href=""><button type="button" class="btn" style="background-color: #E60023; color: white;">Pinterest</button></a>
-                            <a href=""><button type="button" class="btn" style="background-color: #FF0000; color: white;">Youtube</button></a>
-                            <a href=""><button type="button" class="btn" style="background-color: #0077B5; color: white;">LinkedIn</button></a>
-                            <a href=""><button type="button" class="btn mt-2" style="background-color: #E60023; color: white;">Pinterest</button></a>
+                <div class="modal-body pb-5">
+                    <!-- Tab links -->
+                    <div class="tab">
+                        <?php foreach ($sosialmedia as $item) : ?>
+                            <button class="tablinks <?= $item['nama_sosial_media'] ?>"
+                                style="--hover-color: <?= $item['warna_sosial_media'] ?>;"
+                                onmouseover="this.style.backgroundColor=this.style.getPropertyValue('--hover-color'); this.style.color='white';"
+                                onmouseout="this.style.backgroundColor=''; this.style.color='';"
+                                onclick="openPlatform(event, '<?= $item['nama_sosial_media'] ?>')">
+                                <?= $item['nama_sosial_media'] ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php foreach ($sosialmedia as $item) : ?>
+                        <div id="<?= $item['nama_sosial_media'] ?>" class="tabcontent">
+                            <!-- Content -->
                         </div>
-                    </div>
-                    <p class="mb-3">
-                    </p>
-                    <ol class="event-detail list-group">
-                    </ol>
-                    <div class="text-center">
-                    </div>
+                    <?php endforeach; ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary">Some Button</button>
                 </div>
             </div>
         </div>
@@ -374,6 +385,27 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
 
     <script>
+        function openPlatform(evt, platformName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(platformName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
         document.querySelector('.btn.btn-primary').addEventListener('click', function() {
             // Mendapatkan nilai dari input type="month"
             var monthPickerValue = document.getElementById('monthPicker').value;
@@ -608,40 +640,41 @@
             };
             var formattedDateStr = date.toLocaleDateString('id-ID', options);
 
-            // Mengisi elemen modal dengan data
-            var modalBodyContent = 'Content Plan untuk <strong>' + formattedDateStr + '</strong>:';
+            var modalTitle = 'Detail Kegiatan (' + formattedDateStr + '):';
+            document.querySelector('#eventModal .modal-title').innerHTML = modalTitle;
+
             var modalBodyList = '';
+
             // Jika ada lebih dari satu event, gabungkan data mereka
             events.forEach(function(event, index) {
-                var planNumber = events.length > 1 ? `<h2>Plan ${index + 1}</h2>` : '<h2>Plan 1</h2>';
+                var planNumber = events.length > 1 ? `${index + 1}` : '1';
                 modalBodyList += `
-            ${planNumber}
-                <li class="list-group-item">
-                    <strong>Sosial Media:</strong> ${event.sosial_media}<br>
-                    <strong>Content Type:</strong> ${event.content_type}<br>
-                    <strong>Content Pillar:</strong> ${event.content_pillar}<br>
-                    <strong>Status:</strong> ${event.status}<br>
-                    <strong>Caption:</strong> ${event.caption}<br>
-                    <strong>CTA/Link:</strong> ${event.cta_link}<br>
-                    <strong>Hashtag:</strong> ${event.hashtag}<br>
-                </li>
-            <div class="text-center mt-3">
-                <img src="${event.file_content ? '<?= base_url('serve-file') ?>/' + event.file_content : 'https://via.placeholder.com/150'}" alt="Image" style="width: 100%; max-width: 300px; height: auto; margin-top: 10px;"/>
-            </div>
-            <hr> <!-- Tambahkan garis pemisah antar event -->
-        `;
+                    <ol class="event-detail list-group list-group mt-3">
+                        <li class="list-group-item">
+                            <strong>Plan Ke:</strong> ${planNumber}<br>
+                            <strong>Status:</strong> ${event.status}<br>
+                            <strong>Content Type:</strong> ${event.content_type}<br>
+                            <strong>Content Pillar:</strong> ${event.content_pillar}<br>
+                            <strong style="display: flex;">Caption:</strong> ${event.caption}<br>
+                            <strong>CTA/Link:</strong> ${event.cta_link}<br>
+                            <strong>Hashtag:</strong> ${event.hashtag}<br>
+                        </li>
+                    </ol>
+                    <div class="text-center mt-3">
+                        <img src="${event.file_content ? '<?= base_url('serve-file') ?>/' + event.file_content : 'https://via.placeholder.com/300'}"
+                        alt="File Kegiatan" class="img-fluid rounded shadow-sm">
+                    </div>
+                `;
             });
 
-            // Mengisi konten modal
-            document.querySelector('#eventModal .modal-body p').innerHTML = modalBodyContent;
-            document.querySelector('#eventModal .modal-body ol').innerHTML = modalBodyList;
+            document.querySelector('#eventModal .modal-body .tabcontent').innerHTML = modalBodyList;
 
             // Set image URL berdasarkan event pertama jika ada
             if (events[0].file_content) {
                 var filePath = '<?= base_url('serve-file') ?>/' + events[0].file_content;
                 document.querySelector('#eventModal .modal-body img').src = filePath;
             } else {
-                document.querySelector('#eventModal .modal-body img').src = 'https://via.placeholder.com/150';
+                document.querySelector('#eventModal .modal-body img').src = 'https://via.placeholder.com/300';
             }
         }
 

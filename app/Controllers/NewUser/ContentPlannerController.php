@@ -67,6 +67,7 @@ class ContentPlannerController extends BaseController
 
         $data['eventsByDate'] = $eventsByDate;
         $data['socialMediaColors'] = $socialMediaColors;
+        $data['sosialmedia'] = $sosial_media;
 
         return view('NewUser/content-planner/content-calendar', $data);
     }
@@ -104,13 +105,16 @@ class ContentPlannerController extends BaseController
             $fileName = null;
         }
 
+        $caption = $this->request->getPost('caption');
+        $caption = nl2br($caption); // Convert newlines to <br> before saving
+
         $data = [
             'file_content' => $fileName,
             'sosial_media' => $this->request->getPost('sosial_media'),
             'content_type' => $this->request->getPost('content_type'),
             'content_pillar' => $this->request->getPost('content_pillar'),
             'status' => $this->request->getPost('status'),
-            'caption' => $this->request->getPost('caption'),
+            'caption' => $caption,
             'cta_link' => $this->request->getPost('cta_link'),
             'hashtag' => $this->request->getPost('hashtag'),
             'created_at' => $this->request->getPost('created_at'),
