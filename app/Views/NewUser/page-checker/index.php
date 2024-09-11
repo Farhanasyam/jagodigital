@@ -6,103 +6,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PageSpeed Checker</title>
     <style>
-    .sub-tab {
-        display: none;
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
-    .sub-tab.active {
-        display: block;
+    .container {
+        max-width: 900px;
+        width: 100%;
+        margin: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .input-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .input-group {
+        display: flex;
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 10px;
+        position: relative;
+    }
+
+    .input-group input {
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-right: 10px;
+    }
+
+    .input-group button {
+        padding: 10px 20px;
+        font-size: 1em;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        box-sizing: border-box;
+    }
+
+    .input-group button:hover {
+        background-color: #0056b3;
+    }
+
+    .status-message {
+        font-size: 0.9em;
+        color: #888;
+        margin-top: 5px;
+        text-align: center;
+        width: 100%;
     }
 
     .tabs-container,
     .sub-tabs-container {
         display: flex;
-        justify-content: start;
-        margin-bottom: 10px;
+        justify-content: center;
+        margin-bottom: 20px;
     }
 
     .tabs-container button,
     .sub-tabs-container button {
-        padding: 10px;
-        margin-right: 5px;
+        padding: 10px 20px;
+        margin: 0 5px;
+        font-size: 1em;
+        border: none;
+        border-radius: 4px;
+        background-color: #eee;
         cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
     }
 
     .tabs-container button.active,
     .sub-tabs-container button.active {
-        background-color: #ccc;
+        background-color: #ddd;
+        color: #333;
     }
-
-    .loading {
-        font-style: italic;
-        color: gray;
-    }
-
-    .status-message {
-        margin-top: 10px;
-    }
-
-
-
 
     .result-section {
-        border: 1px solid #ddd;
+
         border-radius: 5px;
         padding: 15px;
-        margin-bottom: 20px;
-        background-color: #f9f9f9;
+        margin: 10px 0;
+        background-color: #fafafa;
     }
 
     .result-title {
         font-size: 1.2em;
         font-weight: bold;
         margin-bottom: 10px;
-    }
-
-    .result-section p {
-        margin: 5px 0;
-    }
-
-
-
-    .timestamp {
-        font-size: 0.9em;
-        color: #555;
-    }
-
-    .loading {
-        font-style: italic;
-        color: #666;
-    }
-
-    /* CSS untuk kategori performa */
-    .result-section {
-        margin-bottom: 20px;
-    }
-
-    .result-title {
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .result-container {
-        margin-bottom: 10px;
-    }
-
-    .result-label {
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    .result-description {
-        margin-top: 5px;
-        font-size: 14px;
         color: #333;
     }
 
-    .result-category {
-        font-size: 14px;
+    .result-container {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        text-align: left;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-label {
+        font-size: 1.1em;
         font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .result-description {
+        font-size: 0.9em;
+        color: #666;
     }
 
     .result-good {
@@ -116,38 +154,88 @@
     .result-poor {
         color: red;
     }
+
+    .timestamp {
+        font-size: 0.9em;
+        color: #888;
+        margin-top: 10px;
+    }
+
+    .loading {
+        font-style: italic;
+        color: #666;
+    }
+
+    .comparison-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .comparison-container>div {
+        flex: 1;
+        padding: 15px;
+        background-color: #fff;
+    }
+
+    .comparison-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .comparison-content {
+        font-size: 0.9em;
+        color: #666;
+    }
     </style>
 </head>
 
 <body>
-    <h1>PageSpeed Checker</h1>
+    <div class="container">
+        <h1>PageSpeed Checker</h1>
 
-    <!-- Input URL -->
-    <label for="url">Masukkan URL:</label>
-    <input type="text" id="url" value="">
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="url" placeholder="Masukkan URL">
+                <button id="checkPerformance">Analisis</button>
+            </div>
+            <p id="status" class="status-message">Masukkan URL untuk memulai pengecekan.</p>
+        </div>
 
-    <button id="checkPerformance">Cek Performa</button>
+        <!-- Tabs untuk Desktop/Mobile -->
+        <div class="tabs-container">
+            <button id="desktop-btn" onclick="selectMainTab('desktop')">Desktop</button>
+            <button id="mobile-btn" onclick="selectMainTab('mobile')">Mobile</button>
+        </div>
 
-    <p id="status" class="status-message">Masukkan URL untuk memulai pengecekan.</p>
+        <!-- Tabs untuk URL Penuh/Asal -->
+        <div class="sub-tabs-container">
+            <button id="full-btn" onclick="selectSubTab('full')">URL Penuh</button>
+            <button id="origin-btn" onclick="selectSubTab('origin')">URL Asal</button>
+        </div>
 
-    <!-- Tabs untuk Desktop/Mobile -->
-    <div class="tabs-container">
-        <button id="desktop-btn" onclick="selectMainTab('desktop')">Desktop</button>
-        <button id="mobile-btn" onclick="selectMainTab('mobile')">Mobile</button>
+        <!-- Hasil dari kombinasi Desktop/Mobile dan URL Penuh/Asal -->
+        <div class="comparison-container">
+            <div id="desktop-full" class="result-section">
+                <div class="comparison-title">Desktop - URL Penuh</div>
+                <div class="comparison-content" id="desktop-full-content"></div>
+            </div>
+            <div id="desktop-origin" class="result-section">
+                <div class="comparison-title">Desktop - URL Asal</div>
+                <div class="comparison-content" id="desktop-origin-content"></div>
+            </div>
+            <div id="mobile-full" class="result-section">
+                <div class="comparison-title">Mobile - URL Penuh</div>
+                <div class="comparison-content" id="mobile-full-content"></div>
+            </div>
+            <div id="mobile-origin" class="result-section">
+                <div class="comparison-title">Mobile - URL Asal</div>
+                <div class="comparison-content" id="mobile-origin-content"></div>
+            </div>
+        </div>
     </div>
-
-    <!-- Tabs untuk URL Penuh/Asal -->
-    <div class="sub-tabs-container">
-        <button id="full-btn" onclick="selectSubTab('full')">URL Penuh</button>
-        <button id="origin-btn" onclick="selectSubTab('origin')">URL Asal</button>
-    </div>
-
-    <!-- Hasil dari kombinasi Desktop/Mobile dan URL Penuh/Asal -->
-    <div id="desktop-full" class="sub-tab active"></div>
-    <div id="desktop-origin" class="sub-tab"></div>
-    <div id="mobile-full" class="sub-tab"></div>
-    <div id="mobile-origin" class="sub-tab"></div>
-
     <script>
     let isProcessing = false;
 
