@@ -1,10 +1,10 @@
 <?php
 
+
 namespace App\Controllers\NewUser;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-
 
 class HashtagController extends BaseController
 {
@@ -24,23 +24,25 @@ class HashtagController extends BaseController
 
         $url = "https://hash-tag-generator.p.rapidapi.com/get_has_tags?query=" . urlencode($query) . "&language=en";
 
-        $options = [
-            'http' => [
-                'header' => [
-                    "x-rapidapi-key: " . getenv('RAPIDAPI_KEY'),
-                    "x-rapidapi-host: hash-tag-generator.p.rapidapi.com"
-                ]
-            ]
-        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "x-rapidapi-key: " . env('RAPIDAPI_KEY'),
+            "x-rapidapi-host: hash-tag-generator.p.rapidapi.com"
+        ]);
 
-        $context = stream_context_create($options);
-        $response = file_get_contents($url, false, $context);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-        if ($response === false) {
+        if (curl_errno($ch) || $httpCode != 200) {
+            $error = curl_error($ch);
+            curl_close($ch);
             return $this->response->setStatusCode(ResponseInterface::HTTP_INTERNAL_SERVER_ERROR)
-                ->setJSON(['error' => 'Failed to fetch data from API']);
+                ->setJSON(['error' => 'Failed to fetch data from API: ' . $error]);
         }
 
+        curl_close($ch);
         return $this->response->setJSON(json_decode($response, true));
     }
 }

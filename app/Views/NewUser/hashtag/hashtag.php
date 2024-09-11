@@ -2,24 +2,30 @@
 <?= $this->section('content'); ?>
 <style>
     .hashtag-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        /* Creates columns that fit within the container */
+        display: flex;
+        flex-wrap: wrap;
+        /* Ensure items wrap to a new line */
         gap: 10px;
-        /* Space between checkboxes and labels */
+        /* Space between each hashtag item */
+        max-width: 100%;
+        /* Make sure the container takes the full width */
+        padding: 10px 0;
+        word-wrap: break-word;
+        /* Allow long words (hashtags) to break if too long */
     }
 
     .hashtag-item {
-        display: flex;
-        /* Align checkbox and label horizontally */
-        align-items: center;
-        /* Center checkbox and label vertically */
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        word-break: break-all;
+        /* Ensure very long words break properly */
     }
 
     .hashtag-item input[type="checkbox"] {
         margin-right: 10px;
-        /* Space between checkbox and label text */
-        cursor: pointer;
     }
 
     .card-body {
@@ -40,7 +46,6 @@
         <div class="col-md-6 col-lg-8 mb-4">
             <div class="card">
                 <div class="card-body">
-                    <img src="<?= base_url('assets-new/images/logo.png') ?>" alt="Logo" style="height: 40px;">
                     <h2 class="text-center mb-4"></i> Hashtag Generator</h2>
                     <form id="hashtag-form">
                         <div class="mb-3">
@@ -56,6 +61,7 @@
                             <div id="hasil" class="hashtag-container"></div>
                         </div>
                     </div>
+                    <button id="select-all-btn" class="btn btn-secondary mt-3">Select All</button>
                     <button id="copy-btn" class="btn btn-success mt-3"><i class="fas fa-copy"></i> Copy</button>
                 </div>
             </div>
