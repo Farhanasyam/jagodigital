@@ -140,7 +140,7 @@
           <h2 class="display-7 mb-0">Content Planner</h2>
         </div>
         <div class="dropdown">
-          <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Halaman Saat Ini
           </button>
           <ul class="dropdown-menu  dropdown-menu-right">
