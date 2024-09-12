@@ -38,20 +38,27 @@ class MemberController extends BaseController
     }
     
     
-
     public function detail($id_member)
-{
-    $memberModel = new MemberModels();
-    $member = $memberModel->getMemberById($id_member);
-  // Misalnya ada method getMemberById()
-
-    if ($member) {
-        return view('NewUser/member/detail', ['member' => $member]);
-    } else {
-        // Jika member tidak ditemukan, arahkan ke halaman not found atau berikan error message
-        return redirect()->to('/NewUser/member')->with('error', 'Member tidak ditemukan');
+    {
+        // Ambil member yang sedang dilihat
+        $member = $this->memberModels->getMemberById($id_member);
+    
+        // Cek jika member ditemukan
+        if ($member) {
+            // Ambil member lainnya (kecuali member yang sedang dilihat)
+            $other_members = $this->memberModels->where('id_member !=', $id_member)->findAll(5); // Misalnya ambil 5 member lainnya
+            
+            // Kirim data member dan other_members ke tampilan
+            return view('NewUser/member/detail', [
+                'member' => $member,
+                'other_members' => $other_members
+            ]);
+        } else {
+            // Jika member tidak ditemukan, arahkan ke halaman error atau halaman daftar member
+            return redirect()->to('/NewUser/member')->with('error', 'Member tidak ditemukan');
+        }
     }
-}
+    
 
 
     public function filterByLocation($id_provinsi = null, $id_kabkota = null)
