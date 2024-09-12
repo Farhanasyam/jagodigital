@@ -1,7 +1,7 @@
-<?php $this->setVar('title', 'Content Planner'); ?>
+<?php $this->setVar('title', 'Content Planner');; ?>
 <?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" /> -->
 
 <style>
   .card {
@@ -135,19 +135,22 @@
 <div class="container">
   <div class="mt-4">
     <div class="card bg-white">
-      <div class="card-body d-flex justify-content-between align-items-center">
-        <div>
+      <div class="card-body d-flex flex-wrap justify-content-between align-items-center">
+        <div class="col-12 col-md-6">
           <h2 class="display-7 mb-0">Content Planner</h2>
         </div>
-        <div class="dropdown">
-          <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Halaman Saat Ini
-          </button>
-          <ul class="dropdown-menu  dropdown-menu-right">
-            <li><a class="dropdown-item" href="<?= base_url('/content-calendar'); ?>">Content Calender</a></li>
-            <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Set Up</a></li>
-            <li><a class="dropdown-item" href="<?= base_url('/kpi'); ?>">Matrics</a></li>
-          </ul>
+        <!-- Tambahkan d-flex justify-content-center pada layar kecil -->
+        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end text-center text-md-end mt-3 mt-md-0">
+          <div class="dropdown">
+            <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <?= $title ?? 'Content Planner' ?>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="<?= base_url('/content-calendar'); ?>">Content Calendar</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Set Up</a></li>
+              <li><a class="dropdown-item" href="<?= base_url('/kpi'); ?>">Matrics</a></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -162,8 +165,6 @@
           <h5 id="dateDisplay" class="m-0 text-primary fw-bold"></h5>
         </div>
       </div>
-
-
 
       <div class="row">
         <!-- Upload Image -->
@@ -186,7 +187,6 @@
             below.</p>
           <div class="image-area mt-4 text-muted"><img id="imageResult" src="#" alt=""
               class="img-fluid rounded shadow-sm mx-auto d-block"></div>
-
         </div>
 
         <!-- Form -->
@@ -271,23 +271,13 @@
               Simpan
             </button>
           </div>
-
   </form>
 </div>
 </div>
 </div>
 </div>
 
-<script>
-  // Mengambil elemen button dropdown
-  const currentPageBtn = document.getElementById("current-page-btn");
-
-  // Mengambil nama halaman saat ini dari title dokumen
-  const currentPage = document.title;
-
-  // Mengganti teks pada tombol dropdown dengan nama halaman
-  currentPageBtn.textContent = currentPage;
-</script>
+<!-- <script>
 
 <!-- jQuery via CDN -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

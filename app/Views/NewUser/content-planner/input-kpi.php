@@ -1,7 +1,7 @@
-<?php $this->setVar('title', 'Matrics'); ?>
+<?php $this->setVar('title', 'Matrics');; ?>
 <?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 
@@ -52,38 +52,27 @@
 
 <!-- start text header and line -->
 <div class="container">
-    <!-- <div class="header">
-        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-md-between">
-            <h2 class="mb-3 mb-md-0">Key Performance Indicator</h2>
-            <div class="d-flex flex-wrap gap-2">
-                <a href="/content-calendar"><button type="button" class="btn btn-primary">Content Calendar</button></a>
-                <a href="/content-planner"><button type="button" class="btn btn-success">Content Planner</button></a>
-                <a href="/set-up"><button type="button" class="btn btn-secondary">Set Up</button></a>
-            </div>
-        </div>
-    </div>
-    <hr class="line-separator"> -->
-
     <div class="mt-4">
         <div class="card bg-white">
-            <div class="card-body d-flex justify-content-between align-items-center">
-                <div>
+            <div class="card-body d-flex flex-wrap justify-content-between align-items-center">
+                <div class="col-12 col-md-6">
                     <h2 class="display-7 mb-0">Key Performance Indicator</h2>
                 </div>
-                <div class="dropdown">
-                    <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Halaman Saat Ini
-                    </button>
-                    <ul class="dropdown-menu  dropdown-menu-right">
-                        <li><a class="dropdown-item" href="<?= base_url('/content-calendar'); ?>">Content Calender</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('/content-planner'); ?>">Content Planner</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Set Up</a></li>
-                    </ul>
+                <div class="col-12 col-md-6 text-md-end text-start mt-3 mt-md-0">
+                    <div class="dropdown">
+                        <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?= $title ?? 'Matrics' ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="<?= base_url('/content-calendar'); ?>">Content Calendar</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/content-planner'); ?>">Content Planner</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Matrics</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- end text header and line -->
 
     <div class="card">
@@ -113,7 +102,6 @@
                     <i class="bi bi-chevron-right"></i>
                 </button>
                 <input type="number" id="yearPicker" class="ms-3 mb-2 mb-md-0" min="1900" max="2100" placeholder="Year">
-
             </div>
         </div>
 
@@ -155,17 +143,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Mengambil elemen button dropdown
-    const currentPageBtn = document.getElementById("current-page-btn");
-
-    // Mengambil nama halaman saat ini dari title dokumen
-    const currentPage = document.title;
-
-    // Mengganti teks pada tombol dropdown dengan nama halaman
-    currentPageBtn.textContent = currentPage;
-</script>
 
 <script>
     const csrfName = '<?= csrf_token() ?>'; // Name of the CSRF token

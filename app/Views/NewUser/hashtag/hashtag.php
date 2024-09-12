@@ -1,3 +1,4 @@
+<?php $this->setVar('title', 'Hashtag Generator');; ?>
 <?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
 <style>
