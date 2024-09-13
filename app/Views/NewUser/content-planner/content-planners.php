@@ -170,7 +170,7 @@
         <!-- Upload Image -->
         <div class="col-md-5 mb-4">
           <!-- Upload image input-->
-          <label for="">Upload Image</label>
+          <label>Upload Image</label>
           <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
             <input name="file_content" id="upload" type="file" onchange="readURL(this);"
               class="form-control border-0">
@@ -194,7 +194,7 @@
           <div class="row">
             <!-- Social Media -->
             <div class="form-group">
-              <label for="caption">Social Media</label>
+              <label>Social Media</label>
               <select class="form-control" name="sosial_media" required>
                 <?php foreach ($sosmeds as $sosmed): ?>
                   <option value="<?= $sosmed['nama_sosial_media'] ?>"><?= $sosmed['nama_sosial_media'] ?></option>
@@ -205,7 +205,7 @@
             <!-- Content Type -->
             <div class="col-md-4 mb-2">
               <div class="form-group">
-                <label for="content-type">Content Type</label>
+                <label>Content Type</label>
                 <select class="form-control" name="content_type" required>
                   <?php foreach ($c_types as $c_type): ?>
                     <option value="<?= $c_type['nama_content_type'] ?>"><?= $c_type['nama_content_type'] ?></option>
@@ -217,7 +217,7 @@
             <!-- Content Pillar -->
             <div class="col-md-4 mb-2">
               <div class="form-group">
-                <label for="content-pillar">Content Pillar</label>
+                <label>Content Pillar</label>
                 <select class="form-control" name="content_pillar" required>
                   <?php foreach ($c_pillars as $c_pillar): ?>
                     <option value="<?= $c_pillar['nama_content_pillar'] ?>"><?= $c_pillar['nama_content_pillar'] ?>
@@ -230,7 +230,7 @@
             <!-- Status -->
             <div class="col-md-4 mb-2">
               <div class="form-group">
-                <label for="status">Status</label>
+                <label>Status</label>
                 <select class="form-control" name="status" required>
                   <?php foreach ($statuses as $status): ?>
                     <option value="<?= $status['nama_status'] ?>"><?= $status['nama_status'] ?></option>
@@ -242,25 +242,25 @@
 
           <!-- Caption -->
           <div class="form-group">
-            <label for="caption">Caption</label>
+            <label>Caption</label>
             <textarea class="form-control" rows="5" placeholder="Caption" name="caption"></textarea>
           </div>
 
           <!-- CTA Link -->
           <div class="form-group">
-            <label for="CTA">CTA / Link</label>
+            <label>CTA / Link</label>
             <textarea type="text" class="form-control" placeholder="CTA / Link" name="cta_link"></textarea>
           </div>
 
           <!-- Hashtag -->
           <div class="form-group">
-            <label for="Hashtag">Hashtag</label>
+            <label>Hashtag</label>
             <textarea type="text" class="form-control" placeholder="Hashtag" name="hashtag"></textarea>
           </div>
 
           <!-- Date -->
           <div class="form-group">
-            <label for="post-date">Post Date</label>
+            <label>Post Date</label>
             <input type="date" class="form-control" name="created_at" id="dateInput" required>
           </div>
 
