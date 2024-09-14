@@ -21,7 +21,7 @@ class ContentPlannerController extends BaseController
 {
     public function serve($filename)
     {
-        $filePath = WRITEPATH . 'uploads/' . $filename;
+        $filePath = FCPATH . 'uploads/file_content/' . $filename;
 
         if (file_exists($filePath)) {
             return $this->response->download($filePath, null)->setFileName($filename);
@@ -53,6 +53,7 @@ class ContentPlannerController extends BaseController
                 $eventsByDate[$date] = [];
             }
             $eventsByDate[$date][] = [
+                'id_content_planner' => $event['id_content_planner'],
                 'file_content' => $event['file_content'],
                 'sosial_media' => $event['sosial_media'],
                 'content_type' => $event['content_type'],
@@ -99,7 +100,7 @@ class ContentPlannerController extends BaseController
         if ($file->isValid() && !$file->hasMoved()) {
             // Pindahkan file ke direktori tujuan, misalnya: 'uploads'
             $fileName = $file->getRandomName();
-            $file->move(WRITEPATH . 'uploads', $fileName);
+            $file->move(FCPATH . 'uploads/file_content/', $fileName);
         } else {
             // Jika ada kesalahan dalam pengunggahan file
             $fileName = null;
@@ -124,6 +125,29 @@ class ContentPlannerController extends BaseController
         $model->insert($data);
 
         return redirect()->to('/content-calendar');
+    }
+
+    public function edit($id)
+    {
+        $modelSosmed = new SosialMedia();
+        $modelCPillar = new ContentPillar();
+        $modelCType = new ContentType();
+        $modelStatus = new Status();
+        $modelCPlanner = new ContentPlanner();
+
+        $sosmed = $modelSosmed->findAll();
+        $content_pillar = $modelCPillar->findAll();
+        $content_type = $modelCType->findAll();
+        $status = $modelStatus->findAll();
+        $content_planner = $modelCPlanner->find($id);
+
+        $data['sosmeds'] = $sosmed;
+        $data['c_pillars'] = $content_pillar;
+        $data['c_types'] = $content_type;
+        $data['statuses'] = $status;
+        $data['c_planners'] = $content_planner;
+
+        return view('NewUser/content-planner/content-planners-edit', $data);
     }
 
     public function all_setup()

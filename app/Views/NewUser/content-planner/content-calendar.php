@@ -616,6 +616,9 @@
                         <img src="${event.file_content ? '<?= base_url('serve-file') ?>/' + event.file_content : 'https://via.placeholder.com/300'}"
                         alt="File Kegiatan" class="img-fluid rounded shadow-sm">
                     </div>
+                    <div class="text-center mt-3">
+                        <a href="/content-planner/edit/${event.id_content_planner}" class="btn btn-primary btn-edit">Edit</a>
+                    </div>
                 `;
         });
 
