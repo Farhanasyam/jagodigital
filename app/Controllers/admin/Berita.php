@@ -67,25 +67,37 @@ class Berita extends BaseController
             $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
 
             $file_foto = $this->request->getFile('poster_berita');
-            $file_name = $file_foto->getRandomName();
-            $file_foto->move('assets-baru/img/', $file_name);
 
-            $berita_model = new BeritaModels();
-            $data = [
-                'judul_berita' => $this->request->getVar("judul_berita"),
-                'deskripsi_berita' => $this->request->getVar("deskripsi_berita"),
-                'mulai_berita' => $this->request->getVar("mulai_berita"),
-                'akhir_berita' => $this->request->getVar("akhir_berita"),
-                'poster_berita' => $file_name,
-                'slug' => $slug,
-            ];
+            // Pastikan file valid dan belum dipindahkan
+            if ($file_foto && $file_foto->isValid() && !$file_foto->hasMoved()) {
+                // Buat nama file dengan format slug
+                $file_name = $slug . '.' . $file_foto->getClientExtension();
 
-            $berita_model->save($data);
+                // Pindahkan file ke direktori uploads/foto_berita
+                $file_foto->move('uploads/foto_berita', $file_name);
 
-            session()->setFlashdata('success', 'Data berhasil disimpan');
-            return redirect()->to(base_url('admin/berita/index'));
+                // Simpan data ke model
+                $berita_model = new BeritaModels();
+                $data = [
+                    'judul_berita' => $this->request->getVar("judul_berita"),
+                    'deskripsi_berita' => $this->request->getVar("deskripsi_berita"),
+                    'mulai_berita' => $this->request->getVar("mulai_berita"),
+                    'akhir_berita' => $this->request->getVar("akhir_berita"),
+                    'poster_berita' => $file_name,
+                    'slug' => $slug,
+                ];
+
+                $berita_model->save($data);
+
+                session()->setFlashdata('success', 'Data berhasil disimpan');
+                return redirect()->to(base_url('admin/berita/index'));
+            } else {
+                session()->setFlashdata('error', 'Terjadi kesalahan dalam upload file.');
+                return redirect()->back()->withInput();
+            }
         }
     }
+
 
     public function edit($id_berita)
     {
@@ -117,46 +129,50 @@ class Berita extends BaseController
         $berita_model = new BeritaModels();
         $beritaData = $berita_model->find($id_berita);
 
+        // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+        $judul = $this->request->getVar('judul_berita');
+        $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+        $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+
         if ($this->request->getFile('poster_berita')->isValid()) {
-            if (file_exists('assets-baru/img/' . $beritaData->poster_berita)) {
-                unlink('assets-baru/img/' . $beritaData->poster_berita);
+            // Hapus file lama jika ada
+            $oldFilePath = 'uploads/foto_berita/' . $beritaData->poster_berita;
+            if (file_exists($oldFilePath)) {
+                unlink($oldFilePath);
             }
 
+            // Proses upload file baru
             $file_foto = $this->request->getFile('poster_berita');
-            $fotoName = $file_foto->getRandomName();
-            $file_foto->move('assets-baru/img/', $fotoName);
+            $file_name = $slug . '.' . $file_foto->getClientExtension(); // Nama file dengan format slug
+            $file_foto->move('uploads/foto_berita', $file_name);
 
-            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
-            $judul = $this->request->getVar('judul_berita');
-            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
-            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
-
-            $berita_model->update($id_berita, [
-                'poster_berita' => $fotoName,
+            // Update data termasuk nama file baru
+            $data = [
+                'poster_berita' => $file_name,
                 'judul_berita' => $this->request->getVar("judul_berita"),
                 'deskripsi_berita' => $this->request->getVar("deskripsi_berita"),
                 'mulai_berita' => $this->request->getVar("mulai_berita"),
                 'akhir_berita' => $this->request->getVar("akhir_berita"),
                 'slug' => $slug,
-            ]);
+            ];
         } else {
-            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
-            $judul = $this->request->getVar('judul_berita');
-            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
-            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
-            $berita_model->update($id_berita, [
+            // Update data tanpa mengubah file gambar
+            $data = [
                 'judul_berita' => $this->request->getVar("judul_berita"),
                 'deskripsi_berita' => $this->request->getVar("deskripsi_berita"),
                 'mulai_berita' => $this->request->getVar("mulai_berita"),
                 'akhir_berita' => $this->request->getVar("akhir_berita"),
                 'slug' => $slug,
-
-            ]);
+            ];
         }
+
+        // Update data di database
+        $berita_model->update($id_berita, $data);
 
         session()->setFlashdata('success', 'Berkas berhasil diperbarui');
         return redirect()->to(base_url('admin/berita/index'));
     }
+
 
     public function delete($id = false)
     {
@@ -171,13 +187,23 @@ class Berita extends BaseController
 
         $berita_model = new BeritaModels();
 
+        // Cari data berita berdasarkan ID
         $data = $berita_model->find($id);
 
-        if (file_exists('assets-baru/img/' . $data->poster_berita)) {
-            unlink('assets-baru/img/' . $data->poster_berita);
-        }
+        if ($data) {
+            // Hapus file gambar jika ada
+            $filePath = 'uploads/foto_berita/' . $data->poster_berita;
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
 
-        $berita_model->delete($id);
+            // Hapus data berita dari database
+            $berita_model->delete($id);
+
+            session()->setFlashdata('success', 'Data berhasil dihapus');
+        } else {
+            session()->setFlashdata('error', 'Data tidak ditemukan');
+        }
 
         return redirect()->to(base_url('admin/berita/index'));
     }

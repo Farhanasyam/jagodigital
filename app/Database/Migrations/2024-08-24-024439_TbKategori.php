@@ -18,7 +18,7 @@ class CreateTbKategoriTable extends Migration
             ],
             'nama_kategori' => [
                 'type'       => 'VARCHAR',
-                'constraint' => 20,
+                'constraint' => 100,
                 'null'       => false,
             ],
             'slug' => [

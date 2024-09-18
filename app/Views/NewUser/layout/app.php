@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Meta Tags -->
-  <meta name="title" content="<?= $metaTitle ?? 'Jago Digital Marketing' ?>">
-  <meta name="description" content="<?= $metaDesc ?? 'Default description for Jago Digital Marketing' ?>">
+  <meta name="title" content="<?= $meta->meta_title ?? 'Jago Digital Marketing' ?>">
+  <meta name="description" content="<?= $meta->meta_description ?? 'Default description for Jago Digital Marketing' ?>">
 
   <!-- Canonical Tag -->
   <link rel="canonical" href="<?= $canonicalUrl ?? base_url() ?>">
@@ -15,7 +15,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 
-  <title><?= $title ?? 'Title' ?> | Jago Digital Marketing</title>
+  <title><?= $meta->meta_title ?? 'Jago Digital Marketing' ?></title>
 
   <link rel="icon" type="image/x-icon" href="<?= base_url('assets-new/images/favicon.png') ?>">
   <link href="<?= base_url('assets-new/css/jdm.css') ?>" rel="stylesheet">
@@ -87,27 +87,7 @@
                 Jago Digital Marketing
               </h6>
               <p>
-                Jago Digital Marketing adalah pelatihan untuk meningkatkan keterampilan pemasaran online, strategi konten, dan iklan digital.
-              </p>
-            </div>
-            <!-- Grid column -->
-
-            <hr class="w-100 clearfix d-md-none" />
-
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-              <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-              <p>
-                <a class="text-white">MDBootstrap</a>
-              </p>
-              <p>
-                <a class="text-white">MDWordPress</a>
-              </p>
-              <p>
-                <a class="text-white">BrandFlow</a>
-              </p>
-              <p>
-                <a class="text-white">Bootstrap Angular</a>
+                <?= isset($contact['deskripsi']) ? $contact['deskripsi'] : 'All Rights Reserved'; ?>
               </p>
             </div>
             <!-- Grid column -->
@@ -120,60 +100,26 @@
             <!-- Grid column -->
             <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
               <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-              <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-              <p><i class="fas fa-envelope mr-3"></i> info@gmail.com</p>
-              <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-              <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+              <p><i class="fas fa-home mr-3"></i><?= isset($contact['alamat']) ? $contact['alamat'] : 'All Rights Reserved'; ?></p>
+              <p><i class="fas fa-envelope mr-3"></i> <?= isset($contact['email']) ? $contact['email'] : 'All Rights Reserved'; ?></p>
+              <p><i class="fas fa-phone mr-3"></i> <?= isset($contact['no_hp']) ? $contact['no_hp'] : 'All Rights Reserved'; ?></p>
             </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
             <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
               <h6 class="text-uppercase mb-4 font-weight-bold">Follow us</h6>
+              <?php if (!empty($socialmedia)): ?>
+                <?php foreach ($socialmedia as $social): ?>
+                  <a href="<?= $social->link_sosmed ?>">
+                    <img src="/uploads/socialmedia_icons/<?= $social->icon_sosmed ?>">
+                  </a>
+                <?php endforeach; ?>
+              <?php endif; ?>
 
-              <!-- Facebook -->
-              <a
-                class="btn btn-primary btn-floating m-1"
-                style="background-color: #3b5998"
-                href="#!"
-                role="button"><i class="fab fa-facebook-f"></i></a>
 
-              <!-- Twitter -->
-              <a
-                class="btn btn-primary btn-floating m-1"
-                style="background-color: #55acee"
-                href="#!"
-                role="button"><i class="fab fa-twitter"></i></a>
-
-              <!-- Google -->
-              <a
-                class="btn btn-primary btn-floating m-1"
-                style="background-color: #dd4b39"
-                href="#!"
-                role="button"><i class="fab fa-google"></i></a>
-
-              <!-- Instagram -->
-              <a
-                class="btn btn-primary btn-floating m-1"
-                style="background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4); border: none;"
-                href="#!"
-                role="button">
-                <i class="fab fa-instagram"></i>
-              </a>
-
-              <!-- Linkedin -->
-              <a
-                class="btn btn-primary btn-floating m-1"
-                style="background-color: #0082ca"
-                href="#!"
-                role="button"><i class="fab fa-linkedin-in"></i></a>
-              <!-- Github -->
-              <a
-                class="btn btn-primary btn-floating m-1"
-                style="background-color: #333333"
-                href="#!"
-                role="button"><i class="fab fa-github"></i></a>
             </div>
+
           </div>
           <!--Grid row-->
         </section>

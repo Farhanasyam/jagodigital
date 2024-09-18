@@ -22,54 +22,84 @@
     </div>
 </div>
 
+<!-- Tampilkan Pesan Error Jika Ada -->
+<?php if (session()->getFlashdata('errors')): ?>
+    <div class="alert alert-danger">
+        <?php foreach (session()->getFlashdata('errors') as $error): ?>
+            <p><?= esc($error) ?></p>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
 <!-- Form Pendaftaran -->
 <div class="container-center">
     <div class="form-container">
         <h2><span class="highlight-purple">Dukung Usaha</span><span class="highlight-black"> Anda Untuk Mendapatkan Persiapan Terbaik</span></h2>
 
         <!-- Form pendaftaran -->
-        <form id="pendaftaranForm" action="<?= base_url('/pendaftaran_member') ?>" method="post" enctype="multipart/form-data">
+        <form id="pendaftaranForm" action="<?= base_url('/pendaftaran_member/store') ?>" method="post" enctype="multipart/form-data">
             <?= csrf_field() ?> <!-- Tambahkan ini untuk memasukkan CSRF token -->
 
             <!-- Hidden field for role -->
             <input type="hidden" name="role" value="user">
 
-            <!-- Field yang harus diisi -->
+            <!-- Nama Lengkap -->
             <div class="form-group">
                 <label for="nama_member">Nama Lengkap:</label>
                 <input type="text" id="nama_member" name="nama_member" required placeholder="Masukkan Nama">
             </div>
 
+            <!-- Nomor WhatsApp -->
             <div class="form-group">
                 <label for="no_hp_member">Nomor WhatsApp:</label>
                 <input type="text" id="no_hp_member" name="no_hp_member" required placeholder="Masukkan No WhatsApp">
             </div>
 
+            <!-- Email -->
             <div class="form-group">
                 <label for="email_member">Email:</label>
                 <input type="email" id="email_member" name="email_member" required placeholder="Masukkan Email">
             </div>
 
+            <!-- Alamat -->
             <div class="form-group">
                 <label for="alamat_member">Alamat:</label>
                 <input type="text" id="alamat_member" name="alamat_member" required placeholder="Masukkan Alamat">
             </div>
 
+            <!-- Provinsi -->
+            <div class="form-group">
+                <label for="id_provinsi">Provinsi:</label>
+                <select name="id_provinsi" id="id_provinsi">
+                    <?php foreach ($provinsi as $prov) : ?>
+                        <option value="<?= $prov->id_provinsi ?>"><?= $prov->nama_provinsi ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- Kabupaten/Kota -->
+            <div class="form-group">
+                <label for="id_kabkota">Kabupaten/Kota:</label>
+                <select name="id_kabkota" id="id_kabkota">
+                    <?php foreach ($kabkota as $kota) : ?>
+                        <option value="<?= $kota->id_kabkota ?>"><?= $kota->nama_kabkota ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <!-- Pekerjaan -->
             <div class="form-group">
                 <label for="pekerjaan_member">Pekerjaan:</label>
                 <input type="text" id="pekerjaan_member" name="pekerjaan_member" required placeholder="Masukkan Pekerjaan">
             </div>
 
+            <!-- Pendidikan -->
             <div class="form-group">
                 <label for="pendidikan_member">Pendidikan:</label>
                 <input type="text" id="pendidikan_member" name="pendidikan_member" required placeholder="Masukkan Pendidikan">
             </div>
 
-            <div class="form-group">
-                <label for="sertifikasi_member">Sertifikasi (Jika Ada):</label>
-                <input type="text" id="sertifikasi_member" name="sertifikasi_member" placeholder="Masukkan Sertifikasi">
-            </div>
-
+            <!-- Jenis Kelamin -->
             <div class="form-group">
                 <label>Jenis Kelamin:</label>
                 <select name="jenis_kelamin" required>
@@ -78,51 +108,55 @@
                 </select>
             </div>
 
+            <!-- Username -->
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required placeholder="Masukkan Username">
             </div>
 
+            <!-- Password -->
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required placeholder="Masukkan Password">
             </div>
 
+            <!-- Foto Profil -->
             <div class="form-group">
                 <label for="foto_member">Foto Profil:</label>
                 <input type="file" id="foto_member" name="foto_member" accept="image/*">
             </div>
 
+            <!-- Upload CV -->
             <div class="form-group">
                 <label for="cv_member">Upload CV:</label>
-                <input type="file" id="cv_member" name="cv_member" accept=".pdf, .doc, .docx">
+                <input type="file" id="cv_member" name="cv_member" accept=".pdf,.doc,.docx">
             </div>
 
+            <!-- Upload Sertifikasi -->
+            <div class="form-group">
+                <label for="sertifikasi_member">Upload Sertifikasi (Opsional):</label>
+                <input type="file" id="sertifikasi_member" name="sertifikasi_member" accept=".pdf,.doc,.docx">
+            </div>
+
+            <!-- Slug -->
             <div class="form-group">
                 <label for="slug">Slug:</label>
                 <input type="text" id="slug" name="slug" required placeholder="Masukkan Slug">
             </div>
 
-            <div class="form-group">
-                <label for="id_dpc">ID DPC:</label>
-                <input type="text" id="id_dpc" name="id_dpc" placeholder="Masukkan ID DPC">
-            </div>
-
-            <div class="form-group">
-                <label for="status_kepengurusan">Status Kepengurusan:</label>
-                <input type="text" id="status_kepengurusan" name="status_kepengurusan" placeholder="Masukkan Status Kepengurusan">
-            </div>
-
+            <!-- Instagram -->
             <div class="form-group">
                 <label for="ig_member">Instagram:</label>
                 <input type="text" id="ig_member" name="ig_member" placeholder="Masukkan Instagram">
             </div>
 
+            <!-- Facebook -->
             <div class="form-group">
                 <label for="fb_member">Facebook:</label>
                 <input type="text" id="fb_member" name="fb_member" placeholder="Masukkan Facebook">
             </div>
 
+            <!-- Tombol Submit -->
             <button type="submit" class="btn btn-primary">Daftar</button>
         </form>
     </div>

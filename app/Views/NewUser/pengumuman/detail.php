@@ -11,7 +11,7 @@
 
         <!-- Pengumuman Content -->
         <div class="pengumuman-detail-content">
-            <img src="<?= base_url('assets-baru/img/' . $pengumuman->poster_pengumuman) ?>" class="pengumuman-img" alt="<?= esc($pengumuman->judul_pengumuman) ?>">
+            <img src="<?= base_url('uploads/foto_pengumuman/' . $pengumuman->poster_pengumuman) ?>" class="pengumuman-img" alt="<?= esc($pengumuman->judul_pengumuman) ?>">
             <div class="pengumuman-text">
                 <?= esc(strip_tags($pengumuman->deskripsi_pengumuman, '<b><i><u>')) ?>
             </div>
@@ -35,7 +35,7 @@
             <?php foreach ($recommendedPengumuman as $item): ?>
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm border-0">
-                        <img src="<?= base_url('assets-baru/img/' . $item->poster_pengumuman) ?>" class="card-img-top" alt="<?= esc($item->judul_pengumuman) ?>">
+                        <img src="<?= base_url('uploads/foto_pengumuman/' . $item->poster_pengumuman) ?>" class="card-img-top" alt="<?= esc($item->judul_pengumuman) ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?= esc($item->judul_pengumuman) ?></h5>
                             <p class="card-text"><?= character_limiter(strip_tags($item->deskripsi_pengumuman), 100) ?></p>

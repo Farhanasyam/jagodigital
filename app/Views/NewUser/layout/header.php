@@ -149,7 +149,7 @@ $username = $session->get('username'); // Get the logged-in user's name
           </li>
         <?php else: ?>
           <li class="nav-item">
-            <a class="btn btn-primary" href="<?= base_url('login') ?>">Login</a>
+            <a class="btn btn-primary" #87D5C8 href="<?= base_url('login') ?>">Login</a>
           </li>
         <?php endif; ?>
       </ul>

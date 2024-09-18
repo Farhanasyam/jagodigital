@@ -57,15 +57,19 @@ class ArtikelController extends BaseController
             return redirect()->back()->withInput()->with('error', 'Validasi gagal.');
         }
 
+        // Ambil judul artikel dari input
+        $judul = $this->request->getVar('judul_artikel');
+        // Format tanggal ddmmyyyy
+        $tanggal = date('dmY');
+        // Buat slug dari judul artikel dan tambahkan tanggal
+        $slug = url_title($judul, '-', true) . '-' . $tanggal;
         // Handle file upload
         $fotoArtikel = $this->request->getFile('foto_artikel');
-        $fotoArtikelName = $fotoArtikel->getRandomName();
+        // Buat nama file untuk foto artikel dengan format slug
+        $fotoArtikelName = $slug . '.' . $fotoArtikel->getClientExtension();
+        // Pindahkan file ke direktori uploads dengan nama file yang baru
         $fotoArtikel->move('uploads/upload_artikel', $fotoArtikelName);
 
-        // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
-        $judul = $this->request->getVar('judul_artikel');
-        $tanggal = date('dmY'); // Format tanggal ddmmyyyy
-        $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
 
         // Insert data artikel
         $this->artikelModel->save([
@@ -116,31 +120,32 @@ class ArtikelController extends BaseController
         // Inisialisasi array $data untuk menyimpan data yang akan diupdate
         $data = [];
 
-        // Mendapatkan file yang diunggah
-        $file = $this->request->getFile('foto_artikel');
+        // Ambil judul artikel dari input
+        $judul = $this->request->getVar('judul_artikel');
+        // Format tanggal ddmmyyyy
+        $tanggal = date('dmY');
+        // Buat slug dari judul artikel dan tambahkan tanggal
+        $slug = url_title($judul, '-', true) . '-' . $tanggal;
 
-        // Mengecek apakah ada file yang diunggah dan valid
-        if ($file && $file->isValid() && !$file->hasMoved()) {
+        // Handle file upload
+        $fotoArtikel = $this->request->getFile('foto_artikel');
+
+        if ($fotoArtikel && $fotoArtikel->isValid() && !$fotoArtikel->hasMoved()) {
             // Validasi jenis file
             $allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Daftar tipe file yang diizinkan
-            if (in_array($file->getMimeType(), $allowedTypes)) {
-                // Nama file baru
-                $newFileName = $file->getRandomName();
+            if (in_array($fotoArtikel->getMimeType(), $allowedTypes)) {
+                // Buat nama file untuk foto artikel dengan format slug
+                $fotoArtikelName = $slug . '.' . $fotoArtikel->getClientExtension();
 
-                // Pindahkan file ke folder uploads
-                $file->move('uploads/upload_artikel/', $newFileName);
+                // Pindahkan file ke direktori uploads dengan nama file yang baru
+                $fotoArtikel->move('uploads/upload_artikel', $fotoArtikelName);
 
                 // Tambahkan nama file baru ke data yang akan diupdate
-                $data['foto_artikel'] = $newFileName;
+                $data['foto_artikel'] = $fotoArtikelName;
             } else {
                 return redirect()->back()->with('error', 'Format file tidak diizinkan.');
             }
         }
-
-        // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
-        $judul = $this->request->getVar('judul_artikel');
-        $tanggal = date('dmY'); // Format tanggal ddmmyyyy
-        $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
 
         // Mendapatkan data dari input form
         $data['judul_artikel'] = $this->request->getPost('judul_artikel');
@@ -148,7 +153,6 @@ class ArtikelController extends BaseController
         $data['deskripsi_artikel'] = $this->request->getPost('deskripsi_artikel');
         $data['tags'] = $this->request->getPost('tags');
         $data['slug'] = $slug; // Gunakan slug otomatis
-        
 
         // Memastikan data tidak kosong sebelum melakukan update
         if (!empty($data)) {
@@ -158,6 +162,7 @@ class ArtikelController extends BaseController
             return redirect()->back()->with('error', 'Tidak ada data yang diubah.');
         }
     }
+
 
 
     public function delete($id_artikel)

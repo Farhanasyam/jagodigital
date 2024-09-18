@@ -99,7 +99,7 @@ $username = $session->get('username'); // Get the logged-in user's name
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
-                        <a class="btn btn-primary" href="<?= base_url('login') ?>">Login</a>
+                        <a class="btn btn-primary" href="<?= base_url('login') ?>" style="background-color: #87D5C8 !important; border-color: #87D5C8 !important;">Login</a>
                     </li>
                 <?php endif; ?>
             </ul>

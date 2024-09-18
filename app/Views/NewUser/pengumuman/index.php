@@ -20,7 +20,7 @@
                     <div class="card shadow-sm border-0 h-100">
                         <!-- Gambar pengumuman -->
 
-                        <img src="<?= base_url('assets-baru/img/' . $item['poster_pengumuman']) ?>" class="card-img-top" alt="<?= esc($item['judul_pengumuman']) ?>">
+                        <img src="<?= base_url('uploads/foto_pengumuman/' . $item['poster_pengumuman']) ?>" class="card-img-top" alt="<?= esc($item['judul_pengumuman']) ?>">
 
                         <div class="card-body d-flex flex-column justify-content-center">
                             <h5 class="card-title font-weight-bold"><?= esc($item['judul_pengumuman']) ?></h5>

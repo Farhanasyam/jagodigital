@@ -19,7 +19,7 @@
                 <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
                     <div class="card shadow-sm border-0 h-100">
                         <!-- Gambar berita -->
-                        <img src="<?= base_url('assets-baru/img/' . $item['poster_berita']) ?>" class="card-img-top" alt="<?= esc($item['judul_berita']) ?>">
+                        <img src="<?= base_url('uploads/foto_berita/' . $item['poster_berita']) ?>" class="card-img-top" alt="<?= esc($item['judul_berita']) ?>">
 
                         <div class="card-body d-flex flex-column justify-content-center">
                             <h5 class="card-title font-weight-bold"><?= esc($item['judul_berita']) ?></h5>

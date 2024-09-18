@@ -36,7 +36,8 @@ $routes->group('', ['filter' => 'beforeLogin'], function ($routes) {
     $routes->get('/',  'NewUser\BerandaController::index');
     $routes->get('/about', 'NewUser\BerandaController::about');
     $routes->get('/kontak', 'NewUser\BerandaController::kontak');
-    $routes->get('/pendaftaran_member', 'user\PendaftaranMemberCotroller::pendaftaran_member');
+    $routes->get('/pendaftaran_member', 'user\PendaftaranMemberController::pendaftaran_member');
+    $routes->post('/pendaftaran_member/store', 'user\PendaftaranMemberController::store');
 });
 
 $routes->group('', ['filter' => 'usersAuth'], function ($routes) {
@@ -121,6 +122,21 @@ $routes->get('logout', 'Login::logout');
 
 $routes->get('admin', 'admin\Dashboardctrl::routetoDashboard');
 $routes->get('admin/dashboard', 'admin\Dashboardctrl::index');
+
+// Meta
+$routes->get('admin/meta/index', 'admin\MetaController::index');
+$routes->get('admin/meta/tambah', 'admin\MetaController::tambah');
+$routes->post('admin/meta/proses_tambah', 'admin\MetaController::proses_tambah');
+$routes->get('/admin/meta/edit/(:num)', 'admin\MetaController::edit/$1');
+$routes->post('admin/meta/proses_edit/(:num)', 'admin\MetaController::proses_edit/$1');
+$routes->get('admin/meta/delete/(:any)', 'admin\MetaController::delete/$1');
+
+$routes->get('admin/testimonial/index', 'admin\TestimonialController::index');
+$routes->get('admin/testimonial/tambah', 'admin\TestimonialController::tambah');
+$routes->post('admin/testimonial/proses_tambah', 'admin\TestimonialController::proses_tambah');
+$routes->get('admin/testimonial/edit/(:num)', 'admin\TestimonialController::edit/$1');
+$routes->post('admin/testimonial/proses_edit/(:num)', 'admin\TestimonialController::proses_edit/$1');
+$routes->post('admin/testimonial/delete/(:num)', 'admin\TestimonialController::delete/$1');
 
 // Berita
 $routes->get('admin/berita/index', 'admin\Berita::index');

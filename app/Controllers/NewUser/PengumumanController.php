@@ -3,6 +3,7 @@
 namespace App\Controllers\NewUser;
 
 use App\Controllers\NewUser\BaseController;
+use App\Models\MetaModel;
 use App\Models\PengumumanModels;
 
 class PengumumanController extends BaseController
@@ -17,9 +18,15 @@ class PengumumanController extends BaseController
         // Fetch active announcements for today with a limit
         $activePengumuman = $pengumumanModel->getHomePengumuman($today);
 
+        //SEO
+        $metaModel = new MetaModel();
+        $meta = $metaModel->where('nama_halaman', 'Informasi/Pengumuman')->first();
+        $canonicalUrl = base_url('pengumuman');
+
         return $this->render('NewUser/pengumuman/index', [
-            'title' => 'Pengumuman Terbaru',
-            'activePengumuman' => $activePengumuman
+            'activePengumuman' => $activePengumuman,
+            'meta' => $meta,
+            'canonicalUrl' => $canonicalUrl,
         ]);
     }
 
@@ -33,10 +40,16 @@ class PengumumanController extends BaseController
 
         $activePengumuman = $pengumumanModel->getHomePengumumanAll($today);
 
+        //SEO
+        $metaModel = new MetaModel();
+        $meta = $metaModel->where('nama_halaman', 'Informasi/Pengumuman')->first();
+        $canonicalUrl = base_url('pengumuman');
+
         // Pass data to the view
         return $this->render('NewUser/pengumuman/index', [
-            'title' => 'Pengumuman Terbaru',
-            'activePengumuman' => $activePengumuman
+            'activePengumuman' => $activePengumuman,
+            'meta' => $meta,
+            'canonicalUrl' => $canonicalUrl,
         ]);
     }
 

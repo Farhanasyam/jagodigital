@@ -13,7 +13,7 @@
                             mencakup dasar pemasaran online, strategi konten, dan penggunaan iklan digital.
                             Cocok untuk pemula dan profesional, program ini membantu peserta meningkatkan keterampilan
                             dan daya saing bisnis. Bergabunglah untuk membawa bisnis Anda ke level berikutnya!</p>
-                        <a href="#section-id" class="btn btn-custom">Daftar Sekarang</a>
+                        <a href="<?= base_url('pendaftaran_member'); ?>" class="btn btn-custom">Daftar Sekarang</a>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@
         <h5>
             Ayo pelajari lebih lanjut apa sih Jago Digital Marketing? Yuk kepoin!
         </h5>
-        <a href="#section-id" class="btn btn-custom mt-3">Daftar Sekarang</a>
+        <a href="<?= base_url('pendaftaran_member'); ?>" class="btn btn-custom">Daftar Sekarang</a>
     </div>
 </section>
 
@@ -158,7 +158,7 @@
         <?php foreach ($pengumuman as $event): ?>
             <div class="event-card">
                 <div class="image-container">
-                    <img src="<?= base_url('assets-baru/img/' . $event['poster_pengumuman']) ?>" loading="lazy" alt="<?= esc($event['judul_pengumuman']) ?> ">
+                    <img src="<?= base_url('uploads/foto_pengumuman/' . $event['poster_pengumuman']) ?>" loading="lazy" alt="<?= esc($event['judul_pengumuman']) ?> ">
                 </div>
                 <div class="event-details">
                     <h3><?= esc($event['judul_pengumuman']) ?></h3>
@@ -170,8 +170,6 @@
     <button class="view-all-btn" onclick="window.location.href='/pengumuman'">Lihat semua</button>
 
 </section>
-
-
 
 
 <!-- New section with gap and centered title -->
@@ -189,94 +187,33 @@
 <section class="testimoni">
     <div class="container">
         <div class="row">
-            <!-- Testimonial 1 -->
-            <div class="col-md-4">
-                <div class="card testimoni-card">
-                    <div class="card-body">
-                        <blockquote class="testimoni-quote">
-                            <p>Buat saya, <span class="highlight">ikut Jagoan Digital Marketing menambah hardskill dan pengetahuan untuk saya.</span> Proses belajar dari fasilitator juga enjoy dan seru. Saya ucapkan terimakasih banyak untuk tim JDM, Kak Fer sebagai fasilitator dan teman-teman di Pelatihan JDM. Sukses untuk kalian!</p>
-                        </blockquote>
-                        <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Reino Prajamukti" class="author-image">
-                            <div class="author-info">
-                                <h5 class="author-name">Reino Prajamukti</h5>
-                                <p class="author-title">Application Support Analyst di <strong>3Dolphins.ai</strong></p>
+            <?php if (!empty($testimoni)): ?>
+                <?php foreach ($testimoni as $item): ?>
+                    <div class="col-md-4">
+                        <div class="card testimoni-card">
+                            <div class="card-body">
+                                <blockquote class="testimoni-quote">
+                                    <p><?= $item['deskripsi_testimonial'] ?></p>
+                                </blockquote>
+                                <div class="testimoni-author">
+                                    <img src="<?= base_url('uploads/testimonial/' . $item['foto_testimonial']) ?>" loading="lazy" alt="<?= $item['nama_member'] ?>" class="author-image">
+                                    <div class="author-info">
+                                        <h5 class="author-name"><?= $item['nama_member'] ?></h5>
+                                        <p class="author-title"><?= $item['jabatan_testimonial'] ?></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <!-- Testimonial 2 -->
-            <div class="col-md-4">
-                <div class="card testimoni-card">
-                    <div class="card-body">
-                        <blockquote class="testimoni-quote">
-                            <p>Testimoni kedua untuk <span class="highlight">Jagoan Digital Marketing</span>. Belajar yang sangat bermanfaat dan menambah wawasan saya.</p>
-                        </blockquote>
-                        <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
-                            <div class="author-info">
-                                <h5 class="author-name">Author Name</h5>
-                                <p class="author-title">Job Title di <strong>Company Name</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Testimonial 3 -->
-            <div class="col-md-4">
-                <div class="card testimoni-card">
-                    <div class="card-body">
-                        <blockquote class="testimoni-quote">
-                            <p>Testimoni ketiga. <span class="highlight">Jagoan Digital Marketing</span> adalah pelatihan terbaik yang pernah saya ikuti.</p>
-                        </blockquote>
-                        <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
-                            <div class="author-info">
-                                <h5 class="author-name">Author Name</h5>
-                                <p class="author-title">Job Title di <strong>Company Name</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Testimonial 3 -->
-            <div class="col-md-4">
-                <div class="card testimoni-card">
-                    <div class="card-body">
-                        <blockquote class="testimoni-quote">
-                            <p>Testimoni ketiga. <span class="highlight">Jagoan Digital Marketing</span> adalah pelatihan terbaik yang pernah saya ikuti.</p>
-                        </blockquote>
-                        <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
-                            <div class="author-info">
-                                <h5 class="author-name">Author Name</h5>
-                                <p class="author-title">Job Title di <strong>Company Name</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Testimonial 3 -->
-            <div class="col-md-4">
-                <div class="card testimoni-card">
-                    <div class="card-body">
-                        <blockquote class="testimoni-quote">
-                            <p>Testimoni ketiga. <span class="highlight">Jagoan Digital Marketing</span> adalah pelatihan terbaik yang pernah saya ikuti.</p>
-                        </blockquote>
-                        <div class="testimoni-author">
-                            <img src="<?= base_url('assets-new/images/avatar/avatar1.png') ?>" loading="lazy" alt="Author Name" class="author-image">
-                            <div class="author-info">
-                                <h5 class="author-name">Author Name</h5>
-                                <p class="author-title">Job Title di <strong>Company Name</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Tidak ada testimoni yang tersedia saat ini.</p>
+            <?php endif; ?>
         </div>
     </div>
 </section>
+
+
 
 <!-- css for event -->
 <style>

@@ -55,7 +55,8 @@
 
                             <div class="mb-3">
                                 <label for="deskripsi_artikel" class="form-label">Deskripsi Artikel</label>
-                                <textarea class="form-control" id="deskripsi_artikel" name="deskripsi_artikel" rows="4" required><?= old('deskripsi_artikel', $artikel['deskripsi_artikel']) ?></textarea>
+                                <textarea class="form-control tiny"  id="deskripsi_artikel" name="deskripsi_artikel" rows="4" required><?= old('deskripsi_artikel', $artikel['deskripsi_artikel']) ?></textarea>
+                              
                             </div>
 
                             <div class="mb-3">

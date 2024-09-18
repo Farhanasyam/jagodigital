@@ -10,11 +10,12 @@
             <p class="text-muted"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($artikel['created_at'])) ?></p>
         </div>
 
-        <!-- Article Content -->
         <div class="artikel-detail-content">
-            <img src="<?= base_url('uploads/upload_artikel/' . $artikel['foto_artikel']) ?>" class="artikel-img" alt="<?= esc($artikel['judul_artikel']) ?>">
+            <div class="image-wrapper">
+                <img src="<?= base_url('uploads/upload_artikel/' . $artikel['foto_artikel']) ?>" class="artikel-img" alt="<?= esc($artikel['judul_artikel']) ?>">
+            </div>
             <div class="artikel-text">
-                <p><?= esc($artikel['deskripsi_artikel']) ?></p>
+            <?= $artikel['deskripsi_artikel'] ?>
             </div>
         </div>
 
@@ -62,25 +63,48 @@
         margin-bottom: 10px;
     }
 
-    .artikel-detail-header p {
-        font-size: 1rem;
-        color: #777;
+  
+    /* Artikel Text Styling */
+    .artikel-text h2,
+    .artikel-text h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #333;
     }
 
-    .artikel-detail-content {
-        margin-top: 30px;
+    .artikel-text p {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .artikel-text strong,
+    .artikel-text b {
+        font-weight: bold;
+    }
+
+    /* Add spacing between elements */
+    .artikel-text *+* {
+        margin-top: 20px;
+    }
+
+
+    .image-wrapper {
         text-align: center;
+        /* Center the image within this wrapper */
+        margin-top: 30px;
     }
 
+    /* Image styling */
     .artikel-img {
+        display: inline-block;
+        /* Ensure the image is centered */
         width: 100%;
         max-width: 800px;
         max-height: 300px;
-        /* Set a maximum height for images */
         min-height: 200px;
-        /* Set a minimum height for images */
         object-fit: cover;
-        /* Ensure the image covers the area without distortion */
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -90,6 +114,8 @@
         line-height: 1.6;
         font-size: 1.1rem;
         color: #555;
+        padding: 100px;
+        text-align: justify;
     }
 
     .artikel-detail-footer {
@@ -174,7 +200,10 @@
         background-color: #66b2a5;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1100px) {
+        .artikel-text {
+            padding: 0px;
+        }
         .artikel-detail-header h1 {
             font-size: 2rem;
         }
