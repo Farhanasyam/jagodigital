@@ -99,6 +99,7 @@ $routes->get('/video', 'NewUser\VideoController::index');
 
 $routes->get('/artikel', 'NewUser\ArtikelController::artikel');
 $routes->get('/artikel/all', 'NewUser\ArtikelController::all');
+$routes->get('/artikel/search', 'NewUser\ArtikelController::search');
 $routes->get('/artikel/(:segment)', 'NewUser\ArtikelController::detail/$1');
 
 

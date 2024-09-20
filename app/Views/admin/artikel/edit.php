@@ -63,6 +63,14 @@
                                 <label for="tags" class="form-label">Tags</label>
                                 <input type="text" class="form-control" id="tags" name="tags" value="<?= old('tags', $artikel['tags']) ?>" placeholder="Pisahkan dengan koma" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="tags" class="form-label">Meta Title</label>
+                                <input type="text" class="form-control" id="meta_title" name="meta_title" value="<?= old('meta_title', $artikel['meta_title']) ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="tags" class="form-label">Meta Description</label>
+                                <input type="text" class="form-control" id="meta_description" name="meta_description" value="<?= old('meta_description', $artikel['meta_description']) ?>" required>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                             <a href="<?= base_url('admin/artikel/index') ?>" class="btn btn-secondary">Kembali</a>

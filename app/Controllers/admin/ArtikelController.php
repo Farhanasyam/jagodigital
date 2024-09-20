@@ -50,7 +50,7 @@ class ArtikelController extends BaseController
         if (!$this->validate([
             'judul_artikel' => 'required',
             'kategori' => 'required|integer',
-            'foto_artikel' => 'uploaded[foto_artikel]|mime_in[foto_artikel,image/jpg,image/jpeg,image/png]|max_size[foto_artikel,2048]',
+            'foto_artikel' => 'uploaded[foto_artikel]|mime_in[foto_artikel,image/jpg,image/jpeg,image/png]',
             'deskripsi_artikel' => 'required',
             'tags' => 'required'
         ])) {
@@ -80,7 +80,9 @@ class ArtikelController extends BaseController
             'tags' => $this->request->getVar('tags'),
             'slug' => $slug,
             'views' => 0, // Set default views to 0
-            'created_at' => date('Y-m-d H:i:s') // Format waktu yang benar untuk created_at
+            'created_at' => date('Y-m-d H:i:s'), // Format waktu yang benar untuk created_at
+            'meta_title' => $this->request->getVar('meta_title'),
+            'meta_description' => $this->request->getVar('meta_description'),
         ]);
 
         // Redirect dengan pesan sukses
@@ -153,6 +155,8 @@ class ArtikelController extends BaseController
         $data['deskripsi_artikel'] = $this->request->getPost('deskripsi_artikel');
         $data['tags'] = $this->request->getPost('tags');
         $data['slug'] = $slug; // Gunakan slug otomatis
+        $data['meta_title'] = $this->request->getPost('meta_title');
+        $data['meta_description'] = $this->request->getPost('meta_description');
 
         // Memastikan data tidak kosong sebelum melakukan update
         if (!empty($data)) {

@@ -1,20 +1,31 @@
-/* Gaya untuk judul khusus */
+.pendaftaran-section {
+    position: relative;
+    padding: 50px 15px; /* Mengurangi padding atas/bawah dari 100px menjadi 50px */
+    background: url('/assets-new/images/bg2.jpg') no-repeat center center;
+    background-size: cover;
+    min-height: 50vh; /* Mengatur tinggi minimum menjadi 50vh untuk kontrol yang lebih baik */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Menyusun item secara vertikal */
+    align-items: center; /* Memusatkan item secara horizontal */
+    justify-content: center; /* Memusatkan item secara vertikal */
+    text-align: center;
+    color: #fff; /* Menambahkan warna teks putih untuk kontras lebih baik di atas background */
+}
+
+/* Gaya untuk judul dengan garis bawah */
 .text-custom-title {
-    display: inline-block;
-    border-bottom: 2px solid #933393; 
-    padding-bottom: 5px; 
-    color: #933393;
-    margin-top: 100px; /* Jarak atas dari elemen sebelumnya */
-    font-size: 2rem; /* Ukuran font besar untuk layar lebar */
-    margin-top: 100px;
+    font-size: 2rem; /* Ukuran font untuk judul */
+    margin-bottom: 10px; /* Jarak bawah dari judul */
+    border-bottom: 2px solid #fff; /* Garis bawah dengan warna putih */
 }
 
 /* Gaya untuk paragraf khusus */
 .text-custom-paragraph {
-    color: #393939;
+    color: white;
     font-size: 1.2rem; /* Ukuran font untuk paragraf */
     margin-top: 10px; /* Jarak atas dari judul */
-    margin-bottom: 100px;
+    margin-bottom: 100px; /* Jarak bawah dari paragraf */
 }
 
 /* Pusatkan teks secara kustom */
@@ -22,92 +33,11 @@
     text-align: center;
 }
 
-/* Kontainer gambar dengan teks overlay */
-.image-text-container {
-    position: relative;
-    display: inline-block;
-    width: 100%; /* Pastikan gambar mengambil lebar penuh kontainer */
-}
 
-.image-text-container img {
-    width: 100%; /* Pastikan gambar responsif */
-    height: auto; /* Pertahankan aspek rasio gambar */
-}
 
-/* Teks overlay di atas gambar */
-.overlay-text {
-    position: absolute;
-    top: 50%;
-    left: 0; /* Posisikan ke kiri */
-    transform: translateY(-50%); /* Posisikan vertikal di tengah */
-    color: white;
-    background: rgba(0, 0, 0, 0.5); /* Background semi-transparan */
-    padding: 20px; /* Menambahkan padding untuk ruang di dalam overlay */
-    border-radius: 8px;
-    text-align: left; /* Ubah perataan teks menjadi kiri */
-    width: 50%; /* Atur lebar overlay sesuai kebutuhan */
-}
 
-.overlay-title {
-    font-size: 1.5rem; /* Ukuran font judul */
-    margin: 0;
-}
 
-.overlay-paragraph {
-    font-size: 1rem; /* Ukuran font paragraf */
-    margin-top: 10px;
-}
 
-/* Gaya untuk kartu yang mencakup gambar */
-.card {
-    position: relative;
-    width: 100%; /* Kartu selebar kontainer induk */
-    max-width: 100%; /* Pastikan kartu tidak lebih lebar dari kontainer */
-    margin: 100px auto; /* Pusatkan kartu dengan margin atas dan bawah 100px */
-    padding: 0; /* Hapus padding jika ada */
-    box-sizing: border-box; /* Agar padding dan border tidak mempengaruhi ukuran total */
-}
-
-.img-fluid {
-    width: 100%; /* Gambar mengisi seluruh lebar kartu */
-    height: auto; /* Pertahankan rasio aspek gambar */
-}
-
-/* Gaya untuk teks overlay di dalam kartu */
-.overlay-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    background: none; /* Hapus latar belakang */
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-}
-
-/* Gaya untuk highlight warna */
-.highlight-yellow {
-    color: yellow;
-}
-
-.highlight-white {
-    color: white;
-}
-
-/* Gaya untuk highlight warna */
-.highlight-purple {
-    color: #933393;
-}
-
-.highlight-black {
-    color: rgb(0, 0, 0);
-}
-
-/* Tambahan margin atas */
-.mt-100 {
-    margin-top: 100px;
-}
 
 /* Styling untuk form-container */
 .form-container {
@@ -115,10 +45,10 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 50px 0; /* Jarak atas dan bawah dari elemen lain */
-    width: 50%; /* Membatasi lebar form ke 50% dari lebar kontainer */
+    width: 100%; /* Lebar 100% dari kontainer */
     max-width: 600px; /* Lebar maksimum form */
-    float: left; /* Mengatur form untuk mengalir ke kiri */
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar keseluruhan */
+    margin: 50px auto; /* Jarak atas dan bawah dari elemen lain, pusatkan form */
 }
 
 /* Styling untuk kontainer utama */
@@ -130,20 +60,9 @@
     padding: 20px; /* Padding sekitar konten */
 }
 
-/* Styling untuk form-container */
-.form-container {
-    background-color: #f9f9f9; /* Warna latar belakang form */
-    padding: 20px; /* Padding di sekitar konten form */
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Lebar 100% dari kontainer */
-    max-width: 600px; /* Lebar maksimum form */
-    box-sizing: border-box; /* Memastikan padding tidak menambah lebar keseluruhan */
-}
-
 /* Styling untuk judul form */
 .form-container h2 {
-    color: #933393; /* Warna ungu untuk judul form */
+    color: #87D5C8; /* Warna ungu untuk judul form */
     margin-bottom: 20px;
     text-align: center; /* Pusatkan judul */
 }
@@ -173,8 +92,8 @@
 
 /* Styling untuk tombol submit */
 button[type="submit"] {
-    background-color: #933393; /* Warna ungu untuk tombol */
-    color: white;
+    background-color: #F69E00; /* Warna ungu untuk tombol */
+    color: black;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -182,6 +101,10 @@ button[type="submit"] {
     cursor: pointer;
     display: block;
     margin: 20px auto 0; /* Margin atas 20px dan margin bawah 0, pusatkan tombol */
+}
+
+.btn-bold {
+    font-weight: bold;
 }
 
 button[type="submit"]:hover {
@@ -205,31 +128,7 @@ button[type="submit"]:hover {
     font-weight: normal;
 }
 
-.form-group textarea {
-    resize: vertical; /* Membiarkan textarea dapat di-resize vertikal */
-}
-
 /* Optional: Adjust layout for smaller screens */
-@media (max-width: 768px) {
-    .checkbox-group {
-        flex-direction: column;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Responsivitas untuk layar lebih kecil */
 @media (max-width: 768px) {
     .overlay-title {
         font-size: 1.2rem;
@@ -241,11 +140,14 @@ button[type="submit"]:hover {
 
     .text-custom-title {
         font-size: 1.5rem; /* Ukuran font lebih kecil untuk layar sempit */
-        margin-top: 100px; /* Jarak atas lebih kecil */
     }
 
     .text-custom-paragraph {
         font-size: 1rem; /* Ukuran font lebih kecil untuk paragraf */
+    }
+
+    .form-container {
+        width: 90%; /* Lebar form lebih kecil pada layar sempit */
     }
 }
 
@@ -270,5 +172,9 @@ button[type="submit"]:hover {
 
     .text-center-custom {
         padding: 0 15px; /* Menambahkan padding samping untuk layar sempit */
+    }
+
+    .form-container {
+        width: 100%; /* Lebar form 100% pada layar sangat kecil */
     }
 }

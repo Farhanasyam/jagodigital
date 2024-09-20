@@ -4,22 +4,9 @@
 <link href="<?= base_url('assets-new/css/pendaftaran_member.css') ?>" rel="stylesheet">
 
 <!-- Tambahkan konten tambahan di sini -->
-<div class="container mt-5 text-center-custom">
+<div class="pendaftaran-section">
     <h2 class="text-custom-title">Cara Pendaftaran</h2>
     <p class="text-custom-paragraph">Ayo gabung dengan pelatihan Jago Digital Marketing dan jadi sukses bareng kami</p>
-</div>
-
-<!-- Gambar dengan teks di atasnya -->
-<div class="card">
-    <img src="<?= base_url('assets-new/images/bg1.jpg') ?>" alt="Deskripsi gambar" class="img-fluid">
-    <div class="overlay-text">
-        <h1><span class="highlight-yellow">Gimana</span><span class="highlight-white"> sih cara daftar</span></h1>
-        <h1><span class="highlight-white">Kepelatihan</span><span class="highlight-yellow"> Jago Digital Marketing</span></h1>
-        <p class="text-custom-paragraph highlight-black">Masih bingung cara daftarnya? yuk buruan simak video berikut ini. Setelah disimak jangan lupa langsung daftarkan diri yaa!!!</p>
-
-        <!-- Tombol Daftar -->
-        <a href="#" class="btn btn-warning btn-lg mt-3" id="btn-daftar">Daftar Sekarang</a>
-    </div>
 </div>
 
 <!-- Tampilkan Pesan Error Jika Ada -->
@@ -34,7 +21,7 @@
 <!-- Form Pendaftaran -->
 <div class="container-center">
     <div class="form-container">
-        <h2><span class="highlight-purple">Dukung Usaha</span><span class="highlight-black"> Anda Untuk Mendapatkan Persiapan Terbaik</span></h2>
+        <h2>Dukung Usaha Anda Untuk Mendapatkan Persiapan Terbaik</h2>
 
         <!-- Form pendaftaran -->
         <form id="pendaftaranForm" action="<?= base_url('/pendaftaran_member/store') ?>" method="post" enctype="multipart/form-data">

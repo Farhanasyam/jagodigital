@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Meta Tags -->
-  <meta name="title" content="<?= $meta->meta_title ?? 'Jago Digital Marketing' ?>">
-  <meta name="description" content="<?= $meta->meta_description ?? 'Default description for Jago Digital Marketing' ?>">
+  <meta name="title" content="<?= $artikel['meta_title'] ?? $meta->meta_title ?? 'Jago Digital Marketing' ?>">
+  <meta name="description" content="<?= $artikel['meta_description'] ?? $meta->meta_description ?? 'Default description for Jago Digital Marketing' ?>">
 
   <!-- Canonical Tag -->
   <link rel="canonical" href="<?= $canonicalUrl ?? base_url() ?>">
@@ -15,7 +15,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 
-  <title><?= $meta->meta_title ?? 'Jago Digital Marketing' ?></title>
+  <title><?= $meta->meta_title ?? $artikel['meta_title'] ?? 'Jago Digital Marketing' ?></title>
 
   <link rel="icon" type="image/x-icon" href="<?= base_url('assets-new/images/favicon.png') ?>">
   <link href="<?= base_url('assets-new/css/jdm.css') ?>" rel="stylesheet">
@@ -112,7 +112,7 @@
               <?php if (!empty($socialmedia)): ?>
                 <?php foreach ($socialmedia as $social): ?>
                   <a href="<?= $social->link_sosmed ?>">
-                    <img src="/uploads/socialmedia_icons/<?= $social->icon_sosmed ?>">
+                    <img src="/uploads/socialmedia_icons/<?= $social->icon_sosmed ?>" alt="<?= $social->nama_sosmed ?>">
                   </a>
                 <?php endforeach; ?>
               <?php endif; ?>

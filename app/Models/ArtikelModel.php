@@ -22,6 +22,8 @@ class ArtikelModel extends Model
         'views',
         'slug',
         'created_at',
+        'meta_title',
+        'meta_description',
     ];
 
     // Dates

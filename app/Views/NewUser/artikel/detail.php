@@ -14,8 +14,39 @@
             <div class="image-wrapper">
                 <img src="<?= base_url('uploads/upload_artikel/' . $artikel['foto_artikel']) ?>" class="artikel-img" alt="<?= esc($artikel['judul_artikel']) ?>">
             </div>
+
+            <!-- Tags Badges -->
+            <div class="tags mt-3">
+                <?php
+                // Memisahkan tag berdasarkan koma
+                $tags = explode(',', $artikel['tags']);
+
+                // Array warna untuk badge
+                $colors = [
+                    'badge-primary',
+                    'badge-secondary',
+                    'badge-success',
+                    'badge-danger',
+                    'badge-warning',
+                    'badge-info',
+                    'badge-light',
+                    'badge-dark'
+                ];
+
+                // Looping untuk menampilkan badge
+                foreach ($tags as $tag):
+                    // Memilih warna secara acak
+                    $randomColor = $colors[array_rand($colors)];
+                    $trimmedTag = esc(trim($tag)); ?>
+                    <a href="<?= base_url('/artikel/search?keyword=' . urlencode($trimmedTag)) ?>" class="badge <?= $randomColor ?>" style="text-decoration: none;">
+                        <?= $trimmedTag ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+
+
             <div class="artikel-text">
-            <?= $artikel['deskripsi_artikel'] ?>
+                <?= $artikel['deskripsi_artikel'] ?>
             </div>
         </div>
 
@@ -63,7 +94,7 @@
         margin-bottom: 10px;
     }
 
-  
+
     /* Artikel Text Styling */
     .artikel-text h2,
     .artikel-text h3 {
@@ -114,7 +145,8 @@
         line-height: 1.6;
         font-size: 1.1rem;
         color: #555;
-        padding: 100px;
+        padding-inline-start: 50px;
+        padding-inline-end: 50px;
         text-align: justify;
     }
 
@@ -204,6 +236,7 @@
         .artikel-text {
             padding: 0px;
         }
+
         .artikel-detail-header h1 {
             font-size: 2rem;
         }
@@ -215,6 +248,73 @@
         .artikel-text {
             font-size: 1rem;
         }
+    }
+</style>
+
+<style>
+    .tags {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.5em 1em;
+        margin: 0.25em;
+        border-radius: 0.5rem;
+        color: white;
+        /* Warna teks */
+        font-size: 0.875rem;
+        text-decoration: none;
+        /* Menghilangkan garis bawah */
+    }
+
+    .badge-primary {
+        background-color: #007bff;
+        /* Biru */
+    }
+
+    .badge-secondary {
+        background-color: #6c757d;
+        /* Abu-abu */
+    }
+
+    .badge-success {
+        background-color: #28a745;
+        /* Hijau */
+    }
+
+    .badge-danger {
+        background-color: #dc3545;
+        /* Merah */
+    }
+
+    .badge-warning {
+        background-color: #ffc107;
+        /* Kuning */
+    }
+
+    .badge-info {
+        background-color: #17a2b8;
+        /* Biru Muda */
+    }
+
+    .badge-light {
+        background-color: #f8f9fa;
+        /* Putih */
+        color: #333;
+        /* Warna teks untuk badge light */
+    }
+
+    .badge-dark {
+        background-color: #343a40;
+        /* Hitam */
+    }
+
+    /* Hover effects */
+    .badge:hover {
+        opacity: 0.8;
+        /* Efek saat hover */
     }
 </style>
 
