@@ -11,29 +11,58 @@
                     <img src="<?= base_url('uploads/photos/' . $member->foto_member) ?>" class="img-fluid rounded" alt="<?= $member->nama_member ?>" style="max-height: 350px; width: 100%; object-fit: cover;">
                 </div>
 
-                <!-- Badge with city/region -->
-                <div class="text-center mb-2">
-                    <span class="badge badge-lg bg-primary text-white p-2" style="font-size: 16px;"><?= $member->nama_kabkota ?? 'Wilayah Tidak Diketahui' ?></span>
-                </div>
-
                 <!-- Member Information -->
                 <h2 class="text-center mb-4"><?= strtoupper($member->nama_member ?? 'Nama Tidak Diketahui') ?></h2>
 
-                <h5>Informasi pribadi</h5>
-                <p><strong>Status Kepengurusan:</strong> <?= $member->status_kepengurusan ?? 'Tidak Diketahui' ?></p>
-                <p><strong>Alamat:</strong> <?= $member->alamat_member ?? 'Alamat Tidak Diketahui' ?></p>
-                <p><strong>No. HP:</strong> <?= $member->no_hp_member ?? 'No Telepon Tidak Diketahui' ?></p>
-                <p><strong>Email:</strong> <?= $member->email_member ?? 'Email Tidak Diketahui' ?></p>
-                <p><strong>Instagram:</strong> <?= $member->ig_member ?? 'Instagram Tidak Diketahui' ?></p>
-                <p><strong>Facebook:</strong> <?= $member->fb_member ?? 'Facebook Tidak Diketahui' ?></p>
-                <p><strong>Jenis Kelamin:</strong> <?= $member->jenis_kelamin ?? 'Jenis Kelamin Tidak Diketahui' ?></p>
+                <!-- Badge with city/region -->
+                <div class="text-center mb-2">
+                    <span class="badge badge-lg bg-light text-dark p-2" style="font-size: 18px;"><?= $member->nama_provinsi ?? 'Wilayah Tidak Diketahui' ?></span>
+                </div> 
 
-                <h5>Pendidikan & Pekerjaan</h5>
-                <p><strong>Pendidikan:</strong> <?= $member->pendidikan_member ?? 'Pendidikan Tidak Diketahui' ?></p>
-                <p><strong>Pekerjaan:</strong> <?= $member->pekerjaan_member ?? 'Pekerjaan Tidak Diketahui' ?></p>
+                <!-- Tabs Navigation -->
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="personal-info-tab" data-bs-toggle="tab" data-bs-target="#personal-info" type="button" role="tab" aria-controls="personal-info" aria-selected="true">Informasi Pribadi</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="education-job-tab" data-bs-toggle="tab" data-bs-target="#education-job" type="button" role="tab" aria-controls="education-job" aria-selected="false">Pendidikan & Pekerjaan</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="certification-tab" data-bs-toggle="tab" data-bs-target="#certification" type="button" role="tab" aria-controls="certification" aria-selected="false">Sertifikasi</button>
+                    </li>
+                </ul>
 
-                <h5>Sertifikasi</h5>
-                <p><?= $member->sertifikasi_member ?? 'Sertifikasi Tidak Diketahui' ?></p>
+                <!-- Tabs Content -->
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="personal-info" role="tabpanel" aria-labelledby="personal-info-tab">
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>
+                    <h5>Informasi pribadi</h5>
+                        <p><strong>Status Kepengurusan:</strong> <?= $member->status_kepengurusan ?? 'Tidak Diketahui' ?></p>
+                        <p><strong>Alamat:</strong> <?= $member->alamat_member ?? 'Alamat Tidak Diketahui' ?></p>
+                        <p><strong>No. HP:</strong> <?= $member->no_hp_member ?? 'No Telepon Tidak Diketahui' ?></p>
+                        <p><strong>Email:</strong> <?= $member->email_member ?? 'Email Tidak Diketahui' ?></p>
+                        <p><strong>Instagram:</strong> <?= $member->ig_member ?? 'Instagram Tidak Diketahui' ?></p>
+                        <p><strong>Facebook:</strong> <?= $member->fb_member ?? 'Facebook Tidak Diketahui' ?></p>
+                        <p><strong>Jenis Kelamin:</strong> <?= $member->jenis_kelamin ?? 'Jenis Kelamin Tidak Diketahui' ?></p>
+                    </div>
+                    <div class="tab-pane fade" id="education-job" role="tabpanel" aria-labelledby="education-job-tab">
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1> 
+                    <h5>Pendidikan & Pekerjaan</h5>
+                        <p><strong>Pendidikan:</strong> <?= $educationJob->pendidikan_member ?? 'Pendidikan Tidak Diketahui' ?></p>
+                        <p><strong>Pekerjaan:</strong> <?= $educationJob->pekerjaan_member ?? 'Pekerjaan Tidak Diketahui' ?></p>
+                    </div>
+                    <div class="tab-pane fade" id="certification" role="tabpanel" aria-labelledby="certification-tab">
+                    <h1></h1>
+                    <h1></h1>
+                    <h1></h1>    
+                    <h5>Sertifikasi</h5>
+                        <p><?= $member->sertifikasi_member ?? 'Sertifikasi Tidak Diketahui' ?></p>
+                    </div>
+                </div>
 
                 <!-- Download CV button -->
                 <div class="text-center">
@@ -137,5 +166,33 @@
         padding: 5px 10px;
         background-color: #007bff;
         color: white;
+    }
+
+    /* Add spacing between tabs and content */
+    .tab-content {
+        margin-top: 20px; /* Adjust the value as needed */
+    }
+
+    /* Add spacing around the tabs */
+    .navbar-nav {
+        margin-bottom: 20px; /* Adjust the value as needed */
+    }
+
+    /* Add padding to the tab content */
+    .tab-pane {
+        padding: 20px; /* Adjust the value as needed */
+        background-color: #f9f9f9; /* Optional: Add a background color for better visual separation */
+        border-radius: 8px; /* Optional: Add rounded corners */
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for better visual separation */
+    }
+
+    /* Add margin to the heading */
+    .tab-pane h5 {
+        margin-top: 20px; /* Adjust the value as needed */
+    }
+
+    /* Add margin to the top of the tab content */
+    .tab-pane p {
+        margin-top: 10px; /* Adjust the value as needed */
     }
 </style>
