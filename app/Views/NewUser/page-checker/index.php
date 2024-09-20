@@ -260,6 +260,7 @@
     }
 
     // Tampilkan hasil
+    // Tampilkan hasil
     function displayResults(data, tabId, title) {
         const fcp = parseFloat(data.lighthouseResult.audits['first-contentful-paint'].displayValue);
         const lcp = parseFloat(data.lighthouseResult.audits['largest-contentful-paint'].displayValue);
@@ -283,12 +284,12 @@
             const performanceLabel = getPerformanceCategory(value, thresholds);
             const colorClass = getColorClass(value, thresholds);
             return `
-        <div class="result-container ${colorClass}">
-            <div class="result-label">${label}: ${value} detik</div>
-            <p class="result-category">${performanceLabel}</p>
-            <p class="result-description">${description}</p>
-        </div>
-    `;
+                <div class="result-container ${colorClass}">
+                    <div class="result-label">${label}: ${value} detik</div>
+                    <p class="result-category">${performanceLabel}</p>
+                    <p class="result-description">${description}</p>
+                </div>
+            `;
         }
 
         // Thresholds untuk masing-masing metrik (dalam detik atau milidetik)
@@ -309,21 +310,64 @@
             medium: 600
         }; // Milidetik
 
+        // Hitung jumlah hasil yang baik, buruk, dan memerlukan peningkatan
+        const metrics = [{
+                value: fcp,
+                thresholds: thresholdsFCP
+            },
+            {
+                value: lcp,
+                thresholds: thresholdsLCP
+            },
+            {
+                value: cls,
+                thresholds: thresholdsCLS
+            },
+            {
+                value: tbt / 1000,
+                thresholds: thresholdsTBT
+            }, // TBT dalam detik
+            {
+                value: performanceScore,
+                thresholds: {
+                    low: 90,
+                    medium: 50
+                }
+            }
+        ];
+
+        let baikCount = 0;
+        let perluPerbaikanCount = 0;
+        let burukCount = 0;
+
+        metrics.forEach(metric => {
+            const category = getPerformanceCategory(metric.value, metric.thresholds);
+            if (category === 'Baik') baikCount++;
+            if (category === 'Memerlukan Peningkatan') perluPerbaikanCount++;
+            if (category === 'Buruk') burukCount++;
+        });
+
         // Ambil waktu saat ini
         const currentTime = new Date();
         const formattedTime = `${currentTime.getDate()} ${currentTime.toLocaleString('id-ID', { month: 'short' })} ${currentTime.getFullYear()}, ${currentTime.toLocaleTimeString('id-ID')}`;
 
-        // Format hasil dengan waktu dan judul
+        // Format hasil dengan waktu, judul, dan jumlah kategori
         document.getElementById(tabId).innerHTML = `
     <div class="card">
-        <div class="card-header">
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
             <h5 class="card-title">${title}</h5>
+            <div class="score-category d-flex flex-wrap gap-2 mt-2 mt-lg-0">
+                <span class="badge bg-primary">Skor: ${performanceScore}</span>
+                <span class="badge bg-success">Baik: ${baikCount}</span>
+                <span class="badge bg-warning text-dark">Perlu Perbaikan: ${perluPerbaikanCount}</span>
+                <span class="badge bg-danger">Buruk: ${burukCount}</span>
+            </div>
         </div>
         <div class="card-body">
             ${formatMetric(lcp, thresholdsLCP, 'Largest Contentful Paint (LCP)', 'Largest Contentful Paint (LCP) mengukur waktu yang dibutuhkan untuk elemen konten terbesar pada halaman dimuat dan terlihat oleh pengguna.')}
             ${formatMetric(fcp, thresholdsFCP, 'First Contentful Paint (FCP)', 'First Contentful Paint (FCP) mengukur waktu yang dibutuhkan hingga elemen konten pertama kali dirender pada halaman.')}
             ${formatMetric(cls, thresholdsCLS, 'Cumulative Layout Shift (CLS)', 'Cumulative Layout Shift (CLS) mengukur seberapa sering elemen halaman berpindah posisi saat halaman dimuat, yang dapat memengaruhi pengalaman pengguna.')}
-            ${formatMetric(tbt / 1000, thresholdsTBT, 'Total Blocking Time (TBT)', 'Total Blocking Time (TBT) mengukur total waktu dalam milidetik di mana thread utama terblokir dan tidak dapat merespons input pengguna.')} <!-- Konversi milidetik ke detik -->
+            ${formatMetric(tbt / 1000, thresholdsTBT, 'Total Blocking Time (TBT)', 'Total Blocking Time (TBT) mengukur total waktu dalam milidetik di mana thread utama terblokir dan tidak dapat merespons input pengguna.')}
             <div class="result-container ${getColorClass(performanceScore, {low: 90, medium: 50})}">
                 <div class="result-label">Skor Performa: ${performanceScore}/100</div>
                 <p class="result-category">${getPerformanceCategory(performanceScore, {low: 90, medium: 50})}</p>
@@ -333,6 +377,7 @@
     </div>
 `;
     }
+
 
 
 
