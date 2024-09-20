@@ -10,11 +10,43 @@
             <p class="text-muted"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($artikel['created_at'])) ?></p>
         </div>
 
-        <!-- Article Content -->
         <div class="artikel-detail-content">
-            <img src="<?= base_url('uploads/upload_artikel/' . $artikel['foto_artikel']) ?>" class="artikel-img" alt="<?= esc($artikel['judul_artikel']) ?>">
+            <div class="image-wrapper">
+                <img src="<?= base_url('uploads/upload_artikel/' . $artikel['foto_artikel']) ?>" class="artikel-img" alt="<?= esc($artikel['judul_artikel']) ?>">
+            </div>
+
+            <!-- Tags Badges -->
+            <div class="tags mt-3">
+                <?php
+                // Memisahkan tag berdasarkan koma
+                $tags = explode(',', $artikel['tags']);
+
+                // Array warna untuk badge
+                $colors = [
+                    'badge-primary',
+                    'badge-secondary',
+                    'badge-success',
+                    'badge-danger',
+                    'badge-warning',
+                    'badge-info',
+                    'badge-light',
+                    'badge-dark'
+                ];
+
+                // Looping untuk menampilkan badge
+                foreach ($tags as $tag):
+                    // Memilih warna secara acak
+                    $randomColor = $colors[array_rand($colors)];
+                    $trimmedTag = esc(trim($tag)); ?>
+                    <a href="<?= base_url('/artikel/search?keyword=' . urlencode($trimmedTag)) ?>" class="badge <?= $randomColor ?>" style="text-decoration: none;">
+                        <?= $trimmedTag ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+
+
             <div class="artikel-text">
-                <p><?= esc($artikel['deskripsi_artikel']) ?></p>
+                <?= $artikel['deskripsi_artikel'] ?>
             </div>
         </div>
 
@@ -62,25 +94,48 @@
         margin-bottom: 10px;
     }
 
-    .artikel-detail-header p {
-        font-size: 1rem;
-        color: #777;
+
+    /* Artikel Text Styling */
+    .artikel-text h2,
+    .artikel-text h3 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #333;
     }
 
-    .artikel-detail-content {
-        margin-top: 30px;
+    .artikel-text p {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    .artikel-text strong,
+    .artikel-text b {
+        font-weight: bold;
+    }
+
+    /* Add spacing between elements */
+    .artikel-text *+* {
+        margin-top: 20px;
+    }
+
+
+    .image-wrapper {
         text-align: center;
+        /* Center the image within this wrapper */
+        margin-top: 30px;
     }
 
+    /* Image styling */
     .artikel-img {
+        display: inline-block;
+        /* Ensure the image is centered */
         width: 100%;
         max-width: 800px;
         max-height: 300px;
-        /* Set a maximum height for images */
         min-height: 200px;
-        /* Set a minimum height for images */
         object-fit: cover;
-        /* Ensure the image covers the area without distortion */
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -90,6 +145,9 @@
         line-height: 1.6;
         font-size: 1.1rem;
         color: #555;
+        padding-inline-start: 50px;
+        padding-inline-end: 50px;
+        text-align: justify;
     }
 
     .artikel-detail-footer {
@@ -174,7 +232,11 @@
         background-color: #66b2a5;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1100px) {
+        .artikel-text {
+            padding: 0px;
+        }
+
         .artikel-detail-header h1 {
             font-size: 2rem;
         }
@@ -186,6 +248,73 @@
         .artikel-text {
             font-size: 1rem;
         }
+    }
+</style>
+
+<style>
+    .tags {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 0.5em 1em;
+        margin: 0.25em;
+        border-radius: 0.5rem;
+        color: white;
+        /* Warna teks */
+        font-size: 0.875rem;
+        text-decoration: none;
+        /* Menghilangkan garis bawah */
+    }
+
+    .badge-primary {
+        background-color: #007bff;
+        /* Biru */
+    }
+
+    .badge-secondary {
+        background-color: #6c757d;
+        /* Abu-abu */
+    }
+
+    .badge-success {
+        background-color: #28a745;
+        /* Hijau */
+    }
+
+    .badge-danger {
+        background-color: #dc3545;
+        /* Merah */
+    }
+
+    .badge-warning {
+        background-color: #ffc107;
+        /* Kuning */
+    }
+
+    .badge-info {
+        background-color: #17a2b8;
+        /* Biru Muda */
+    }
+
+    .badge-light {
+        background-color: #f8f9fa;
+        /* Putih */
+        color: #333;
+        /* Warna teks untuk badge light */
+    }
+
+    .badge-dark {
+        background-color: #343a40;
+        /* Hitam */
+    }
+
+    /* Hover effects */
+    .badge:hover {
+        opacity: 0.8;
+        /* Efek saat hover */
     }
 </style>
 

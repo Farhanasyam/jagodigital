@@ -53,6 +53,16 @@ class TbArtikel extends Migration
                 'constraint' => 100,
                 'null'       => true,
             ],
+            'meta_title' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+            ],
+            'meta_description' => [
+                'type'       => 'VARCHAR',
+                'constraint' => 100,
+                'null'       => true,
+            ],
         ]);
 
         $this->forge->addPrimaryKey('id_artikel');

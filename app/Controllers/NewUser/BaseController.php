@@ -4,6 +4,8 @@ namespace App\Controllers\NewUser;
 
 use App\Models\KategoriModel;
 use App\Models\KategoriVideoModels;
+use App\Models\KontakModels;
+use App\Models\SocialMediaModels;
 use App\Models\TentangModels;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -61,12 +63,23 @@ abstract class BaseController extends Controller
 
     protected $layoutData;
     protected $categories;
+    protected $contact;
+    protected $socialmedia;
 
     public function __construct()
     {
         // Load data layout (tentang)
         $tentang_model = new TentangModels();
         $this->layoutData = $tentang_model->first();
+
+        // Load data layout (tentang)
+        $kontak_model = new KontakModels();
+        $this->contact = $kontak_model->first();
+
+        // Load data layout (tentang)
+        $social_model = new SocialMediaModels();
+        $this->socialmedia = $social_model->findAll();
+
 
         // Load categories data
         $kategori_model = new KategoriVideoModels();
@@ -77,6 +90,8 @@ abstract class BaseController extends Controller
     protected function render($view, $data = [])
     {
         $data['layout'] = $this->layoutData;
+        $data['contact'] = $this->contact;
+        $data['socialmedia'] = $this->socialmedia;
         $data['categories'] = $this->categories; // Pass categories data to view
         
         // Render view dengan layout

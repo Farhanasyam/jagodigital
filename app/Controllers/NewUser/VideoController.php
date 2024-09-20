@@ -4,6 +4,7 @@ namespace App\Controllers\NewUser;
 
 use App\Controllers\NewUser\BaseController;
 use App\Models\KategoriVideoModels;
+use App\Models\MetaModel;
 use App\Models\VideoPembelajaranModels;
 
 class VideoController extends BaseController
@@ -24,10 +25,16 @@ class VideoController extends BaseController
         $kategoriVideoModels = $this->kategoriVideoModels->findAll();
         $videoPembelajaranModels = $this->videoPembelajaranModels->findAll();
 
+        //SEO
+        $metaModel = new MetaModel();
+        $meta = $metaModel->where('nama_halaman', 'Materi Pembelajaran')->first();
+        $canonicalUrl = base_url('about');
+
         return $this->render('NewUser/materi-pembelajaran/index', [
-            'title' => 'Video',
             'kategoriVideoModels' => $kategoriVideoModels,
             'videoPembelajaranModels' => $videoPembelajaranModels,
+            'meta' => $meta,
+            'canonicalUrl' => $canonicalUrl,
         ]);
     }
 

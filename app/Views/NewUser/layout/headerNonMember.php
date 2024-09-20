@@ -62,7 +62,7 @@ $username = $session->get('username'); // Get the logged-in user's name
                                 <hr class="dropdown-divider">
                             </li>
                             <?php if ($loggedIn && $session->get('role') == 'admin'): ?>
-                                <li><a class="dropdown-item" href="?view=admin">Tampilan Admin</a></li>
+                                <li><a class="dropdown-item" href="<?= base_url('admin/dashboard') ?>">Tampilan Admin</a></li>
                                 <li><a class="dropdown-item" href="?view=member">Tampilan Member</a></li>
                                 <li><a class="dropdown-item" href="?view=nonmember">Tampilan Non Member</a></li>
                             <?php endif; ?>
@@ -72,7 +72,7 @@ $username = $session->get('username'); // Get the logged-in user's name
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
-                        <a class="btn btn-primary" href="<?= base_url('login') ?>">Login</a>
+                        <a class="btn btn-primary" href="<?= base_url('login') ?>" style="background-color: #87D5C8 !important; border-color: #87D5C8 !important;">Login</a>
                     </li>
                 <?php endif; ?>
             </ul>

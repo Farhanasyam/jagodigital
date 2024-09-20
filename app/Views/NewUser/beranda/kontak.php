@@ -105,13 +105,13 @@
     }
 
     .contact-title {
-        color: #810075;
+        color: #87D5C8;
         margin-bottom: 0;
     }
 
     .contact-divider {
         border: none;
-        border-top: 6px solid #810075;
+        border-top: 6px solid #87D5C8;
         width: 130px;
         margin-top: 0;
     }

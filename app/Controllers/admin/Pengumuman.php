@@ -54,13 +54,14 @@ class Pengumuman extends BaseController
 
     public function proses_tambah()
     {
+        // Validasi input
         if (!$this->validate([
             'poster_pengumuman' => [
                 'rules' => 'uploaded[poster_pengumuman]|is_image[poster_pengumuman]|max_dims[poster_pengumuman,3000,3000]|mime_in[poster_pengumuman,image/jpg,image/jpeg,image/png]',
                 'errors' => [
                     'uploaded' => 'Pilih foto terlebih dahulu',
                     'is_image' => 'File yang anda pilih bukan gambar',
-                    'max_dims' => 'Maksimal ukuran gambar 572x572 pixels',
+                    'max_dims' => 'Maksimal ukuran gambar 3000x3000 pixels',
                     'mime_in' => 'File yang anda pilih wajib berekstensikan jpg/jpeg/png'
                 ]
             ]
@@ -74,23 +75,36 @@ class Pengumuman extends BaseController
             $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
 
             $file_foto = $this->request->getFile('poster_pengumuman');
-            $file_foto->move('assets-baru/img/');
-            $file_name = $file_foto->getName();
-            $PengumumanModels = new PengumumanModels();
-            $data = [
-                'judul_pengumuman' => $this->request->getVar("judul_pengumuman"),
-                'deskripsi_pengumuman' => $this->request->getVar("deskripsi_pengumuman"),
-                'mulai_pengumuman' => $this->request->getVar("mulai_pengumuman"),
-                'akhir_pengumuman' => $this->request->getVar("akhir_pengumuman"),
-                'poster_pengumuman' => $file_name,
-                'slug' => $slug
-            ];
-            $PengumumanModels->save($data);
 
-            session()->setFlashdata('success', 'Data berhasil disimpan');
-            return redirect()->to(base_url('admin/pengumuman/index'));
+            // Cek apakah file valid dan belum dipindahkan
+            if ($file_foto->isValid() && !$file_foto->hasMoved()) {
+                // Buat nama file dengan format slug
+                $file_name = $slug . '.' . $file_foto->getClientExtension();
+
+                // Pindahkan file ke direktori uploads/foto_pengumuman
+                $file_foto->move('uploads/foto_pengumuman', $file_name);
+
+                // Siapkan data untuk disimpan
+                $PengumumanModels = new PengumumanModels();
+                $data = [
+                    'judul_pengumuman' => $this->request->getVar('judul_pengumuman'),
+                    'deskripsi_pengumuman' => $this->request->getVar('deskripsi_pengumuman'),
+                    'mulai_pengumuman' => $this->request->getVar('mulai_pengumuman'),
+                    'akhir_pengumuman' => $this->request->getVar('akhir_pengumuman'),
+                    'poster_pengumuman' => $file_name,
+                    'slug' => $slug
+                ];
+                $PengumumanModels->save($data);
+
+                session()->setFlashdata('success', 'Data berhasil disimpan');
+                return redirect()->to(base_url('admin/pengumuman/index'));
+            } else {
+                session()->setFlashdata('error', 'Terjadi kesalahan dalam upload file.');
+                return redirect()->back()->withInput();
+            }
         }
     }
+
 
     public function edit($id_pengumuman)
     {
@@ -126,44 +140,48 @@ class Pengumuman extends BaseController
         $PengumumanModels = new PengumumanModels();
         $pengumumanData = $PengumumanModels->find($id_pengumuman);
 
-        // Check if new 'foto_penulis' file is uploaded
-        if ($this->request->getFile('poster_pengumuman')->isValid()) {
-            // Delete the old 'foto_penulis' file
-            unlink('assets-baru/img/' . $pengumumanData->poster_pengumuman);
+        // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
+        $judul = $this->request->getVar('judul_pengumuman');
+        $tanggal = date('dmY'); // Format tanggal ddmmyyyy
+        $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
 
-            // Upload the new 'foto_penulis' file
-            $dataPengumuman = $this->request->getFile('poster_pengumuman');
-            $fotoName = $dataPengumuman->getRandomName();
-            $dataPengumuman->move('assets-baru/img/', $fotoName);
+        // Cek apakah file baru diunggah
+        $file_foto = $this->request->getFile('poster_pengumuman');
 
-            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
-            $judul = $this->request->getVar('judul_pengumuman');
-            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
-            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
+        if ($file_foto && $file_foto->isValid() && !$file_foto->hasMoved()) {
+            // Hapus file lama jika ada
+            if (file_exists('uploads/foto_pengumuman/' . $pengumumanData->poster_pengumuman)) {
+                unlink('uploads/foto_pengumuman/' . $pengumumanData->poster_pengumuman);
+            }
 
-            // Update the 'foto_penulis' field in the database with a "where" clause
-            $PengumumanModels->where('id_pengumuman', $id_pengumuman)->set([
-                'poster_pengumuman' => $fotoName,
+            // Buat nama file dengan format slug
+            $file_name = $slug . '.' . $file_foto->getClientExtension();
+
+            // Pindahkan file ke direktori uploads/foto_pengumuman
+            $file_foto->move('uploads/foto_pengumuman', $file_name);
+
+            // Update data termasuk foto_pengumuman
+            $data = [
+                'poster_pengumuman' => $file_name,
                 'judul_pengumuman' => $this->request->getVar("judul_pengumuman"),
                 'deskripsi_pengumuman' => $this->request->getVar("deskripsi_pengumuman"),
                 'mulai_pengumuman' => $this->request->getVar("mulai_pengumuman"),
                 'akhir_pengumuman' => $this->request->getVar("akhir_pengumuman"),
                 'slug' => $slug,
-            ])->update();
+            ];
         } else {
-            // Buat slug otomatis dari judul dan tambahkan tanggal ddmmyyyy
-            $judul = $this->request->getVar('judul_pengumuman');
-            $tanggal = date('dmY'); // Format tanggal ddmmyyyy
-            $slug = url_title($judul, '-', true) . '-' . $tanggal; // Menghasilkan slug + tanggal
-            // If no new 'foto_penulis' file is uploaded, update only the other fields
-            $PengumumanModels->where('id_pengumuman', $id_pengumuman)->set([
+            // Jika tidak ada file baru, update hanya data lainnya
+            $data = [
                 'judul_pengumuman' => $this->request->getVar("judul_pengumuman"),
                 'deskripsi_pengumuman' => $this->request->getVar("deskripsi_pengumuman"),
                 'mulai_pengumuman' => $this->request->getVar("mulai_pengumuman"),
                 'akhir_pengumuman' => $this->request->getVar("akhir_pengumuman"),
                 'slug' => $slug,
-            ])->update();
+            ];
         }
+
+        // Update data di database
+        $PengumumanModels->update($id_pengumuman, $data);
 
         session()->setFlashdata('success', 'Berkas berhasil diperbarui');
         return redirect()->to(base_url('admin/pengumuman/index'));
@@ -172,27 +190,39 @@ class Pengumuman extends BaseController
 
 
 
+
     public function delete($id = false)
     {
         // Pengecekan apakah pengguna sudah login atau belum
         if (!session()->get('logged_in')) {
-            return redirect()->to(base_url('login'));
-            // Ubah 'login' sesuai dengan halaman login Anda
+            return redirect()->to(base_url('login')); // Ubah 'login' sesuai dengan halaman login Anda
         }
 
+        // Pengecekan peran pengguna
         $role = session()->get('role');
         if ($role !== 'admin') {
-            // Jika peran bukan admin, arahkan ke halaman lain (misal: user)
             return redirect()->to(base_url('/')); // Sesuaikan dengan URL halaman user
         }
 
         $PengumumanModels = new PengumumanModels();
 
+        // Cari data pengumuman berdasarkan ID
         $data = $PengumumanModels->find($id);
 
-        unlink('assets-baru/img/' . $data->poster_pengumuman);
+        if ($data) {
+            // Hapus file gambar jika ada
+            $filePath = 'uploads/foto_pengumuman/' . $data->poster_pengumuman;
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
 
-        $PengumumanModels->delete($id);
+            // Hapus data pengumuman dari database
+            $PengumumanModels->delete($id);
+
+            session()->setFlashdata('success', 'Data berhasil dihapus');
+        } else {
+            session()->setFlashdata('error', 'Data tidak ditemukan');
+        }
 
         return redirect()->to(base_url('admin/pengumuman/index'));
     }

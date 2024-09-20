@@ -4,51 +4,51 @@
 <!-- artikel section start -->
 <section class="artikel-section">
     <div class="container">
-        <h2>Artikel</h2>
-        <p>Gali potensi yang selama ini kamu yakini bersama mentor yang ahli dibidangnya, <br>kamu bakal dipandu sampai bener bener paham.</p>
+        <h2>Hasil Pencarian Artikel</h2>
+        <?php if (!empty($data['keyword'])): ?>
+            <p>Menampilkan hasil pencarian untuk: <strong><?= esc($data['keyword']) ?></strong></p>
+        <?php endif; ?>
 
         <!-- Search Bar Start -->
         <form action="/artikel/search" method="GET" class="search-bar">
-            <input type="text" name="keyword" id="search-input" placeholder="Cari artikel..." aria-label="Cari artikel" required>
+            <input type="text" name="keyword" id="search-input" placeholder="<?= isset($data['keyword']) ? esc($data['keyword']) : 'Cari artikel...' ?>" aria-label="Cari artikel" required>
             <button type="submit" id="search-button">
                 <i class="fas fa-search"></i>
             </button>
         </form>
         <!-- Search Bar End -->
+
     </div>
 </section>
 <!-- artikel section end -->
 
-
-<!-- {{-- blog-section start --}} -->
 <section class="blog-section">
     <div class="container">
+        <!-- Tampilkan Hasil Pencarian -->
         <div class="row justify-content-center text-center" id="artikel-container">
-            <!-- Initial articles -->
-            <?php foreach ($initialArtikel as $item): ?>
-                <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
-                    <div class="card shadow-sm border-0 h-100">
-                        <img src="<?= base_url('uploads/upload_artikel/' . $item['foto_artikel']) ?>" class="card-img-top" alt="<?= esc($item['judul_artikel']) ?>">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <p class="text-muted small"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($item['created_at'])) ?></p>
-                            <h5 class="card-title font-weight-bold"><?= esc($item['judul_artikel']) ?></h5>
-                            <p class="card-text"><?= character_limiter(strip_tags($item['deskripsi_artikel']), 100) ?></p>
-                            <a href="/artikel/<?= esc($item['slug']) ?>" class="btn btn-gold btn-block mt-3">Baca Selengkapnya</a>
+            <?php if (!empty($data['hasilPencarian'])): ?>
+                <?php foreach ($data['hasilPencarian'] as $artikel): ?>
+                    <div class="col-md-6 col-lg-4 mb-4 d-flex align-items-stretch">
+                        <div class="card shadow-sm border-0 h-100">
+                            <img src="<?= base_url('uploads/upload_artikel/' . $artikel['foto_artikel']) ?>" class="card-img-top" alt="<?= esc($artikel['judul_artikel']) ?>">
+                            <div class="card-body d-flex flex-column justify-content-center">
+                                <p class="text-muted small"><i class="fas fa-calendar-alt"></i> <?= date('d M Y', strtotime($artikel['created_at'])) ?></p>
+                                <h5 class="card-title font-weight-bold"><?= esc($artikel['judul_artikel']) ?></h5>
+                                <p class="card-text"><?= character_limiter(strip_tags($artikel['deskripsi_artikel']), 100) ?></p>
+                                <a href="/artikel/<?= esc($artikel['slug']) ?>" class="btn btn-gold btn-block mt-3">Baca Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Tidak ada artikel yang ditemukan.</p>
+            <?php endif; ?>
         </div>
-        <?php if (current_url() !== site_url('artikel/all')): ?>
-            <div class="text-center mt-4">
-                <a href="/artikel/all" class="view-all-info" style="font-weight: bold">
-                    Tampilkan Lebih Banyak <i class="fas fa-chevron-right"></i>
-                </a>
-            </div>
-        <?php endif; ?>
     </div>
 </section>
-<!-- {{-- blog-section end --}} -->
+
+
+
 
 
 

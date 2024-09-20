@@ -4,6 +4,7 @@ namespace App\Controllers\NewUser;
 
 use App\Controllers\NewUser\BaseController;
 use App\Models\BeritaModels;
+use App\Models\MetaModel;
 
 class BeritaController extends BaseController
 {
@@ -17,9 +18,15 @@ class BeritaController extends BaseController
         // Ambil berita yang aktif sesuai dengan tanggal hari ini
         $activeBerita = $beritaModel->getHomeBerita($today);
 
+        //SEO
+        $metaModel = new MetaModel();
+        $meta = $metaModel->where('nama_halaman', 'Informasi/Berita')->first();
+        $canonicalUrl = base_url('berita');
+
         return $this->render('NewUser/berita/index', [
-            'title' => 'Berita Terbaru',
-            'activeBerita' => $activeBerita 
+            'activeBerita' => $activeBerita,
+            'meta' => $meta,
+            '$canonicalUrl' => $canonicalUrl,
         ]);
     }
 
@@ -33,10 +40,16 @@ class BeritaController extends BaseController
 
         $activeBerita = $beritaModel->getHomeBeritaAll($today);
 
+         //SEO
+         $metaModel = new MetaModel();
+         $meta = $metaModel->where('nama_halaman', 'Informasi/Berita')->first();
+         $canonicalUrl = base_url('berita');
+
         // Pass data to the view
         return $this->render('NewUser/berita/index', [
-            'title' => 'Berita Terbaru',
-            'activeBerita' => $activeBerita
+            'activeBerita' => $activeBerita,
+            'meta' => $meta,
+            '$canonicalUrl' => $canonicalUrl,
         ]);
     }
 

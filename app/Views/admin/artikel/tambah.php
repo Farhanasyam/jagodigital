@@ -49,12 +49,20 @@
 
                             <div class="mb-3">
                                 <label class="form-label">Deskripsi Artikel</label>
-                                <textarea class="form-control" name="deskripsi_artikel" rows="4" required><?= old('deskripsi_artikel') ?></textarea>
+                                <textarea class="form-control tiny" id="deskripsi_artikel" name="deskripsi_artikel" row="5" value="<?= old('deskripsi_artikel') ?>"></textarea>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label">Tags</label>
                                 <input type="text" class="form-control" name="tags" value="<?= old('tags') ?>" placeholder="Pisahkan dengan koma" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Meta Title</label>
+                                <input type="text" class="form-control" name="meta_title" value="<?= old('meta_title') ?>" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Meta Description</label>
+                                <input type="text" class="form-control" name="meta_description" value="<?= old('meta_description') ?>" required>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Simpan</button>

@@ -49,11 +49,34 @@
         <?php if (!empty($founder)): ?>
             <?php foreach ($founder as $founderItem): ?>
                 <div class="founder-card">
-                    <img src="<?= base_url('uploads/foto_founder/' . $founderItem->foto_founder) ?>" alt="<?= esc($founderItem->nama_founder) ?>" class="profile-img">
-                    <img src="<?= base_url('assets-new/images/logo.png') ?>" class="logo" alt="Logo">
+                    <!-- Founder Photo -->
+                    <div class="profile-wrapper">
+                        <img src="<?= base_url('uploads/foto_founder/' . $founderItem->foto_founder) ?>" alt="<?= esc($founderItem->nama_founder) ?>" class="profile-img">
+                    </div>
+
+                    <!-- Founder Info -->
                     <div class="info">
-                        <h3 class="card-title"><?= esc($founderItem->nama_founder) ?></h3>
-                        <p class="card-text"><?= esc($founderItem->jabatan_founder) ?></p>
+                        <h3><?= esc($founderItem->nama_founder) ?></h3>
+                        <p class="role"><?= esc($founderItem->jabatan_founder) ?></p>
+
+                        <!-- Founder Description -->
+                        <p class="description"><?= esc($founderItem->deskripsi_founder ?? 'Deskripsi tidak tersedia') ?></p>
+
+                        <!-- Social Media Links -->
+                        <?php if (!empty($founderItem->links)): ?>
+                            <div class="social-media">
+                                <?php foreach ($founderItem->links as $socialMedia): ?>
+                                    <a href="<?= esc($socialMedia->link_founder) ?>" target="_blank" class="social-link">
+                                        <img src="<?= base_url('uploads/icons/' . $socialMedia->icon_link_founder) ?>" alt="<?= esc($socialMedia->nama_link_founder) ?>" class="social-icon">
+                                        <span class="social-text"><?= esc($socialMedia->nama_link_founder) ?></span>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <p>Sosial media tidak tersedia.</p>
+                        <?php endif; ?>
+
+
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -63,154 +86,148 @@
     </div>
 </section>
 
-
-
-<!-- css for founder -->
+<!-- Updated CSS -->
 <style>
     .founders-section {
-        position: relative;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
         text-align: center;
-        padding: 30px 20px;
-        border-radius: 20px;
-        margin: 90px auto 20px;
-        /* Added 50px margin-top for space above */
-        max-width: 1000px;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
-
-
-    .founders-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 70%;
-        border-radius: 20px;
-        background-color: #87D5C8;
-        z-index: -1;
-        border-radius: 20px 20px 0 0;
-    }
-
-
-
-    .founders-section h2,
-    .founders-section p {
-        margin: 0;
-        padding: 0 20px;
-        color: #fff;
-    }
-
-    .founders-section h2 {
-        font-size: 28px;
-        margin-bottom: 10px;
-    }
-
-    .founders-section p {
-        margin-bottom: 30px;
+        background-color: #f2f2f2;
+        border-radius: 10px;
     }
 
     .founders {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
-        flex-wrap: wrap;
     }
 
     .founder-card {
-        position: relative;
-        /* Needed for absolute positioning within the card */
-        background-color: #fff;
-        border-radius: 20px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        width: 250px;
-        /* Adjust width as needed */
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         text-align: center;
-        box-sizing: border-box;
-        margin-bottom: 20px;
-    }
-
-    .founder-card img {
-        border-radius: 20px;
+        transition: transform 0.3s ease;
         width: 100%;
-        height: auto;
-
+        max-width: 350px;
+        position: relative;
     }
 
-    .founder-card .logo {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 50px;
-        /* Adjust the width as needed */
-        height: auto;
-        /* Maintain aspect ratio */
-        object-fit: contain;
-        /* Ensure image is contained within the width */
+    .founder-card:hover {
+        transform: translateY(-10px);
     }
 
+    .profile-wrapper {
+        width: 100%;
+        padding-top: 100%;
+        position: relative;
+    }
 
-    .founder-card .info {
+    .profile-img {
         position: absolute;
-        bottom: 0;
+        top: 0;
         left: 0;
         width: 100%;
-        background-color: rgba(255, 152, 0, 0.9);
-        /* Semi-transparent background for the text */
-        color: #fff;
-        padding: 10px;
-        box-sizing: border-box;
-        text-align: left;
-        border-radius: 0 0 20px 20px;
-        /* Match the bottom border-radius */
+        height: 100%;
+        object-fit: cover;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
     }
 
-    .founder-card h3 {
+    .info {
+        padding: 20px;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .info h3 {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+
+    .social-media {
+        display: flex;
+        flex-direction: column;
+        /* Mengatur elemen secara vertikal */
+        align-items: center;
+        /* Menyelaraskan elemen ke tengah */
+       
+        margin-top: 15px;
+        /* Jarak atas jika diperlukan */
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: #000000;
+    }
+
+    .social-icon {
+        width: 24px;
+        /* Ukuran ikon */
+        height: 24px;
+        /* Ukuran ikon */
+        margin-right: 8px;
+        /* Jarak kanan antara ikon dan teks */
+    }
+
+    .social-text {
+        font-size: 16px;
+        /* Ukuran teks */
+        line-height: 24px;
+        /* Menyelaraskan tinggi baris dengan tinggi ikon */
+    }
+
+
+    .social-link:hover .social-icon {
+        transform: scale(1.2);
+    }
+
+
+    .info .role {
         font-size: 18px;
-        /* Adjusted font size for the smaller card */
-        margin: 0;
+        color: #FF9800;
+        margin-bottom: 10px;
     }
 
-    .founder-card p {
-        font-size: 14px;
-        /* Adjusted font size for the smaller card */
-        margin: 0;
+    .description {
+        font-size: 16px;
+        margin-bottom: 15px;
+        text-align: justify;
     }
 
-    /* Responsive Design */
-    @media (max-width: 900px) {
+    .social-media {
+        margin-top: 15px;
+    }
+
+    .social-link {
+        display: inline-block;
+        margin-right: 10px;
+    }
+
+    .social-icon {
+        width: 50px;
+        height: 50px;
+        transition: transform 0.3s ease;
+    }
+
+    .social-link:hover .social-icon {
+        transform: scale(1.2);
+    }
+
+    @media (max-width: 768px) {
         .founders {
             flex-direction: column;
             align-items: center;
         }
 
         .founder-card {
-            width: 80%;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .founder-card {
             width: 100%;
-            padding: 15px;
-        }
-
-        .founders-section h2 {
-            font-size: 24px;
-        }
-
-        .founders-section p {
-            font-size: 14px;
-        }
-
-        .founder-card h3 {
-            font-size: 18px;
-        }
-
-        .founder-card p {
-            font-size: 14px;
         }
     }
 </style>

@@ -11,7 +11,7 @@
 
         <!-- Berita Content -->
         <div class="berita-detail-content">
-            <img src="<?= base_url('assets-baru/img/' . $berita->poster_berita) ?>" class="berita-img" alt="<?= esc($berita->judul_berita) ?>">
+            <img src="<?= base_url('uploads/foto_berita/' . $berita->poster_berita) ?>" class="berita-img" alt="<?= esc($berita->judul_berita) ?>">
             <div class="berita-text">
                 <?= esc(strip_tags($berita->deskripsi_berita, '<b><i><u>')) ?>
             </div>
@@ -33,7 +33,7 @@
             <?php foreach ($recommendedBerita as $item): ?>
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm border-0">
-                        <img src="<?= base_url('assets-baru/img/' . $item->poster_berita) ?>" class="card-img-top" alt="<?= esc($item->judul_berita) ?>">
+                        <img src="<?= base_url('uploads/foto_berita/' . $item->poster_berita) ?>" class="card-img-top" alt="<?= esc($item->judul_berita) ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?= esc($item->judul_berita) ?></h5>
                             <p class="card-text"><?= character_limiter(strip_tags($item->deskripsi_berita), 100) ?></p>

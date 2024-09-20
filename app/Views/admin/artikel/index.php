@@ -27,6 +27,8 @@
                                         <th class="text-center align-middle">Tags</th>
                                         <th class="text-center align-middle">Views</th>
                                         <th class="text-center align-middle" style="width: 60px;">Slug</th>
+                                        <th class="text-center align-middle" style="width: 60px;">Meta Title</th>
+                                        <th class="text-center align-middle" style="width: 60px;">Meta Description</th>
                                         <th class="text-center align-middle">Aksi</th>
                                     </tr>
                                 </thead>
@@ -47,9 +49,10 @@
                                             </td>
                                             <td class="text-center align-middle"><?= $artikel['tags']; ?></td>
                                             <td class="text-center align-middle"><?= $artikel['views']; ?></td>
-                                            <td class="text-center align-middle" style="width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                <?= $artikel['slug']; ?>
-                                            </td>
+                                            <td class="text-center align-middle"><?= $artikel['slug']; ?></td>
+                                            <td class="text-center align-middle"><?= $artikel['meta_title']; ?></td>
+                                            <td class="text-center align-middle"><?= $artikel['meta_description']; ?></td>
+                                         
                                             <td class="text-center align-middle">
                                                 <div class="d-grid gap-2">
                                                     <a href="<?= base_url('admin/artikel/delete/' . $artikel['id_artikel']); ?>" class="btn btn-danger">Hapus</a>
