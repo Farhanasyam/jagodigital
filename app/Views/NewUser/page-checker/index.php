@@ -1,114 +1,13 @@
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PageSpeed Checker</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
+<?php $this->setVar('title', 'SEO Checker');; ?>
+<?= $this->extend('NewUser/layout/app'); ?>
+<?= $this->section('content'); ?>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+    .card {
         background-color: #f5f5f5;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .container {
-        max-width: 900px;
-        width: 100%;
-        margin: 20px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-        font-size: 2em;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .input-section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-
-    .input-group {
-        display: flex;
-        width: 100%;
-        max-width: 600px;
-        margin-bottom: 10px;
-        position: relative;
-    }
-
-    .input-group input {
-        padding: 10px;
-        font-size: 1em;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        width: 100%;
-        box-sizing: border-box;
-        margin-right: 10px;
-    }
-
-    .input-group button {
-        padding: 10px 20px;
-        font-size: 1em;
-        border: none;
-        border-radius: 4px;
-        background-color: #007bff;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        box-sizing: border-box;
-    }
-
-    .input-group button:hover {
-        background-color: #0056b3;
-    }
-
-    .status-message {
-        font-size: 0.9em;
-        color: #888;
-        margin-top: 5px;
-        text-align: center;
-        width: 100%;
-    }
-
-    .tabs-container,
-    .sub-tabs-container {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-
-    .tabs-container button,
-    .sub-tabs-container button {
-        padding: 10px 20px;
-        margin: 0 5px;
-        font-size: 1em;
-        border: none;
-        border-radius: 4px;
-        background-color: #eee;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-    }
-
-    .tabs-container button.active,
-    .sub-tabs-container button.active {
-        background-color: #ddd;
-        color: #333;
     }
 
     .result-section {
-
         border-radius: 5px;
         padding: 15px;
         margin: 10px 0;
@@ -176,6 +75,7 @@
         flex: 1;
         padding: 15px;
         background-color: #fff;
+        min-height: 400px;
     }
 
     .comparison-title {
@@ -189,238 +89,336 @@
         font-size: 0.9em;
         color: #666;
     }
-    </style>
-</head>
 
-<body>
-    div class="container">
-        <h1>PageSpeed Checker</h1>
-        
-        <div class="input-section">
-            <div class="input-group">
-                <input type="text" id="url" placeholder="Masukkan URL">
-                <button id="checkPerformance">Analisis</button>
+    .card {
+        min-height: 400px;
+    }
+</style>
+
+<div class="container mt-4">
+    <div class="card py-4 bg-secondary-subtle">
+        <h2 class="text-center mb-4">PageSpeed Checker</h2>
+
+        <!-- Input dan tombol sejajar pada layar besar, tombol berada di bawah input pada layar kecil -->
+        <div class="container">
+            <div class="row justify-content-center mb-3">
+                <div class="col-12 col-md-8">
+                    <div class="d-flex flex-column flex-md-row align-items-center">
+                        <input type="text" id="url" class="form-control mb-2 mb-md-0 me-md-2 rounded" placeholder="Masukkan URL">
+                        <button id="checkPerformance" class="btn btn-primary d-flex align-items-center">
+                            <i class="bi bi-lightning-fill me-2"></i> Analisa
+                        </button>
+                    </div>
+                </div>
             </div>
-            <p id="status" class="status-message">Masukkan URL untuk memulai pengecekan.</p>
         </div>
+
+        <p id="status" class="status-message text-center">Masukkan URL untuk memulai pengecekan.</p>
 
         <!-- Tabs untuk Desktop/Mobile -->
-        <div class="tabs-container">
-            <button id="desktop-btn" onclick="selectMainTab('desktop')">Desktop</button>
-            <button id="mobile-btn" onclick="selectMainTab('mobile')">Mobile</button>
-        </div>
-
-        <!-- Hasil dari kombinasi Desktop/Mobile dan URL Penuh/Asal -->
-        <div class="comparison-container">
-            <div id="desktop-full" class="result-section">
-                <div class="comparison-title">Desktop</div>
-                <div class="comparison-content" id="desktop-full-content"></div>
-            </div>
-            
-            <div id="mobile-full" class="result-section">
-                <div class="comparison-title">Mobile</div>
-                <div class="comparison-content" id="mobile-full-content"></div>
-            </div>
-            
+        <div class="tabs-container text-center mb-3">
+            <button id="desktop-btn" onclick="selectMainTab('desktop')" class="btn btn-outline-success rounded me-2">
+                <i class="bi bi-display me-2"></i> Desktop
+            </button>
+            <button id="mobile-btn" onclick="selectMainTab('mobile')" class="btn btn-outline-primary">
+                <i class="bi bi-phone me-2"></i> Mobile
+            </button>
         </div>
     </div>
-    
-    <script>
+
+    <!-- Hasil dari kombinasi Desktop/Mobile dan URL Penuh/Asal -->
+    <!-- <div class="comparison-container">
+        <div id="desktop-full" class="result-section">
+            <div class="comparison-title">Desktop</div>
+            <div class="comparison-content" id="desktop-full-content"></div>
+        </div>
+
+        <div id="mobile-full" class="result-section">
+            <div class="comparison-title">Mobile</div>
+            <div class="comparison-content" id="mobile-full-content"></div>
+        </div>
+    </div> -->
+
+    <div class="comparison-container">
+        <!-- Card untuk Desktop -->
+        <div id="desktop-full" class="card result-section">
+            <div class="card-header">
+                <div class="comparison-title">Desktop</div>
+            </div>
+            <div class="card-body">
+                <div class="comparison-content" id="desktop-full-content">
+                </div>
+            </div>
+        </div>
+
+        <!-- Card untuk Mobile -->
+        <div id="mobile-full" class=" card result-section">
+            <div class="card-header">
+                <div class="comparison-title">Mobile</div>
+            </div>
+            <div class="card-body">
+                <div class="comparison-content" id="mobile-full-content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
     let isProcessing = false;
 
-// Set default ke Desktop dan URL Penuh saat halaman dimuat
-window.onload = function() {
-    selectMainTab('desktop');
-    selectSubTab('full');
-};
+    // Set default ke Desktop dan URL Penuh saat halaman dimuat
+    window.onload = function() {
+        selectMainTab('desktop');
+        selectSubTab('full');
+    };
 
-document.getElementById("checkPerformance").addEventListener("click", function() {
-    if (isProcessing) return; // Hindari permintaan ganda
+    document.getElementById("checkPerformance").addEventListener("click", function() {
+        if (isProcessing) return; // Hindari permintaan ganda
 
-    const urlInput = document.getElementById("url").value;
+        const urlInput = document.getElementById("url").value;
 
-    // Cek apakah URL kosong
-    if (!urlInput) {
-        document.getElementById("status").innerHTML = "URL belum diisi. Masukkan URL yang valid.";
-        return;
-    }
-
-    isProcessing = true; // Tandai proses sedang berlangsung
-    document.getElementById("status").innerHTML = "Sedang memproses URL... Mohon tunggu...";
-
-    let urlFull;
-
-    // Validasi dan parsing URL
-    try {
-        const parsedUrl = new URL(urlInput);
-        urlFull = urlInput;
-    } catch (error) {
-        document.getElementById("status").innerHTML = "URL yang Anda masukkan tidak valid.";
-        isProcessing = false;
-        return;
-    }
-
-    // Menyimpan status progres
-    let completedRequests = 0;
-    const totalRequests = 2;
-
-    // Reset data sebelum memulai pengecekan ulang
-    clearPreviousResults();
-
-    // Proses untuk keempat kombinasi
-    checkAllCombinations(urlFull, function() {
-        completedRequests++;
-        if (completedRequests === totalRequests) {
-            document.getElementById("status").innerHTML = "Semua data berhasil diproses. Pilih tab untuk melihat hasil.";
-            isProcessing = false; // Tandai proses selesai
+        // Cek apakah URL kosong
+        if (!urlInput) {
+            document.getElementById("status").innerHTML = "URL belum diisi. Masukkan URL yang valid.";
+            return;
         }
-    });
-});
 
-// Reset hasil sebelum memulai request baru
-function clearPreviousResults() {
-    document.getElementById("desktop-full").innerHTML = "";
-    document.getElementById("mobile-full").innerHTML = "";
-}
+        isProcessing = true; // Tandai proses sedang berlangsung
+        document.getElementById("status").innerHTML = "Sedang memproses URL... Mohon tunggu...";
 
-// Proses semua kombinasi
-function checkAllCombinations(urlFull, onComplete) {
-    // Cek desktop untuk URL penuh
-    getPageSpeedData(urlFull, 'desktop', 'desktop-full', 'Desktop URL Penuh', onComplete);
+        let urlFull;
 
+        // Validasi dan parsing URL
+        try {
+            const parsedUrl = new URL(urlInput);
+            urlFull = urlInput;
+        } catch (error) {
+            document.getElementById("status").innerHTML = "URL yang Anda masukkan tidak valid.";
+            isProcessing = false;
+            return;
+        }
 
-    // Cek mobile untuk URL penuh
-    getPageSpeedData(urlFull, 'mobile', 'mobile-full', 'Mobile URL Penuh', onComplete);
-}
+        // Menyimpan status progres
+        let completedRequests = 0;
+        const totalRequests = 2;
 
-// Ambil data dari API dan tampilkan hasilnya
-function getPageSpeedData(url, strategy, tabId, title, onComplete) {
-    const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${strategy}`;
+        // Reset data sebelum memulai pengecekan ulang
+        clearPreviousResults();
 
-    // Tampilkan status loading di tab yang sedang di-request
-    if (document.getElementById(tabId).innerHTML === "") {
-        document.getElementById(tabId).innerHTML = `<p class="loading">Sedang memproses ${strategy.toUpperCase()} - ${tabId.includes('full') ? 'URL Penuh' : 'URL Asal'}...</p>`;
-    }
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                document.getElementById(tabId).innerHTML = "Data tidak ditemukan atau terjadi kesalahan.";
-            } else {
-                displayResults(data, tabId, title);
+        // Proses untuk keempat kombinasi
+        checkAllCombinations(urlFull, function() {
+            completedRequests++;
+            if (completedRequests === totalRequests) {
+                document.getElementById("status").innerHTML = "Semua data berhasil diproses. Pilih tab untuk melihat hasil.";
+                isProcessing = false; // Tandai proses selesai
             }
-            onComplete();
-        })
-        .catch(error => {
-            console.error("Error fetching PageSpeed data:", error);
-            document.getElementById(tabId).innerHTML = "Terjadi kesalahan saat mengambil data.";
-            onComplete();
         });
-}
+    });
 
-// Tampilkan hasil
-function displayResults(data, tabId, title) {
-    const fcp = parseFloat(data.lighthouseResult.audits['first-contentful-paint'].displayValue);
-    const lcp = parseFloat(data.lighthouseResult.audits['largest-contentful-paint'].displayValue);
-    const cls = parseFloat(data.lighthouseResult.audits['cumulative-layout-shift'].displayValue);
-    const tbt = parseFloat(data.lighthouseResult.audits['total-blocking-time'].displayValue);
-    const tti = data.lighthouseResult.audits['interactive'].displayValue;
-    const performanceScore = data.lighthouseResult.categories.performance.score * 100;
-
-    function getPerformanceCategory(value, thresholds) {
-        if (value <= thresholds.low) return 'Baik';
-        if (value <= thresholds.medium) return 'Memerlukan Peningkatan';
-        return 'Buruk';
+    // Reset hasil sebelum memulai request baru
+    function clearPreviousResults() {
+        document.getElementById("desktop-full").innerHTML = "";
+        document.getElementById("mobile-full").innerHTML = "";
     }
 
-    function getColorClass(value, thresholds) {
-        if (value <= thresholds.low) return 'result-good';
-        if (value <= thresholds.medium) return 'result-needs-improvement';
-        return 'result-poor';
+    // Proses semua kombinasi
+    function checkAllCombinations(urlFull, onComplete) {
+        // Cek desktop untuk URL penuh
+        getPageSpeedData(urlFull, 'desktop', 'desktop-full', 'Desktop', onComplete);
+
+
+        // Cek mobile untuk URL penuh
+        getPageSpeedData(urlFull, 'mobile', 'mobile-full', 'Mobile', onComplete);
     }
 
-    function formatMetric(value, thresholds, label, description) {
-        const performanceLabel = getPerformanceCategory(value, thresholds);
-        const colorClass = getColorClass(value, thresholds);
-        return `
-            <div class="result-container ${colorClass}">
-                <div class="result-label">${label}: ${value} detik</div>
-                <p class="result-category">${performanceLabel}</p>
-                <p class="result-description">${description}</p>
+    // Ambil data dari API dan tampilkan hasilnya
+    function getPageSpeedData(url, strategy, tabId, title, onComplete) {
+        const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=${strategy}`;
+
+        // Tampilkan status loading di tab yang sedang di-request
+        if (document.getElementById(tabId).innerHTML === "") {
+            document.getElementById(tabId).innerHTML = `<p class="loading">Sedang memproses ${strategy.toUpperCase()} - ${tabId.includes('full') ? 'URL Penuh' : 'URL Asal'}...</p>`;
+        }
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    document.getElementById(tabId).innerHTML = "Data tidak ditemukan atau terjadi kesalahan.";
+                } else {
+                    displayResults(data, tabId, title);
+                }
+                onComplete();
+            })
+            .catch(error => {
+                console.error("Error fetching PageSpeed data:", error);
+                document.getElementById(tabId).innerHTML = "Terjadi kesalahan saat mengambil data.";
+                onComplete();
+            });
+    }
+
+    // Tampilkan hasil
+    // Tampilkan hasil
+    function displayResults(data, tabId, title) {
+        const fcp = parseFloat(data.lighthouseResult.audits['first-contentful-paint'].displayValue);
+        const lcp = parseFloat(data.lighthouseResult.audits['largest-contentful-paint'].displayValue);
+        const cls = parseFloat(data.lighthouseResult.audits['cumulative-layout-shift'].displayValue);
+        const tbt = parseFloat(data.lighthouseResult.audits['total-blocking-time'].displayValue);
+        const performanceScore = data.lighthouseResult.categories.performance.score * 100;
+
+        function getPerformanceCategory(value, thresholds) {
+            if (value <= thresholds.low) return 'Baik';
+            if (value <= thresholds.medium) return 'Memerlukan Peningkatan';
+            return 'Buruk';
+        }
+
+        function getColorClass(value, thresholds) {
+            if (value <= thresholds.low) return 'result-good';
+            if (value <= thresholds.medium) return 'result-needs-improvement';
+            return 'result-poor';
+        }
+
+        function formatMetric(value, thresholds, label, description) {
+            const performanceLabel = getPerformanceCategory(value, thresholds);
+            const colorClass = getColorClass(value, thresholds);
+            return `
+                <div class="result-container ${colorClass}">
+                    <div class="result-label">${label}: ${value} detik</div>
+                    <p class="result-category">${performanceLabel}</p>
+                    <p class="result-description">${description}</p>
+                </div>
+            `;
+        }
+
+        // Thresholds untuk masing-masing metrik (dalam detik atau milidetik)
+        const thresholdsLCP = {
+            low: 2.5,
+            medium: 4
+        }; // Detik
+        const thresholdsFCP = {
+            low: 1.8,
+            medium: 3
+        }; // Detik
+        const thresholdsCLS = {
+            low: 0.1,
+            medium: 0.25
+        }; // Skor
+        const thresholdsTBT = {
+            low: 300,
+            medium: 600
+        }; // Milidetik
+
+        // Hitung jumlah hasil yang baik, buruk, dan memerlukan peningkatan
+        const metrics = [{
+                value: fcp,
+                thresholds: thresholdsFCP
+            },
+            {
+                value: lcp,
+                thresholds: thresholdsLCP
+            },
+            {
+                value: cls,
+                thresholds: thresholdsCLS
+            },
+            {
+                value: tbt / 1000,
+                thresholds: thresholdsTBT
+            }, // TBT dalam detik
+            {
+                value: performanceScore,
+                thresholds: {
+                    low: 90,
+                    medium: 50
+                }
+            }
+        ];
+
+        let baikCount = 0;
+        let perluPerbaikanCount = 0;
+        let burukCount = 0;
+
+        metrics.forEach(metric => {
+            const category = getPerformanceCategory(metric.value, metric.thresholds);
+            if (category === 'Baik') baikCount++;
+            if (category === 'Memerlukan Peningkatan') perluPerbaikanCount++;
+            if (category === 'Buruk') burukCount++;
+        });
+
+        // Ambil waktu saat ini
+        const currentTime = new Date();
+        const formattedTime = `${currentTime.getDate()} ${currentTime.toLocaleString('id-ID', { month: 'short' })} ${currentTime.getFullYear()}, ${currentTime.toLocaleTimeString('id-ID')}`;
+
+        // Format hasil dengan waktu, judul, dan jumlah kategori
+        document.getElementById(tabId).innerHTML = `
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+            <h5 class="card-title">${title}</h5>
+            <div class="score-category d-flex flex-wrap gap-2 mt-2 mt-lg-0">
+                <span class="badge bg-primary">Skor: ${performanceScore}</span>
+                <span class="badge bg-success">Baik: ${baikCount}</span>
+                <span class="badge bg-warning text-dark">Perlu Perbaikan: ${perluPerbaikanCount}</span>
+                <span class="badge bg-danger">Buruk: ${burukCount}</span>
             </div>
-        `;
-    }
-
-    // Thresholds untuk masing-masing metrik (dalam detik atau milidetik)
-    const thresholdsLCP = { low: 2.5, medium: 4 }; // Detik
-    const thresholdsFCP = { low: 1.8, medium: 3 }; // Detik
-    const thresholdsCLS = { low: 0.1, medium: 0.25 }; // Skor
-    const thresholdsTBT = { low: 300, medium: 600 }; // Milidetik
-
-    // Ambil waktu saat ini
-    const currentTime = new Date();
-    const formattedTime = `${currentTime.getDate()} ${currentTime.toLocaleString('id-ID', { month: 'short' })} ${currentTime.getFullYear()}, ${currentTime.toLocaleTimeString('id-ID')}`;
-
-    // Format hasil dengan waktu dan judul
-    document.getElementById(tabId).innerHTML = `
-        <div class="result-section">
-            <div class="result-title">${title}</div>
+        </div>
+        <div class="card-body">
             ${formatMetric(lcp, thresholdsLCP, 'Largest Contentful Paint (LCP)', 'Largest Contentful Paint (LCP) mengukur waktu yang dibutuhkan untuk elemen konten terbesar pada halaman dimuat dan terlihat oleh pengguna.')}
             ${formatMetric(fcp, thresholdsFCP, 'First Contentful Paint (FCP)', 'First Contentful Paint (FCP) mengukur waktu yang dibutuhkan hingga elemen konten pertama kali dirender pada halaman.')}
             ${formatMetric(cls, thresholdsCLS, 'Cumulative Layout Shift (CLS)', 'Cumulative Layout Shift (CLS) mengukur seberapa sering elemen halaman berpindah posisi saat halaman dimuat, yang dapat memengaruhi pengalaman pengguna.')}
-            ${formatMetric(tbt / 1000, thresholdsTBT, 'Total Blocking Time (TBT)', 'Total Blocking Time (TBT) mengukur total waktu dalam milidetik di mana thread utama terblokir dan tidak dapat merespons input pengguna.')} <!-- Konversi milidetik ke detik -->
+            ${formatMetric(tbt / 1000, thresholdsTBT, 'Total Blocking Time (TBT)', 'Total Blocking Time (TBT) mengukur total waktu dalam milidetik di mana thread utama terblokir dan tidak dapat merespons input pengguna.')}
             <div class="result-container ${getColorClass(performanceScore, {low: 90, medium: 50})}">
                 <div class="result-label">Skor Performa: ${performanceScore}/100</div>
                 <p class="result-category">${getPerformanceCategory(performanceScore, {low: 90, medium: 50})}</p>
             </div>
             <p class="timestamp">Laporan dari ${formattedTime}</p>
         </div>
-    `;
-}
-
-
-// Fungsi untuk memilih tab utama (Desktop/Mobile)
-function selectMainTab(mode) {
-    const allSubTabs = ['desktop-full', 'mobile-full'];
-    allSubTabs.forEach(tab => document.getElementById(tab).style.display = 'none');
-    
-    const desktopBtn = document.getElementById('desktop-btn');
-    const mobileBtn = document.getElementById('mobile-btn');
-    
-    if (mode === 'desktop') {
-        desktopBtn.classList.add('active');
-        mobileBtn.classList.remove('active');
-        document.getElementById('desktop-full').style.display = 'block';
-    } else {
-        mobileBtn.classList.add('active');
-        desktopBtn.classList.remove('active');
-        document.getElementById('mobile-full').style.display = 'block';
+    </div>
+`;
     }
-}
 
-// Fungsi untuk memilih sub-tab (URL Penuh/Asal)
-function selectSubTab(urlType) {
-    const mode = document.getElementById('desktop-btn').classList.contains('active') ? 'desktop' : 'mobile';
 
-    const allSubTabs = {
-        'desktop': {
-            'full': 'desktop-full',
-        },
-        'mobile': {
-            'full': 'mobile-full',
+
+
+    // Fungsi untuk memilih tab utama (Desktop/Mobile)
+    function selectMainTab(mode) {
+        const allSubTabs = ['desktop-full', 'mobile-full'];
+        allSubTabs.forEach(tab => document.getElementById(tab).style.display = 'none');
+
+        const desktopBtn = document.getElementById('desktop-btn');
+        const mobileBtn = document.getElementById('mobile-btn');
+
+        if (mode === 'desktop') {
+            desktopBtn.classList.add('active');
+            mobileBtn.classList.remove('active');
+            document.getElementById('desktop-full').style.display = 'block';
+        } else {
+            mobileBtn.classList.add('active');
+            desktopBtn.classList.remove('active');
+            document.getElementById('mobile-full').style.display = 'block';
         }
-    };
+    }
 
-    // Sembunyikan semua tab
-    Object.values(allSubTabs[mode]).forEach(tab => document.getElementById(tab).style.display = 'none');
+    // Fungsi untuk memilih sub-tab (URL Penuh/Asal)
+    function selectSubTab(urlType) {
+        const mode = document.getElementById('desktop-btn').classList.contains('active') ? 'desktop' : 'mobile';
 
-    // Tampilkan tab yang dipilih
-    const tabToShow = allSubTabs[mode][urlType];
-    document.getElementById(tabToShow).style.display = 'block';
-}
+        const allSubTabs = {
+            'desktop': {
+                'full': 'desktop-full',
+            },
+            'mobile': {
+                'full': 'mobile-full',
+            }
+        };
 
-    </script>
-</body>
+        // Sembunyikan semua tab
+        Object.values(allSubTabs[mode]).forEach(tab => document.getElementById(tab).style.display = 'none');
 
-</html>
+        // Tampilkan tab yang dipilih
+        const tabToShow = allSubTabs[mode][urlType];
+        document.getElementById(tabToShow).style.display = 'block';
+    }
+</script>
+<?= $this->endsection('content'); ?>
