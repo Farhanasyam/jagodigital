@@ -179,7 +179,6 @@
             </div>
         </div>
 
-
         <!-- Tabel Content Pillar -->
         <!-- start nama data -->
         <div class="main-card card mb-3">
@@ -217,44 +216,6 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- Tabel Status -->
-        <!-- start nama data -->
-        <div class="main-card card mb-3">
-            <div class="card-body border-white border-warning">
-                <h4 class="text-primary fw-bold">Status Content</h4>
-                <!-- end nama data -->
-
-                <div class="table-responsive">
-                    <table class="table table-light" style="border-collapse: separate; border-radius: 20px; overflow: hidden;">
-                        <thead class="text-center">
-                            <tr class="table-secondary">
-                                <th>No</th>
-                                <th class="w-75">Nama Status</th>
-                                <th style="text-align: center;">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1 ?>
-                            <?php foreach ($statuses as $item): ?>
-                                <tr>
-                                    <td class="text-center"><?= $i++ ?></td>
-                                    <td contenteditable="true" data-id="<?= $item['id_status'] ?>" data-column="nama_status"><?= esc($item['nama_status']) ?></td>
-                                    <td><button class="btn btn-danger btn-sm delete-status" style="width: 100%; min-width: 80px; border-radius:10px;" data-id="<?= $item['id_status'] ?>">Delete</button></td>
-                                </tr>
-                            <?php endforeach; ?>
-                            <tr>
-                                <th class="py-3 text-center">New Data</th>
-                                <td><input type="text" id="newNamaStatus" class="form-control" placeholder="Status"></td>
-                                <td><button class="btn btn-primary btn-sm" id="addStatus" style="width: 100%; min-width: 80px; border-radius:10px;">Add Data</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>
 
@@ -369,13 +330,6 @@
             deleteData(id, url);
         });
 
-        // Handle delete Status
-        $('.delete-status').click(function() {
-            var id = $(this).data('id');
-            var url = '<?= base_url('/delete_status') ?>';
-            deleteData(id, url);
-        });
-
         function addData(data, url) {
             data[csrfName] = csrfHash; // Menambahkan token CSRF ke data
             $.ajax({
@@ -409,8 +363,6 @@
                 url = '<?= base_url('/update_content_type') ?>';
             } else if ($(this).closest('table').find('th').eq(1).text().includes('Content Pillar')) {
                 url = '<?= base_url('/update_content_pillar') ?>';
-            } else if ($(this).closest('table').find('th').eq(1).text().includes('Status')) {
-                url = '<?= base_url('/update_status') ?>';
             }
 
             updateData(id, column, value, url);
@@ -458,20 +410,6 @@
             addData({
                 nama_content_pillar: namaContentPillar
             }, '<?= base_url('/add_content_pillar') ?>');
-        });
-
-        // Handle add Status
-        $('#addStatus').click(function() {
-            var namaStatus = $('#newNamaStatus').val().trim();
-
-            if (namaStatus === '') {
-                alert('Nama Status tidak boleh kosong');
-                return;
-            }
-
-            addData({
-                nama_status: namaStatus
-            }, '<?= base_url('/add_status') ?>');
         });
     });
 </script>
