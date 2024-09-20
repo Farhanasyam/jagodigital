@@ -1,4 +1,4 @@
-<?php $this->setVar('title', 'Content Planner');; ?>
+<?php $this->setVar('title', 'Content Planner'); ?>
 <?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
 <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" /> -->
@@ -26,66 +26,6 @@
     padding-bottom: 20px;
   }
 
-  .line-separator {
-    width: 100%;
-    height: 2px;
-    background-color: #000;
-    border: none;
-    margin-top: 5px;
-    margin-bottom: 40px;
-  }
-
-  #upload {
-    opacity: 0;
-  }
-
-  #upload-label {
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-  }
-
-  .image-area {
-    border: 2px dashed;
-    padding: 1.6rem;
-    position: relative;
-    text-align: center;
-  }
-
-  .image-area::before {
-    content: 'Uploaded image result';
-    font-weight: bold;
-    text-transform: uppercase;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0.8rem;
-    z-index: 1;
-  }
-
-  .image-area img {
-    z-index: 2;
-    position: relative;
-  }
-
-
-  .date {
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .calendar-icons {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .calendar-icons i {
-    margin-left: 10px;
-    cursor: pointer;
-  }
-
   .form-control,
   .btn {
     border-radius: 0.25rem;
@@ -103,32 +43,6 @@
     white-space: nowrap;
     /* Mencegah teks membungkus ke baris berikutnya */
   }
-
-  @media (max-width: 320px) {
-    .d-flex {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .calendar-controls {
-      margin-top: 10px;
-      width: 100%;
-    }
-  }
-
-  @media (max-width: 375px) {
-    .d-flex {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .calendar-controls {
-      margin-top: 10px;
-      width: 100%;
-    }
-  }
 </style>
 
 <!-- start text header and line -->
@@ -140,9 +54,11 @@
           <h2 class="display-7 mb-0">Content Planner</h2>
         </div>
         <!-- Tambahkan d-flex justify-content-center pada layar kecil -->
-        <div class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end text-center text-md-end mt-3 mt-md-0">
+        <div
+          class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end text-center text-md-end mt-3 mt-md-0">
           <div class="dropdown">
-            <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;"
+              type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <?= $title ?? 'Content Planner' ?>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -167,26 +83,12 @@
       </div>
 
       <div class="row">
-        <!-- Upload Image -->
         <div class="col-md-5 mb-4">
-          <!-- Upload image input-->
-          <label>Upload Image</label>
-          <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-            <input name="file_content" id="upload" type="file" onchange="readURL(this);"
-              class="form-control border-0">
-            <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
-            <div class="input-group-append">
-              <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i
-                  class="fa fa-cloud-upload mr-2 text-muted"></i><small
-                  class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-            </div>
+          <!-- Link Video -->
+          <label for="gdrive-link">Link Google Drive</label>
+          <div class="input-group mb-3 px-2 py-2 bg-white shadow-sm">
+          <textarea name="gdrive_link" id="gdrive-link" type="url" placeholder="Contoh: https://drive.google.com/file/d/[ID]/view?usp=sharing" class="form-control border-0" autocomplete="off"></textarea>
           </div>
-
-          <!-- Uploaded image area-->
-          <p class="text-center font-weight-light mt-4 text-muted">The image uploaded will be rendered inside the box
-            below.</p>
-          <div class="image-area mt-4 text-muted"><img id="imageResult" src="#" alt=""
-              class="img-fluid rounded shadow-sm mx-auto d-block"></div>
         </div>
 
         <!-- Form -->
@@ -232,9 +134,8 @@
               <div class="form-group">
                 <label>Status</label>
                 <select class="form-control" name="status" required>
-                  <?php foreach ($statuses as $status): ?>
-                    <option value="<?= $status['nama_status'] ?>"><?= $status['nama_status'] ?></option>
-                  <?php endforeach; ?>
+                  <option value="Planning">Planning</option>
+                  <option value="In Progress">In Progress</option>
                 </select>
               </div>
             </div>
@@ -261,9 +162,8 @@
           <!-- Date -->
           <div class="form-group">
             <label>Post Date</label>
-            <input type="date" class="form-control" name="created_at" id="dateInput" required>
+            <input type="date" class="form-control" name="post_date" id="dateInput" required>
           </div>
-
 
           <!-- Button Add Content -->
           <div class="d-flex justify-content-center mt-4">
@@ -271,48 +171,16 @@
               Simpan
             </button>
           </div>
+        </div>
+      </div>
+    </div>
   </form>
 </div>
 </div>
 </div>
 </div>
 
-<!-- <script>
-
-<!-- jQuery via CDN -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<!-- Bootstrap Bundle with Popper via CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-<!-- Upload Image with Preview -->
 <script>
-  function readURL(input) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-        $('#imageResult').attr('src', e.target.result);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-
-  $(function() {
-    $('#upload').on('change', function() {
-      readURL(this);
-    });
-  });
-
-  var input = document.getElementById('upload');
-  var infoArea = document.getElementById('upload-label');
-
-  input.addEventListener('change', showFileName);
-
-  function showFileName(event) {
-    var input = event.srcElement;
-    var fileName = input.files[0].name;
-    infoArea.textContent = 'File name: ' + fileName;
-  }
-
   document.addEventListener('DOMContentLoaded', function() {
     var dateInput = document.getElementById('dateInput');
     var dateDisplay = document.getElementById('dateDisplay');
