@@ -66,7 +66,7 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="<?= base_url('/content-calendar'); ?>">Content Calendar</a></li>
                             <li><a class="dropdown-item" href="<?= base_url('/content-planner'); ?>">Content Planner</a></li>
-                            <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Matrics</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Set Up</a></li>
                         </ul>
                     </div>
                 </div>
