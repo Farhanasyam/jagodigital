@@ -63,6 +63,8 @@ $routes->group('', ['filter' => 'usersAuth'], function ($routes) {
     $routes->get('/content-planner', 'NewUser\ContentPlannerController::index');
     $routes->post('/content-planner/add', 'NewUser\ContentPlannerController::add');
     $routes->get('/content-planner/edit/(:num)', 'NewUser\ContentPlannerController::edit/$1');
+    $routes->post('/content-planner/update/(:num)', 'NewUser\ContentPlannerController::update/$1');
+    $routes->get('/content-planner/delete/(:num)', 'NewUser\ContentPlannerController::delete/$1');
 
     // Set Up
     $routes->get('/set-up', 'NewUser\ContentPlannerController::all_setup');
