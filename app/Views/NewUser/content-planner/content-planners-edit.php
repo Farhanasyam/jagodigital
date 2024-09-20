@@ -1,7 +1,7 @@
 <?php $this->setVar('title', 'Edit Content Planner'); ?>
 <?= $this->extend('NewUser/layout/app'); ?>
 <?= $this->section('content'); ?>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" /> -->
 
 <style>
     .card {
@@ -26,66 +26,6 @@
         padding-bottom: 20px;
     }
 
-    .line-separator {
-        width: 100%;
-        height: 2px;
-        background-color: #000;
-        border: none;
-        margin-top: 5px;
-        margin-bottom: 40px;
-    }
-
-    #upload {
-        opacity: 0;
-    }
-
-    #upload-label {
-        position: absolute;
-        top: 50%;
-        left: 1rem;
-        transform: translateY(-50%);
-    }
-
-    .image-area {
-        border: 2px dashed;
-        padding: 1.6rem;
-        position: relative;
-        text-align: center;
-    }
-
-    .image-area::before {
-        content: 'Uploaded image result';
-        font-weight: bold;
-        text-transform: uppercase;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 0.8rem;
-        z-index: 1;
-    }
-
-    .image-area img {
-        z-index: 2;
-        position: relative;
-    }
-
-
-    .date {
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-
-    .calendar-icons {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    .calendar-icons i {
-        margin-left: 10px;
-        cursor: pointer;
-    }
-
     .form-control,
     .btn {
         border-radius: 0.25rem;
@@ -103,58 +43,38 @@
         white-space: nowrap;
         /* Mencegah teks membungkus ke baris berikutnya */
     }
-
-    @media (max-width: 320px) {
-        .d-flex {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .calendar-controls {
-            margin-top: 10px;
-            width: 100%;
-        }
-    }
-
-    @media (max-width: 375px) {
-        .d-flex {
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .calendar-controls {
-            margin-top: 10px;
-            width: 100%;
-        }
-    }
 </style>
 
 <!-- start text header and line -->
 <div class="container">
     <div class="mt-4">
         <div class="card bg-white">
-            <div class="card-body d-flex justify-content-between align-items-center">
-                <div>
-                    <h2 class="display-7 mb-0">Edit Content Planner</h2>
+            <div class="card-body d-flex flex-wrap justify-content-between align-items-center">
+                <div class="col-12 col-md-6">
+                    <h2 class="display-7 mb-0">Content Planner</h2>
                 </div>
-                <div class="dropdown">
-                    <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Halaman Saat Ini
-                    </button>
-                    <ul class="dropdown-menu  dropdown-menu-right">
-                        <li><a class="dropdown-item" href="<?= base_url('/content-calendar'); ?>">Content Calender</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Set Up</a></li>
-                        <li><a class="dropdown-item" href="<?= base_url('/kpi'); ?>">Matrics</a></li>
-                    </ul>
+                <!-- Tambahkan d-flex justify-content-center pada layar kecil -->
+                <div
+                    class="col-12 col-md-6 d-flex justify-content-center justify-content-md-end text-center text-md-end mt-3 mt-md-0">
+                    <div class="dropdown">
+                        <button id="current-page-btn" class="btn btn-primary dropdown-toggle px-3" style="border-radius: 10px;"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?= $title ?? 'Content Planner' ?>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="<?= base_url('/content-calendar'); ?>">Content Calendar</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/set-up'); ?>">Set Up</a></li>
+                            <li><a class="dropdown-item" href="<?= base_url('/kpi'); ?>">Matrics</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <form action="<?= base_url('/content-planner/add'); ?>" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>" />
+    <form id="contentPlannerForm" action="<?= base_url('/content-planner/update/' . $c_planners['id_content_planner']); ?>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+        <input type="hidden" name="id" value="<?= $c_planners['id_content_planner']; ?>">
         <div class="card">
             <!-- Info Date -->
             <div class="mb-4 left-3">
@@ -163,37 +83,13 @@
                 </div>
             </div>
 
-
-
             <div class="row">
-                <!-- Upload Image -->
                 <div class="col-md-5 mb-4">
-                    <input type="hidden" name="old_file_content" value="<?= esc($c_planners['file_content']) ?>">
-                    <!-- Upload image input-->
-                    <label>Upload Image</label>
-                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
-                        <input name="file_content" id="upload" type="file" onchange="readURL(this);"
-                            class="form-control border-0">
-                        <?php $fileContent = isset($c_planners['file_content']) ? esc($c_planners['file_content']) : 'No file uploaded'; ?>
-                        <label id="upload-label" for="upload" class="font-weight-light text-muted">
-                            File name: <?= $fileContent ?>
-                        </label>
-                        <div class="input-group-append">
-                            <label class="btn btn-light m-0 rounded-pill px-4"> <i
-                                    class="fa fa-cloud-upload mr-2 text-muted"></i><small
-                                    class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
-                        </div>
+                    <!-- Link Video -->
+                    <label for="gdrive-link">Link Google Drive</label>
+                    <div class="input-group mb-3 px-2 py-2 bg-white shadow-sm">
+                        <textarea name="gdrive_link" id="gdrive-link" type="url" placeholder="Contoh: https://drive.google.com/file/d/[ID]/view?usp=sharing" class="form-control border-0" autocomplete="off"><?= esc($c_planners['link_gdrive']) ?></textarea>
                     </div>
-
-                    <!-- Uploaded image area-->
-                    <p class="text-center font-weight-light mt-4 text-muted">The image uploaded will be rendered inside the box
-                        below.</p>
-                    <?php if (!empty($c_planners['file_content'])): ?>
-                        <div class="image-area mt-4 text-muted">
-                            <img id="imageResult" src="<?= base_url('uploads/file_content/' . esc($c_planners['file_content'])) ?>" alt="Uploaded Image" class="img-fluid rounded shadow-sm mx-auto d-block">
-                        </div>
-                    <?php endif; ?>
-
                 </div>
 
                 <!-- Form -->
@@ -247,12 +143,15 @@
                             <div class="form-group">
                                 <label>Status</label>
                                 <select class="form-control" name="status" required>
-                                    <?php foreach ($statuses as $status): ?>
-                                        <option value="<?= $status['nama_status'] ?>"
-                                            <?= $status['nama_status'] == $c_planners['status'] ? 'selected' : '' ?>>
-                                            <?= $status['nama_status'] ?>
-                                        </option>
-                                    <?php endforeach; ?>
+                                    <option value="Planning" <?= $c_planners['status'] === 'Planning' ? 'selected' : '' ?>>
+                                        Planning
+                                    </option>
+                                    <option value="In Progress" <?= $c_planners['status'] === 'In Progress' ? 'selected' : '' ?>>
+                                        In Progress
+                                    </option>
+                                    <option value="Posted" <?= $c_planners['status'] === 'Posted' ? 'selected' : '' ?>>
+                                        Posted
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -279,71 +178,67 @@
                     <!-- Date -->
                     <div class="form-group">
                         <label>Post Date</label>
-                        <input type="date" class="form-control" name="created_at" id="dateInput" required>
+                        <input type="date" class="form-control" name="post_date" id="dateInput" required>
                     </div>
 
                     <!-- Button Add Content -->
                     <div class="d-flex justify-content-center mt-4">
-                        <button type="submit" class="btn btn-warning">
+                        <button type="submit" id="submitBtn" class="btn btn-warning">
                             Ubah
                         </button>
                     </div>
-
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 </div>
 </div>
 </div>
 
-<!-- jQuery via CDN -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<!-- Bootstrap Bundle with Popper via CDN -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-<!-- Upload Image with Preview -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // Mengambil elemen button dropdown
-    const currentPageBtn = document.getElementById("current-page-btn");
+    document.addEventListener('DOMContentLoaded', function() {
+        var submitBtn = document.getElementById('submitBtn');
+        var form = document.getElementById('contentPlannerForm');
+        var statusField = document.querySelector('select[name="status"]');
 
-    // Mengambil nama halaman saat ini dari title dokumen
-    const currentPage = document.title;
+        submitBtn.addEventListener('click', function(e) {
+            // Mencegah submit form langsung
+            e.preventDefault();
 
-    // Mengganti teks pada tombol dropdown dengan nama halaman
-    currentPageBtn.textContent = currentPage;
+            var selectedStatus = statusField.value;
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#imageResult').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $(function() {
-        $('#upload').on('change', function() {
-            readURL(this);
+            if (selectedStatus === 'Posted') {
+                Swal.fire({
+                    title: 'Apakah Anda yakin?',
+                    text: "Jika Anda mengubah status menjadi 'Posted', file content planner akan dihapus.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, ubah!',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Jika user menekan 'Ya', submit form
+                        form.submit();
+                    }
+                    // Jika user menekan 'Batal', tidak ada tindakan yang dilakukan
+                });
+            } else {
+                // Jika status bukan 'Posted', langsung submit form
+                form.submit();
+            }
         });
     });
-
-    var input = document.getElementById('upload');
-    var infoArea = document.getElementById('upload-label');
-
-    input.addEventListener('change', showFileName);
-
-    function showFileName(event) {
-        var input = event.srcElement;
-        var fileName = input.files[0].name;
-        infoArea.textContent = 'File name: ' + fileName;
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
         var dateInput = document.getElementById('dateInput');
         var dateDisplay = document.getElementById('dateDisplay');
 
         // Ambil tanggal saat ini
-        var dateData = new Date("<?= date('Y-m-d', strtotime($c_planners['created_at'])) ?>");
+        var dateData = new Date("<?= date('Y-m-d', strtotime($c_planners['post_date'])) ?>");
         var options = {
             day: '2-digit',
             month: 'long',
@@ -365,6 +260,5 @@
         });
     });
 </script>
-
 
 <?= $this->endSection('content'); ?>
