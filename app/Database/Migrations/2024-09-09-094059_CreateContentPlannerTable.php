@@ -15,10 +15,9 @@ class CreateContentPlannerTable extends Migration
                 'unsigned'       => true,
                 'auto_increment' => true,
             ],
-            'file_content' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 255,
-                'null' => true,
+            'link_gdrive' => [
+                'type'       => 'TEXT',
+                'null'       => true,
             ],
             'sosial_media' => [
                 'type'       => 'VARCHAR',
@@ -37,8 +36,7 @@ class CreateContentPlannerTable extends Migration
                 'constraint' => 255,
             ],
             'caption' => [
-                'type'       => 'VARCHAR',
-                'constraint' => 255,
+                'type'       => 'TEXT',
                 'null'       => true,
             ],
             'cta_link' => [
@@ -51,7 +49,7 @@ class CreateContentPlannerTable extends Migration
                 'constraint' => 255,
                 'null'       => true,
             ],
-            'created_at' => [
+            'post_date' => [
                 'type' => 'DATETIME',
             ],
         ]);

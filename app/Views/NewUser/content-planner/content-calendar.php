@@ -302,7 +302,7 @@
 <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header text-white" style="background-color: #87D5C8">
                 <h5 class="modal-title" id="eventModalLabel1"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -326,8 +326,7 @@
                 <?php endforeach; ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary">Some Button</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -335,6 +334,7 @@
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     function openPlatform(evt, platformName) {
@@ -448,20 +448,20 @@
 
                 // Cek apakah ada event pada tanggal ini
                 if (eventsByDate[currentDateStr]) {
-                    // Object untuk mengelompokkan event berdasarkan created_at
-                    var eventsGroupedByCreatedAt = {};
+                    // Object untuk mengelompokkan event berdasarkan post_date
+                    var eventsGroupedByPostDate = {};
 
-                    // Mengelompokkan event berdasarkan created_at
+                    // Mengelompokkan event berdasarkan post_date
                     eventsByDate[currentDateStr].forEach(function(event) {
-                        if (!eventsGroupedByCreatedAt[event.created_at]) {
-                            eventsGroupedByCreatedAt[event.created_at] = [];
+                        if (!eventsGroupedByPostDate[event.post_date]) {
+                            eventsGroupedByPostDate[event.post_date] = [];
                         }
-                        eventsGroupedByCreatedAt[event.created_at].push(event);
+                        eventsGroupedByPostDate[event.post_date].push(event);
                     });
 
-                    // Membuat div untuk setiap group created_at
-                    Object.keys(eventsGroupedByCreatedAt).forEach(function(createdAt) {
-                        var events = eventsGroupedByCreatedAt[createdAt];
+                    // Membuat div untuk setiap group post_date
+                    Object.keys(eventsGroupedByPostDate).forEach(function(postDate) {
+                        var events = eventsGroupedByPostDate[postDate];
                         var eventDiv = document.createElement('div');
                         eventDiv.className = 'event-rect';
                         eventDiv.setAttribute('data-bs-toggle', 'modal');
@@ -525,20 +525,20 @@
 
                     // Cek apakah ada event pada tanggal ini
                     if (eventsByDate[currentDateStr]) {
-                        // Object untuk mengelompokkan event berdasarkan created_at
-                        var eventsGroupedByCreatedAt = {};
+                        // Object untuk mengelompokkan event berdasarkan post_date
+                        var eventsGroupedByPostDate = {};
 
-                        // Mengelompokkan event berdasarkan created_at
+                        // Mengelompokkan event berdasarkan post_date
                         eventsByDate[currentDateStr].forEach(function(event) {
-                            if (!eventsGroupedByCreatedAt[event.created_at]) {
-                                eventsGroupedByCreatedAt[event.created_at] = [];
+                            if (!eventsGroupedByPostDate[event.post_date]) {
+                                eventsGroupedByPostDate[event.post_date] = [];
                             }
-                            eventsGroupedByCreatedAt[event.created_at].push(event);
+                            eventsGroupedByPostDate[event.post_date].push(event);
                         });
 
-                        // Membuat div untuk setiap group created_at
-                        Object.keys(eventsGroupedByCreatedAt).forEach(function(createdAt) {
-                            var events = eventsGroupedByCreatedAt[createdAt];
+                        // Membuat div untuk setiap group post_date
+                        Object.keys(eventsGroupedByPostDate).forEach(function(postDate) {
+                            var events = eventsGroupedByPostDate[postDate];
                             var eventDiv = document.createElement('div');
                             eventDiv.className = 'event-rect';
                             eventDiv.setAttribute('data-bs-toggle', 'modal');
@@ -581,9 +581,16 @@
         }
     }
 
+    function getPreviewLink(url) {
+        if (url) {
+            return url.replace('/view?usp=sharing', '/preview');
+        }
+        return ''; // Return an empty string if URL is null or undefined
+    }
+
     function fillEventModal(dateStr, events) {
-        // Ubah format created_at menjadi [Nama Hari], [Angka Tanggal] [Nama Bulan] [Angka Tahun]
-        var date = new Date(events[0].created_at); // Menggunakan created_at dari event pertama
+        // Ubah format post_date menjadi [Nama Hari], [Angka Tanggal] [Nama Bulan] [Angka Tahun]
+        var date = new Date(events[0].post_date); // Menggunakan post_date dari event pertama
         var options = {
             weekday: 'long',
             year: 'numeric',
@@ -595,41 +602,97 @@
         var modalTitle = 'Detail Kegiatan (' + formattedDateStr + '):';
         document.querySelector('#eventModal .modal-title').innerHTML = modalTitle;
 
-        var modalBodyList = '';
+        var eventByPlatform = {};
 
-        // Jika ada lebih dari satu event, gabungkan data mereka
-        events.forEach(function(event, index) {
-            var planNumber = events.length > 1 ? `${index + 1}` : '1';
-            modalBodyList += `
-                    <ol class="event-detail list-group list-group mt-3">
-                        <li class="list-group-item">
-                            <strong>Plan Ke:</strong> ${planNumber}<br>
-                            <strong>Status:</strong> ${event.status}<br>
-                            <strong>Content Type:</strong> ${event.content_type}<br>
-                            <strong>Content Pillar:</strong> ${event.content_pillar}<br>
-                            <strong style="display: flex;">Caption:</strong> ${event.caption}<br>
-                            <strong>CTA/Link:</strong> ${event.cta_link}<br>
-                            <strong>Hashtag:</strong> ${event.hashtag}<br>
-                        </li>
-                    </ol>
-                    <div class="text-center mt-3">
-                        <img src="${event.file_content ? '<?= base_url('serve-file') ?>/' + event.file_content : 'https://via.placeholder.com/300'}"
-                        alt="File Kegiatan" class="img-fluid rounded shadow-sm">
-                    </div>
-                    <div class="text-center mt-3">
-                        <a href="/content-planner/edit/${event.id_content_planner}" class="btn btn-primary btn-edit">Edit</a>
-                    </div>
-                `;
+        // Memisahkan event berdasarkan sosial media
+        events.forEach(function(event) {
+            if (!eventByPlatform[event.sosial_media]) {
+                eventByPlatform[event.sosial_media] = [];
+            }
+            eventByPlatform[event.sosial_media].push(event);
         });
 
-        document.querySelector('#eventModal .modal-body .tabcontent').innerHTML = modalBodyList;
+        // Bersihkan konten setiap tab
+        document.querySelectorAll('.tabcontent').forEach(function(tabContent) {
+            tabContent.innerHTML = ''; // Kosongkan setiap tab terlebih dahulu
+        });
 
-        // Set image URL berdasarkan event pertama jika ada
-        if (events[0].file_content) {
-            var filePath = '<?= base_url('serve-file') ?>/' + events[0].file_content;
-            document.querySelector('#eventModal .modal-body img').src = filePath;
-        } else {
-            document.querySelector('#eventModal .modal-body img').src = 'https://via.placeholder.com/300';
+        // Untuk setiap sosial media, isi konten yang sesuai
+        Object.keys(eventByPlatform).forEach(function(socialMedia) {
+            var tabContent = document.getElementById(socialMedia);
+
+            var modalBodyList = '';
+
+            eventByPlatform[socialMedia].forEach(function(event, index) {
+                var planNumber = eventByPlatform[socialMedia].length > 1 ? `${index + 1}` : '1';
+                var socialMediaName = event.sosial_media; // Ambil nama sosial media
+                modalBodyList += `
+                <ol class="event-detail list-group list-group mt-3">
+                    <li class="list-group-item">
+                        <strong>Plan Ke:</strong> ${planNumber} dari ${socialMediaName}<br>
+                        <strong>Status:</strong> ${event.status}<br>
+                        <strong>Content Type:</strong> ${event.content_type}<br>
+                        <strong>Content Pillar:</strong> ${event.content_pillar}<br>
+                        <strong style="display: flex;">Caption:</strong> ${event.caption}<br>
+                        <strong>CTA/Link:</strong> ${event.cta_link}<br>
+                        <strong>Hashtag:</strong> ${event.hashtag}<br>
+                    </li>
+                </ol>
+            `;
+
+                var filePath = getPreviewLink(event.link_gdrive);
+
+                var mediaContent;
+                if (filePath) {
+                    mediaContent = '<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;"><iframe src="' + filePath + '" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>';
+                } else {
+                    mediaContent = '<img src="https://via.placeholder.com/800x450" alt="File Kegiatan" class="img-fluid rounded shadow-sm">';
+                }
+
+                modalBodyList += `
+            <div class="text-center mt-3">
+                ${mediaContent}
+            </div>
+            <div class="text-center mt-3 mb-2">
+                <a href="/content-planner/edit/${event.id_content_planner}" class="btn btn-warning btn-edit">Edit Content Plan</a>
+                <a href="#" class="btn btn-danger btn-delete" data-id="${event.id_content_planner}">Delete Content Plan</a>
+            </div>
+        `;
+            });
+
+            tabContent.innerHTML = modalBodyList; // Isi konten tab dengan data yang sesuai
+
+            // Tambahkan event listener untuk tombol delete
+            tabContent.querySelectorAll('.btn-delete').forEach(function(deleteBtn) {
+                deleteBtn.addEventListener('click', function(e) {
+                    e.preventDefault(); // Mencegah aksi default
+
+                    var contentId = this.getAttribute('data-id'); // Ambil ID konten
+
+                    Swal.fire({
+                        title: 'Apakah Anda yakin?',
+                        text: "Anda akan menghapus konten ini!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Jika user menekan 'Ya', arahkan ke URL hapus
+                            window.location.href = '/content-planner/delete/' + contentId;
+                        }
+                        // Jika user menekan 'Batal', tidak ada tindakan yang dilakukan
+                    });
+                });
+            });
+        });
+
+        // Secara otomatis membuka tab sosial media pertama
+        var firstTab = document.querySelector('.tablinks');
+        if (firstTab) {
+            firstTab.click();
         }
     }
 

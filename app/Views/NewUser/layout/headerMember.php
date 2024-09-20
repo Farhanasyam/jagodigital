@@ -69,7 +69,7 @@ $username = $session->get('username'); // Get the logged-in user's name
                         Aplikasi
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/content-calendar">Content Planner</a></li>
+                        <li><a class="dropdown-item" href="/content-calendar">Content Calendar</a></li>
                         <li><a class="dropdown-item" href="/hashtag">Hashtag Generator</a></li>
                         <li><a class="dropdown-item" href="/seo-checker">Seo Checker</a></li>
                     </ul>

@@ -7,7 +7,6 @@ use App\Models\ContentPlanner;
 use App\Models\SosialMedia;
 use App\Models\ContentPillar;
 use App\Models\ContentType;
-use App\Models\Status;
 use App\Models\InstagramMetrics;
 use App\Models\TiktokMetrics;
 use App\Models\YoutubeMetrics;
@@ -48,13 +47,13 @@ class ContentPlannerController extends BaseController
         // Mengelompokkan data berdasarkan tanggal
         $eventsByDate = [];
         foreach ($content_planner as $event) {
-            $date = date('Y-m-d', strtotime($event['created_at']));
+            $date = date('Y-m-d', strtotime($event['post_date']));
             if (!isset($eventsByDate[$date])) {
                 $eventsByDate[$date] = [];
             }
             $eventsByDate[$date][] = [
                 'id_content_planner' => $event['id_content_planner'],
-                'file_content' => $event['file_content'],
+                'link_gdrive' => $event['link_gdrive'],
                 'sosial_media' => $event['sosial_media'],
                 'content_type' => $event['content_type'],
                 'content_pillar' => $event['content_pillar'],
@@ -62,7 +61,7 @@ class ContentPlannerController extends BaseController
                 'caption' => $event['caption'],
                 'cta_link' => $event['cta_link'],
                 'hashtag' => $event['hashtag'],
-                'created_at' => $event['created_at'],
+                'post_date' => $event['post_date'],
             ];
         }
 
@@ -78,39 +77,36 @@ class ContentPlannerController extends BaseController
         $modelSosmed = new SosialMedia();
         $modelCPillar = new ContentPillar();
         $modelCType = new ContentType();
-        $modelStatus = new Status();
 
         $sosmed = $modelSosmed->findAll();
         $content_pillar = $modelCPillar->findAll();
         $content_type = $modelCType->findAll();
-        $status = $modelStatus->findAll();
 
         $data['sosmeds'] = $sosmed;
         $data['c_pillars'] = $content_pillar;
         $data['c_types'] = $content_type;
-        $data['statuses'] = $status;
 
         return view('NewUser/content-planner/content-planners', $data);
     }
 
     public function add()
     {
-        $file = $this->request->getFile('file_content');
+        // $file = $this->request->getFile('file_content');
 
-        if ($file->isValid() && !$file->hasMoved()) {
-            // Pindahkan file ke direktori tujuan, misalnya: 'uploads'
-            $fileName = $file->getRandomName();
-            $file->move(FCPATH . 'uploads/file_content/', $fileName);
-        } else {
-            // Jika ada kesalahan dalam pengunggahan file
-            $fileName = null;
-        }
+        // if ($file->isValid() && !$file->hasMoved()) {
+        //     // Pindahkan file ke direktori tujuan, misalnya: 'uploads'
+        //     $fileName = $file->getRandomName();
+        //     $file->move(FCPATH . 'uploads/file_content/', $fileName);
+        // } else {
+        //     // Jika ada kesalahan dalam pengunggahan file
+        //     $fileName = null;
+        // }
 
         $caption = $this->request->getPost('caption');
         $caption = nl2br($caption); // Convert newlines to <br> before saving
 
         $data = [
-            'file_content' => $fileName,
+            'link_gdrive' => $this->request->getPost('gdrive_link'),
             'sosial_media' => $this->request->getPost('sosial_media'),
             'content_type' => $this->request->getPost('content_type'),
             'content_pillar' => $this->request->getPost('content_pillar'),
@@ -118,7 +114,7 @@ class ContentPlannerController extends BaseController
             'caption' => $caption,
             'cta_link' => $this->request->getPost('cta_link'),
             'hashtag' => $this->request->getPost('hashtag'),
-            'created_at' => $this->request->getPost('created_at'),
+            'post_date' => $this->request->getPost('post_date'),
         ];
 
         $model = new ContentPlanner();
@@ -132,22 +128,68 @@ class ContentPlannerController extends BaseController
         $modelSosmed = new SosialMedia();
         $modelCPillar = new ContentPillar();
         $modelCType = new ContentType();
-        $modelStatus = new Status();
         $modelCPlanner = new ContentPlanner();
 
         $sosmed = $modelSosmed->findAll();
         $content_pillar = $modelCPillar->findAll();
         $content_type = $modelCType->findAll();
-        $status = $modelStatus->findAll();
         $content_planner = $modelCPlanner->find($id);
 
         $data['sosmeds'] = $sosmed;
         $data['c_pillars'] = $content_pillar;
         $data['c_types'] = $content_type;
-        $data['statuses'] = $status;
         $data['c_planners'] = $content_planner;
 
         return view('NewUser/content-planner/content-planners-edit', $data);
+    }
+
+    public function update($id)
+    {
+        $modelCPlanner = new ContentPlanner();
+
+        // Ambil data dari input
+        $gdriveLink = $this->request->getPost('gdrive_link');
+        $status = $this->request->getPost('status'); // Ambil status dari form
+
+        // Logika untuk menentukan nilai link_gdrive
+        if ($status === 'Posted') {
+            // Jika status adalah 'Posted', link_gdrive harus di-set ke null
+            $linkGdrive = null;
+        } elseif (!empty($gdriveLink)) {
+            // Jika status bukan 'Posted', gunakan gdriveLink jika tersedia
+            $linkGdrive = $gdriveLink;
+        } else {
+            // Jika tidak ada input untuk gdriveLink, gunakan nilai null
+            $linkGdrive = null;
+        }
+
+        // Ambil data dari form
+        $data = [
+            'sosial_media'   => $this->request->getPost('sosial_media'),
+            'content_type'   => $this->request->getPost('content_type'),
+            'content_pillar' => $this->request->getPost('content_pillar'),
+            'status'         => $status,
+            'caption'        => $this->request->getPost('caption'),
+            'cta_link'       => $this->request->getPost('cta_link'),
+            'hashtag'        => $this->request->getPost('hashtag'),
+            'post_date'      => $this->request->getPost('post_date'),
+            'link_gdrive'    => $linkGdrive, // Update link_gdrive dengan nilai yang telah ditentukan
+        ];
+
+        // Update data di database
+        $modelCPlanner->update($id, $data);
+
+        // Redirect ke halaman content calendar setelah update
+        return redirect()->to('/content-calendar');
+    }
+
+    public function delete($id)
+    {
+        $modelCPlanner = new ContentPlanner();
+
+        $modelCPlanner->delete($id);
+
+        return redirect()->to('/content-calendar');
     }
 
     public function all_setup()
@@ -155,17 +197,14 @@ class ContentPlannerController extends BaseController
         $modelSosmed = new SosialMedia();
         $modelCPillar = new ContentPillar();
         $modelCType = new ContentType();
-        $modelStatus = new Status();
 
         $sosmed = $modelSosmed->findAll();
         $content_pillar = $modelCPillar->findAll();
         $content_type = $modelCType->findAll();
-        $status = $modelStatus->findAll();
 
         $data['sosmeds'] = $sosmed;
         $data['c_pillars'] = $content_pillar;
         $data['c_types'] = $content_type;
-        $data['statuses'] = $status;
 
         return view('NewUser/content-planner/set-up', $data);
     }
@@ -173,14 +212,12 @@ class ContentPlannerController extends BaseController
     protected $sosialMediaModel;
     protected $contentTypeModel;
     protected $contentPillarModel;
-    protected $statusModel;
 
     public function __construct()
     {
         $this->sosialMediaModel = new SosialMedia();
         $this->contentTypeModel = new ContentType();
         $this->contentPillarModel = new ContentPillar();
-        $this->statusModel = new Status();
     }
 
     public function add_sosial_media()
@@ -289,42 +326,6 @@ class ContentPlannerController extends BaseController
     {
         $id = $this->request->getPost('id');
         $this->contentPillarModel->delete($id);
-        return $this->response->setJSON(['status' => 'success']);
-    }
-
-    public function add_status()
-    {
-        $data = [
-            'nama_status' => $this->request->getPost('nama_status'),
-        ];
-
-        $this->statusModel->insert($data);
-        return $this->response->setJSON(['status' => 'success']);
-    }
-
-    public function update_status()
-    {
-        $id = $this->request->getPost('id');
-        $column = $this->request->getPost('column');
-        $value = $this->request->getPost('value');
-
-        if (in_array($column, ['nama_status'])) {
-            $this->statusModel->update($id, [$column => $value]);
-            return $this->response
-                ->setJSON(['status' => 'success'])
-                ->setHeader('X-CSRF-Token', csrf_hash());
-        }
-
-        return $this->response
-            ->setJSON(['status' => 'failed'])
-            ->setStatusCode(400)
-            ->setHeader('X-CSRF-Token', csrf_hash());
-    }
-
-    public function delete_status()
-    {
-        $id = $this->request->getPost('id');
-        $this->statusModel->delete($id);
         return $this->response->setJSON(['status' => 'success']);
     }
 
