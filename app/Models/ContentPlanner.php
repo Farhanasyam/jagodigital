@@ -12,7 +12,7 @@ class ContentPlanner extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['file_content', 'sosial_media', 'content_type', 'content_pillar', 'status', 'caption', 'cta_link', 'hashtag', 'created_at'];
+    protected $allowedFields    = ['link_gdrive', 'sosial_media', 'content_type', 'content_pillar', 'status', 'caption', 'cta_link', 'hashtag', 'post_date'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
