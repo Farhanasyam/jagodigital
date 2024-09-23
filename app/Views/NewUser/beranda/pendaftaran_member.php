@@ -21,7 +21,7 @@
 <!-- Form Pendaftaran -->
 <div class="container-center">
     <div class="form-container">
-        <h2>Dukung Usaha Anda Untuk Mendapatkan Persiapan Terbaik</h2>
+        <h2>Dukung  2 Usaha Anda Untuk Mendapatkan Persiapan Terbaik</h2>
 
         <!-- Form pendaftaran -->
         <form id="pendaftaranForm" action="<?= base_url('/pendaftaran_member/store') ?>" method="post" enctype="multipart/form-data">

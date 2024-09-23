@@ -40,7 +40,7 @@
                                             <td class="text-center col-4" valign="middle"><?= $tampilBerita->deskripsi_berita ?></td>
                                             <td class="text-center ritacol-4" valign="middle"><?= $tampilBerita->mulai_berita ?></td>
                                             <td class="text-center col-4" valign="middle"><?= $tampilBerita->akhir_berita ?></td>
-                                            <td class="text-center col-2" valign="middle"><img src="<?= base_url() . 'assets-baru/img/' . $tampilBerita->poster_berita ?>" class="img-fluid" alt="Poster Berita"></td>
+                                            <td class="text-center col-2" valign="middle"><img src="<?= base_url() . 'uploads/foto_berita/' . $tampilBerita->poster_berita ?>" class="img-fluid" alt="Poster Berita"></td>
                                             <td valign="middle">
                                                 <div class="d-grid gap-2">
                                                     <a href="<?= base_url('admin/berita/delete') . '/' . $tampilBerita->id_berita ?>" class="btn btn-danger">Hapus</a>

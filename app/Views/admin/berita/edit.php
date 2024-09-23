@@ -32,7 +32,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Poster Berita</label>
                                         <input type="file" class="form-control" id="poster_berita" name="poster_berita">
-                                        <img width="150px" class="img-thumbnail" src="<?= base_url() . "assets-baru/img/" . $beritaData->poster_berita; ?>">
+                                        <img width="150px" class="img-thumbnail" src="<?= base_url() . "uploads/foto_berita/" . $beritaData->poster_berita; ?>">
                                         <?= $validation->getError('poster_berita') ?>
                                     </div>
                                     <p>*Ukuran foto maksimal 572x572 pixels</p>
