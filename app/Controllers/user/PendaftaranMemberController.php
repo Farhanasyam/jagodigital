@@ -2,9 +2,10 @@
 
 namespace App\Controllers\User;
 
-use App\Controllers\BaseController;
+use App\Controllers\NewUser\BaseController;
 use App\Models\PendaftaranMemberModels;
 use App\Models\KabkotaModels;
+use App\Models\MetaModel;
 use App\Models\ProvinsiModels;
 
 class PendaftaranMemberController extends BaseController
@@ -27,10 +28,18 @@ class PendaftaranMemberController extends BaseController
         $provinsi = $this->provinsiModel->findAll();
         $kabkota = $this->kabkotaModel->findAll();
 
-        return view('NewUser/beranda/pendaftaran_member', [
+        //SEO
+        $metaModel = new MetaModel();
+        $meta = $metaModel->where('nama_halaman', 'Pendaftaran Member')->first();
+        
+        $canonicalUrl = base_url('pendaftaran_member');
+
+        return $this->render('NewUser/beranda/pendaftaran_member', [
             'title' => 'Pendaftaran Member',
             'provinsi' => $provinsi,   // Kirim data provinsi ke view
-            'kabkota' => $kabkota      // Kirim data kabupaten/kota ke view
+            'kabkota' => $kabkota,      // Kirim data kabupaten/kota ke view
+            'meta' => $meta,
+            'canonicalUrl' => $canonicalUrl,
         ]);
     }
 

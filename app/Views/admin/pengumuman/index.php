@@ -40,7 +40,7 @@
                                             <td class="text-center col-4" valign="middle"><?= $tampilPengumuman->deskripsi_pengumuman ?></td>
                                             <td class="text-center col-4" valign="middle"><?= $tampilPengumuman->mulai_pengumuman ?></td>
                                             <td class="text-center col-4" valign="middle"><?= $tampilPengumuman->akhir_pengumuman ?></td>
-                                            <td class="text-center col-2" valign="middle"><img src="<?= base_url() . 'assets-baru/img/' . $tampilPengumuman->poster_pengumuman ?>" class="img-fluid" alt="Poster Pengumuman"></td>
+                                            <td class="text-center col-2" valign="middle"><img src="<?= base_url() . 'uploads/foto_pengumuman/' . $tampilPengumuman->poster_pengumuman ?>" class="img-fluid" alt="Poster Pengumuman"></td>
                                             <td valign="middle">
                                                 <div class="d-grid gap-2">
                                                     <a href="<?= base_url('admin/pengumuman/delete') . '/' . $tampilPengumuman->id_pengumuman ?>" class="btn btn-danger">Hapus</a>
